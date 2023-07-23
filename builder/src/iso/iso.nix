@@ -24,6 +24,7 @@ in
   # specify files to be imported into /etc/ folder
   environment.etc = {
     foundation_installer.source = ./foundation_installer.sh;
+    config.source = ../../config;
   };
 
   networking = {
