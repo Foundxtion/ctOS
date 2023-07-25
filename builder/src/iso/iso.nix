@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  secrets = import ./builder-secrets.nix;
+  secrets = import ./secrets.nix;
 in
 {
   imports = [
