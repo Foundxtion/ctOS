@@ -18,6 +18,7 @@ def main():
     config = create_config()
     write_config("foundation-gen-files/secrets.nix", config)
     shutil.copy("./src/iso/iso.nix", "foundation-gen-files")
+    shutil.copy("./src/iso/foundation_installer.sh", "foundation-gen-files")
 
 if __name__ == "__main__":
     main()

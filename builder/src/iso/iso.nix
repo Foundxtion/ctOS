@@ -2,8 +2,8 @@
 let
   secrets = import ./secrets.nix;
 in
-{
-  imports = [
+  {
+    imports = [
     # Standard minimal nix installer
     <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix>
 
@@ -22,24 +22,38 @@ in
   ];
 
   # specify files to be imported into /etc/ folder
-  environment.etc = {
-    foundation_installer.source = ./foundation_installer.sh;
-    config.source = ../../config;
+  environment.home.nixos = {
+    "foundation_installer.sh" = {
+      source = ./foundation_installer.sh;
+      mode = "0777";
+    };
+    config = {
+      source = ../../config;
+      mode = "0666";
+    };
+    "secrets.nix" = {
+      source = ./secrets.nix;
+      mode = "0666";
+    };
   };
 
-  networking = {
+  networking = let 
     hostName = "foundation-installer";
     networkmanager.enable = true;
     wireless.enable = false;
-    # usePredictableInterfaceNames = false;
-    # interfaces.eth0.ip4 = [
-    #   {
-    #     address = secrets.network.ipAddress;
-    #     prefixLength = secrets.network.prefixLength;
-    #   }
-    # ];
-    # defaultGateway = secrets.network.defaultGateway;
-    # nameservers = [ "8.8.8.8" ];
+  in
+  if secrets.network.hasStaticAddress then {
+    inherit hostName networkmanager wireless;
+    usePredictableInterfaceNames = false;
+    interfaces.eth0 = {
+      ipAddress = secrets.network.ipAddress;
+      prefixLength = secrets.network.prefixLength;
+    };
+    defaultGateway = secrets.network.defaultGateway;
+    nameservers = [ "8.8.8.8" ];
+  }
+  else {
+    inherit hostName networkmanager wireless;
   };
 
   # this enables an ssh access in the boot process

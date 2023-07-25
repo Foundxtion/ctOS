@@ -17,12 +17,20 @@ def __search_pub_key():
 
     pub_key_path = path + "/" + L[0]
     with open(pub_key_path, "r") as file:
-        print("the pub key found at: " + pub_key_path + " has been loaded as authorized key for ssh")
+        print("The pub key found at: " + pub_key_path + " has been loaded as authorized key for ssh.")
         return "".join(file.readlines()).removesuffix("\n")
 
 
 def __fill_network_attributes():
     network = {}
+    network["hasStaticAddress"] = __input_bool("Enable static ip address ?")
+
+    if not network["hasStaticAddress"]:
+        network["ipAddress"] = ""
+        network["prefixLength"] = 0
+        network["defaultGateway"] = ""
+        return network
+
     network["ipAddress"] = input("Please provide an IPv4 address: ")
     prefix = -1
     while prefix <= -1:
@@ -38,13 +46,24 @@ def __fill_network_attributes():
 
 def __fill_openssh_attributes():
     openssh = {}
-    permitRootLogin = input("Do you want to enable root login through ssh ? (y/n)")
-    openssh["permitRootLogin"] = permitRootLogin == "y" or permitRootLogin == "y\n"
-
+    openssh["enable"] = __input_bool("Enable openssh ?")
+    openssh["permitRootLogin"] = openssh["enable"] and __input_bool("Enable root login through ssh ?")
     return openssh
+
+def __fill_nginx_attributes():
+    nginx = {}
+    nginx["enable"] = __input_bool("Enable nginx ?")
+    nginx["virtualHosts"] = {}
+
+    return nginx
 
 def __fill_services_attributes():
     services = {}
     services["openssh"] = __fill_openssh_attributes()
+    services["nginx"] = __fill_nginx_attributes()
 
     return services
+
+def __input_bool(string):
+    ans = input(string + "(y/n): ").strip(" \n")
+    return ans == "y"
