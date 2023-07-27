@@ -7,6 +7,9 @@
     ./services
     ./docker
     ./users
+    ./timezone
   ];
   nixpkgs.config.allowUnfree = true;
+
+  system.stateVersion = "23.05";
 }
