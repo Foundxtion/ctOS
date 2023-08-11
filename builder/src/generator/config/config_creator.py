@@ -57,10 +57,36 @@ def __fill_nginx_attributes():
 
     return nginx
 
+def __fill_ddclient_attributes():
+    ddclient = {
+        "enable" : False,
+        "protocol" : "",
+        "web" : "",
+        "username" : "",
+        "password" : "",
+        "server" : "",
+        "domain" : "",
+    }
+
+    ddclient["enable"] = __input_bool("Enable ddclient ?")
+    if not ddclient["enable"]:
+        return ddclient
+
+    ddclient["protocol"] = input("Please provide a protocol: ")
+    ddclient["web"] = input("Please provide a web config: ")
+    ddclient["username"] = input("Please provide a username: ")
+    ddclient["password"] = input("Please provide a password: ")
+    ddclient["server"] = input("Please provide a server: ")
+    ddclient["domain"] = input("Please provide a domain: ")
+
+    return ddclient
+
+
 def __fill_services_attributes():
     services = {}
     services["openssh"] = __fill_openssh_attributes()
     services["nginx"] = __fill_nginx_attributes()
+    services["ddclient"] = __fill_ddclient_attributes()
 
     return services
 

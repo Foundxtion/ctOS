@@ -18,5 +18,14 @@
         # Here will be written all nginx virtualHosts config
       };
     };
+    ddclient = {
+      enable = false;
+      protocol = "";
+      web = "";
+      username = "";
+      password = "";
+      server = "";
+      domain = "";
+    };
   };
 }
