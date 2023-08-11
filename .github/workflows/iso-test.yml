@@ -13,4 +13,3 @@ jobs:
       with:
         nix_path: nixpkgs=channel:nixos-unstable
     - run: ./tests/iso-test.sh
-    - run: nix-shell --run "echo OK"
