@@ -13,4 +13,6 @@ in
     # TODO: add virtualHosts configuration
     virtualHosts = secrets.services.nginx.virtualHosts;
   };
+
+  services.ddclient = secrets.ddclient;
 }
