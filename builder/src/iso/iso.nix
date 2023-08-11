@@ -22,14 +22,10 @@ in
   ];
 
   # specify files to be imported into /etc/ folder
-  environment.home.nixos = {
+  environment.etc = {
     "foundation_installer.sh" = {
-      source = ./foundation_installer.sh;
+      source = ./foundation_install.sh;
       mode = "0777";
-    };
-    config = {
-      source = ../../config;
-      mode = "0666";
     };
     "secrets.nix" = {
       source = ./secrets.nix;
