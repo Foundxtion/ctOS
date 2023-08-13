@@ -14,10 +14,10 @@ in
         ipAddress = secrets.network.ipAddress;
         prefixLength = secrets.network.prefixLength;
       };
-    # firewall = {
-    #   allowedTCPPorts = [];
-    #   allowedUDPPorts = [];
-    # }
+    firewall = {
+        allowedTCPPorts = [80 443 22];
+        allowedUDPPorts = [80 443 22];
+    };
   }
   else {
     inherit networkmanager hostname;

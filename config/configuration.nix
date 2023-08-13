@@ -7,7 +7,7 @@
     ./services
     ./docker
     ./users
-    ./timezone
+    ./location
   ];
   nixpkgs.config.allowUnfree = true;
 

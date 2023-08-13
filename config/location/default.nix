@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 {
+  console.keyMap = "us";
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
 
