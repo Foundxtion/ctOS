@@ -23,10 +23,6 @@ in
 
   # specify files to be imported into /etc/ folder
   environment.etc = {
-    "foundation_installer.sh" = {
-      source = ./foundation_install.sh;
-      mode = "0777";
-    };
     "secrets.nix" = {
       source = ./secrets.nix;
       mode = "0666";
@@ -59,5 +55,20 @@ in
   users.users.root.openssh.authorizedKeys.keys = [
     secrets.authorizedKey
   ];
+
+  systemd.services.install = {
+    description = "NixOS installation bootstrap";
+    wantedBy = ["multi-user.target"];
+    after = ["network.target" "polkit.service"];
+    path = ["/run/current-system/sw/"];
+    script = with pkgs; ''
+        dev="/dev/sda";
+
+        ${parted} "$dev" -- mklabel gpt;
+        ${parted} "$dev" -- mkpart primary 512MB -8GB
+
+        ${parted} "$dev" -- mkpart primary linux-swap -8GB 100%
+      '';
+  };
 
 }
