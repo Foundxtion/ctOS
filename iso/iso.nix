@@ -64,11 +64,39 @@ in
     script = with pkgs; ''
         dev="/dev/sda";
 
-        ${parted} "$dev" -- mklabel gpt;
-        ${parted} "$dev" -- mkpart primary 512MB -8GB
+        echo "Creating partitions...";
+        ${parted}/bin/parted "$dev" -- mklabel gpt;
+        ${parted}/bin/parted "$dev" -- mkpart primary 512MB -8GB;
 
-        ${parted} "$dev" -- mkpart primary linux-swap -8GB 100%
+        ${parted}/bin/parted "$dev" -- mkpart primary linux-swap -8GB 100%;
+        ${parted}/bin/parted "$dev" -- mkpart ESP fat32 1MB 512MB;
+        ${parted}/bin/parted "$dev" -- set 3 esp on;
+
+        echo "Formatting partitions...";
+        mkfs.ext4 -L nixos "$dev"1;
+        mkswap -L swap "$dev"2;
+        mkfs.fat -F 32 -n boot "$dev"3;
+
+        echo "Mouting filesystems...";
+        mount "$dev"1 /mnt;
+        mkdir -p /mnt/boot;
+        mount "$dev"3 /mnt/boot;
+        swapon "$dev"2;
+
+        echo "Generating config...";
+        ${config.system.build.nixos-generate-config}/bin/nixos-generate-config --root /mnt;
+
+        echo "Installing NixOS...";
+        ${config.system.build.nixos-install}/bin/nixos-install;
+
+        echo "Rebooting...";
+        reboot;
       '';
+
+      environment = config.nix.envVars // {
+        inherit (config.environment.sessionVariables) NIX_PATH;
+        HOME = "/root";
+      };
   };
 
 }
