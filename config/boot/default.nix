@@ -5,7 +5,7 @@
       systemd-boot.enable = true;
       efi = {
         canTouchEfiVariables = true;
-        ediSysMountPoint = "/boot/efi";
+        efiSysMountPoint = "/boot/efi";
       };
     };
     kernelPackages = pkgs.linuxPackages_latest;
