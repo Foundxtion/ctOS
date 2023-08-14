@@ -14,5 +14,5 @@ in
     virtualHosts = secrets.services.nginx.virtualHosts;
   };
 
-  services.ddclient = secrets.ddclient;
+  services.ddclient = secrets.services.ddclient;
 }
