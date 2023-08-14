@@ -19,14 +19,11 @@ in
   environment.systemPackages = with pkgs; [
     vim
     git
+    lsof
   ];
 
   # specify files to be imported into /etc/ folder
   environment.etc = {
-    "foundation_installer.sh" = {
-      source = ./foundation_install.sh;
-      mode = "0777";
-    };
     "secrets.nix" = {
       source = ./secrets.nix;
       mode = "0666";
@@ -41,10 +38,10 @@ in
   if secrets.network.hasStaticAddress then {
     inherit hostName networkmanager wireless;
     usePredictableInterfaceNames = false;
-    interfaces.eth0 = {
-      ipAddress = secrets.network.ipAddress;
+    interfaces.eth0.ipv4.addresses = [{
+      address = secrets.network.ipAddress;
       prefixLength = secrets.network.prefixLength;
-    };
+    }];
     defaultGateway = secrets.network.defaultGateway;
     nameservers = [ "8.8.8.8" ];
   }
@@ -59,5 +56,63 @@ in
   users.users.root.openssh.authorizedKeys.keys = [
     secrets.authorizedKey
   ];
+
+  systemd.services.install = {
+    description = "NixOS installation bootstrap";
+    wantedBy = ["multi-user.target"];
+    after = ["network.target" "polkit.service" "NetworkManager.service"];
+    path = ["/run/current-system/sw/"];
+    script = with pkgs; ''
+        dev="/dev/sda";
+
+        echo "Waiting 5 seconds for connection establishment";
+        sleep 5;
+
+        echo "Testing connection...";
+        ping -c 3 github.com;
+        echo "Test passed!";
+
+        echo "Creating partitions...";
+        
+        # we put yes in stdin in case there is already a partition table to override
+        ${parted}/bin/parted "$dev" -s -- mklabel gpt;
+        ${parted}/bin/parted "$dev" -- mkpart primary 512MB -8GB;
+
+        ${parted}/bin/parted "$dev" -- mkpart primary linux-swap -8GB 100%;
+        ${parted}/bin/parted "$dev" -- mkpart ESP fat32 1MB 512MB;
+        ${parted}/bin/parted "$dev" -- set 3 esp on;
+
+        echo "Formatting partitions...";
+        mkfs.ext4 -L nixos "$dev"1;
+        mkswap -L swap "$dev"2;
+        mkfs.fat -F 32 -n boot "$dev"3;
+
+        echo "Mouting filesystems...";
+        mount "$dev"1 /mnt;
+        mkdir -p /mnt/boot;
+        mount "$dev"3 /mnt/boot;
+        swapon "$dev"2;
+
+        echo "Generating config...";
+        ${config.system.build.nixos-generate-config}/bin/nixos-generate-config --root /mnt;
+        git clone https://github.com/LilianSchall/foundation /mnt/root/.config;
+        cp /etc/secrets.nix /mnt/root/.config/config/;
+        mv /mnt/etc/nixos/hardware-configuration.nix /mnt/root/.config/config/;
+        rm -rf /mnt/etc/nixos;
+        cd /mnt/etc;
+        ln -sr ../root/.config/config /mnt/etc/nixos;
+
+        echo "Installing NixOS...";
+        ${config.system.build.nixos-install}/bin/nixos-install;
+
+        echo "Rebooting...";
+        reboot;
+      '';
+
+      environment = config.nix.envVars // {
+        inherit (config.environment.sessionVariables) NIX_PATH;
+        HOME = "/root";
+      };
+  };
 
 }

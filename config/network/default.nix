@@ -2,24 +2,24 @@
 let
   secrets = import ../secrets.nix;
   networkmanager.enable = true;
-  hostname = secrets.hostName;
+  hostName = secrets.hostName;
 in
   {
     networking = if secrets.network.hasStaticAddress then {
-      inherit networkmanager hostname;
+      inherit networkmanager hostName;
 
       defaultGateway = secrets.network.defaultGateway;
       nameservers = [ "8.8.8.8" ];
-      interfaces.eth0 = {
-        ipAddress = secrets.network.ipAddress;
+      interfaces.eth0.ipv4.addresses = [{
+        address = secrets.network.ipAddress;
         prefixLength = secrets.network.prefixLength;
-      };
-    # firewall = {
-    #   allowedTCPPorts = [];
-    #   allowedUDPPorts = [];
-    # }
+      }];
+    firewall = {
+        allowedTCPPorts = [80 443 22];
+        allowedUDPPorts = [80 443 22];
+    };
   }
   else {
-    inherit networkmanager hostname;
+    inherit networkmanager hostName;
   };
 }
