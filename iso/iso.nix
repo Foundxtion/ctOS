@@ -38,10 +38,10 @@ in
   if secrets.network.hasStaticAddress then {
     inherit hostName networkmanager wireless;
     usePredictableInterfaceNames = false;
-    interfaces.eth0 = {
-      ipAddress = secrets.network.ipAddress;
+    interfaces.eth0.ipv4.addresses = [{
+      address = secrets.network.ipAddress;
       prefixLength = secrets.network.prefixLength;
-    };
+    }];
     defaultGateway = secrets.network.defaultGateway;
     nameservers = [ "8.8.8.8" ];
   }
