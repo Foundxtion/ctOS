@@ -103,7 +103,7 @@ in
         ln -sr ../root/.config/config /mnt/etc/nixos;
 
         echo "Installing NixOS...";
-        ${config.system.build.nixos-install}/bin/nixos-install;
+        ${config.system.build.nixos-install}/bin/nixos-install --no-root-passwd;
 
         echo "Rebooting...";
         reboot;
