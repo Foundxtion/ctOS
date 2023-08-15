@@ -2,11 +2,12 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      htop
       git
+      htop
+      man-pages
+      neofetch
       tree
       vim
-      man-pages
       zip
     ];
   };
