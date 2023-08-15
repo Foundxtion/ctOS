@@ -1,13 +1,14 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./hardware-configuration.nix
     ./boot
+    ./docker
+    ./environment
+    ./hardware-configuration.nix
+    ./location
     ./network
     ./services
-    ./docker
     ./users
-    ./location
   ];
   nixpkgs.config.allowUnfree = true;
 
