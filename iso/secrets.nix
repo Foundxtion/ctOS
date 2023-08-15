@@ -10,7 +10,7 @@
   services = {
     openssh = {
       enable = false;
-      permitRootLogin = false;
+      permitRootLogin = "no";
     };
     nginx = {
       enable = false;
