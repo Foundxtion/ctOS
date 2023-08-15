@@ -22,7 +22,7 @@
       enable = false;
       protocol = "";
       web = "";
-      username = "";
+      login = "";
       password = "";
       server = "";
       domain = "";
