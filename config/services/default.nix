@@ -5,7 +5,9 @@ in
 {
   services.openssh = {
     enable = secrets.services.openssh.enable;
-    settings.PermitRootLogin = secrets.services.openssh.PermitRootLogin;
+    passwordAuthentication = false;
+    kbdInteractiveAuthentication = false;
+    permitRootLogin = secrets.services.openssh.permitRootLogin;
   };
 
   services.nginx = {
