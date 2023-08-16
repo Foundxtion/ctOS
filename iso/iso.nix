@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, home-manager, pkgs, ... }:
 let
   secrets = import ./secrets.nix;
 in
@@ -11,9 +11,13 @@ in
     # https://nixos.wiki/wiki/Creating_a_NixOS_live_CD
     # The user will not need to update its channel during installation
     <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+	
+	# Installing home-manager
+    <home-manager/nixos>
   ];
 
   nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes"];
 
   # specify what packages needs to be imported
   environment.systemPackages = with pkgs; [
