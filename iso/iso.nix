@@ -32,7 +32,7 @@ in
   };
 
   networking = let 
-    hostName = "foundation-installer";
+    hostName = "fndx-installer";
     networkmanager.enable = true;
     wireless.enable = false;
   in
@@ -100,7 +100,7 @@ in
 
         echo "Generating config...";
         ${config.system.build.nixos-generate-config}/bin/nixos-generate-config --root /mnt;
-        git clone https://github.com/LilianSchall/foundation /mnt/root/nixos;
+        git clone ${secrets.git-remote} /mnt/root/nixos;
         cp /etc/secrets.nix /mnt/root/nixos/config/;
         mv /mnt/etc/nixos/hardware-configuration.nix /mnt/root/nixos/config/;
         rm -rf /mnt/etc/nixos;

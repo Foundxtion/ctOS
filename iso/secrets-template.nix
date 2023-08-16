@@ -1,4 +1,5 @@
 {
+  git-remote = "";
   hostName = "";
   network = {
     hasStaticAddress = false;

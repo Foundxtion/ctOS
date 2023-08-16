@@ -3,7 +3,7 @@
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    users.foundation = import ../homeManagerConfig;
+    users.fndx = import ../homeManagerConfig;
     users.root = import ../homeManagerConfig;
   };
 }
