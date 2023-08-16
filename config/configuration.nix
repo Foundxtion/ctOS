@@ -12,6 +12,7 @@ in
     ./network
     ./services
     ./users
+    ./hardwareAddons
     (import "${home-manager}/nixos")
   ];
   nixpkgs.config.allowUnfree = true;
