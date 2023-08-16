@@ -95,12 +95,12 @@ in
 
         echo "Generating config...";
         ${config.system.build.nixos-generate-config}/bin/nixos-generate-config --root /mnt;
-        git clone https://github.com/LilianSchall/foundation /mnt/root/.config;
-        cp /etc/secrets.nix /mnt/root/.config/config/;
-        mv /mnt/etc/nixos/hardware-configuration.nix /mnt/root/.config/config/;
+        git clone https://github.com/LilianSchall/foundation /mnt/root/nixos;
+        cp /etc/secrets.nix /mnt/root/nixos/config/;
+        mv /mnt/etc/nixos/hardware-configuration.nix /mnt/root/nixos/config/;
         rm -rf /mnt/etc/nixos;
         cd /mnt/etc;
-        ln -sr ../root/.config/config /mnt/etc/nixos;
+        ln -sr ../root/nixos/config /mnt/etc/nixos;
 
         echo "Installing NixOS...";
         ${config.system.build.nixos-install}/bin/nixos-install --no-root-passwd;
