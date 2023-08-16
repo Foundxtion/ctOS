@@ -11,9 +11,6 @@ in
     # https://nixos.wiki/wiki/Creating_a_NixOS_live_CD
     # The user will not need to update its channel during installation
     <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-	
-	# Installing home-manager
-    <home-manager/nixos>
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -75,6 +72,10 @@ in
         echo "Testing connection...";
         ping -c 3 github.com;
         echo "Test passed!";
+
+        echo "Adding home-manager channel...";
+        nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager;
+        nix-channel --update;
 
         echo "Creating partitions...";
         
