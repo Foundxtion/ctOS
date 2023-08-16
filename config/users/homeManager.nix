@@ -2,6 +2,8 @@
 {
   users.users.home-manager = {
     isNormalUser = false;
+    isSystemUser = true;
+    group = "home-manager";
     description = "home-manager user";
   };
 
