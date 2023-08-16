@@ -1,14 +1,7 @@
-{ config, pkgs, ... } :
+{ config, pkgs, ... }:
 {
-  environment = {
-    systemPackages = with pkgs; [
-      git
-      htop
-      man-pages
-      neofetch
-      tree
-      vim
-      zip
-    ];
-  };
+  imports = [
+    ./systemPackages.nix
+    ./programs.nix
+  ];
 }
