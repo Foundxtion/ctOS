@@ -15,5 +15,7 @@
         src = pkgs.zsh-powerlevel10k;
       }
     ];
+
+    initExtra = (builtins.readFile ./p10k.zsh);
   };
 }
