@@ -31,5 +31,21 @@
       server = "";
       domain = "";
     };
+    grafana = {
+      enable = false;
+      settings = {
+        server = {
+
+        # Listening address
+        http_addr = "";
+        # Listening port
+        http_port = 0;
+
+        # Grafana needs to know on which domain and URL it is running
+        domain = "";
+        root_url = "";
+      };
+    };
+  };
   };
 }
