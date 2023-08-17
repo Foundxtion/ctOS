@@ -5,9 +5,11 @@ in
 {
   services.openssh = {
     enable = secrets.services.openssh.enable;
-    passwordAuthentication = false;
-    kbdInteractiveAuthentication = false;
-    permitRootLogin = secrets.services.openssh.permitRootLogin;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = secrets.services.openssh.permitRootLogin;
+    };
   };
 
   services.nginx = {
@@ -18,7 +20,7 @@ in
 
   security.acme = {
     acceptTerms = true;
-    email = secrets.security.acme.email;
+    defaults.email = secrets.security.acme.email;
   };
 
   services.ddclient = {
