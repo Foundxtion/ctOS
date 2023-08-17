@@ -19,6 +19,9 @@
         # Here will be written all nginx virtualHosts config
       };
     };
+    acme = {
+      email = "";
+    };
     ddclient = {
       enable = false;
       protocol = "";
