@@ -8,6 +8,9 @@
     defaultGateway = "";
   };
   authorizedKey = "";
+  security.acme = {
+    email = "";
+  };
   services = {
     openssh = {
       enable = false;
@@ -18,9 +21,6 @@
       virtualHosts = {
         # Here will be written all nginx virtualHosts config
       };
-    };
-    security.acme = {
-      email = "";
     };
     ddclient = {
       enable = false;
