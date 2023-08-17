@@ -19,7 +19,7 @@
         # Here will be written all nginx virtualHosts config
       };
     };
-    acme = {
+    security.acme = {
       email = "";
     };
     ddclient = {
