@@ -7,4 +7,9 @@ in
     enable = secrets.services.grafana.enable;
     settings = secrets.services.grafana.settings;
   };
+
+  services.prometheus = {
+    enable = secrets.services.grafana.enable;
+    port = 9001;
+  };
 }
