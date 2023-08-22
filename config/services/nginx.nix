@@ -5,7 +5,7 @@ let
 in
 {
   services.nginx = {
-    enable = false;
+    enable = true;
     # TODO: add virtualHosts configuration
     virtualHosts = server.nginx.virtualHosts;
   };

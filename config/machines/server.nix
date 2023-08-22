@@ -25,16 +25,16 @@ in
     "s3l4h.com" = {
       enableACME = true;
       forceSSL = true;
-      root = /var/www/landingpage;
+      root = "/var/www/landingpage";
     };
     "www.s3l4h.com" = {
       enableACME = true;
       forceSSL = true;
-      root = /var/www/landingpage;
+      root = "/var/www/landingpage";
     };	
     "grafana.s3l4h.com" = {
       enableACME = true;
-      forceSSL = true;
+      addSSL = true;
       locations."/" = {
         extraConfig = "proxy_set_header Host grafana.s3l4h.com";
         proxyPass = "http://${toString grafana_settings.server.http_addr}:${toString grafana_settings.server.http_port}/";
