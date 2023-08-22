@@ -22,6 +22,16 @@ in
   };
   grafana.settings = grafana_settings;
   nginx.virtualHosts = {
+    "s3l4h.com" = {
+      enableACME = true;
+      forceSSL = true;
+      root = /var/www/landingpage;
+    };
+    "www.s3l4h.com" = {
+      enableACME = true;
+      forceSSL = true;
+      root = /var/www/landingpage;
+    };	
     "grafana.s3l4h.com" = {
       enableACME = true;
       forceSSL = true;
@@ -30,16 +40,6 @@ in
         proxyPass = "http://${toString grafana_settings.server.http_addr}:${toString grafana_settings.server.http_port}/";
         proxyWebsockets = true;
       };
-    };
-    "www.s3l4h.com" = {
-      enableACME = true;
-      forceSSL = true;
-      root = /var/www/landingpage;
-    };	
-    "s3l4h.com" = {
-      enableACME = true;
-      forceSSL = true;
-      root = /var/www/landingpage;
     };
   };
 }
