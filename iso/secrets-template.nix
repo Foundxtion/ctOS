@@ -1,7 +1,8 @@
 {
-  git-remote = "";
+  git-remote = "https://github.com/Foundxtion/Foundxtion";
   hostName = "";
   username = "fndx";
+  initialPasswordHash = "";
   network = {
     hasStaticAddress = false;
     ipAddress = "";
