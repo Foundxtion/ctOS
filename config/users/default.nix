@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./fndx.nix
+    ./user.nix
     ./homeManager.nix
   ];
 

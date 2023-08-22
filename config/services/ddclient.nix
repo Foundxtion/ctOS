@@ -1,15 +1,16 @@
 {config, pkgs, ...}:
 let
   secrets = import ../secrets.nix;
+  server = import ../machines/server.nix;
 in
 {
   services.ddclient = {
-    enable = secrets.services.ddclient.enable;
+    enable = true;
     configFile = pkgs.writeText "ddclient-config-file" ''
-      use=web, web=${secrets.services.ddclient.web}
-      protocol=${secrets.services.ddclient.protocol}
-      server=${secrets.services.ddclient.server}
-      login=${secrets.services.ddclient.login}
+      use=web, web=${server.ddclient.web}
+      protocol=${server.ddclient.protocol}
+      server=${server.ddclient.server}
+      login=${server.ddclient.login}
       password=${secrets.services.ddclient.password}
       @
     '';

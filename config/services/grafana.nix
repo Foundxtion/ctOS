@@ -1,15 +1,16 @@
 {config, pkgs, ...}:
 let
   secrets = import ../secrets.nix;
+  server = import ../machines/server.nix;
 in
 {
   services.grafana = {
-    enable = secrets.services.grafana.enable;
-    settings = secrets.services.grafana.settings;
+    enable = true;
+    settings = server.grafana.settings;
   };
 
   services.prometheus = {
-    enable = secrets.services.grafana.enable;
+    enable = true;
     port = 9001;
   };
 }

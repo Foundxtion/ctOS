@@ -54,9 +54,7 @@ in
   # whose root session is only accessible by the builder
   # of the iso
   systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
-  users.users.root.openssh.authorizedKeys.keys = [
-    secrets.authorizedKey
-  ];
+  users.users.root.openssh.authorizedKeys.keys = secrets.authorizedKeys;
 
   systemd.services.install = {
     description = "NixOS installation bootstrap";

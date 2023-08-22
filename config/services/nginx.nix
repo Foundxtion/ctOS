@@ -1,12 +1,13 @@
 {config, pkgs, ...}:
 let
   secrets = import ../secrets.nix;
+  server = import ../machines/server.nix;
 in
 {
   services.nginx = {
-    enable = secrets.services.nginx.enable;
-  # TODO: add virtualHosts configuration
-    virtualHosts = secrets.services.nginx.virtualHosts;
+    enable = true;
+    # TODO: add virtualHosts configuration
+    virtualHosts = server.nginx.virtualHosts;
   };
 
   security.acme = {

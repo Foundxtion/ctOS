@@ -4,7 +4,7 @@ let
 in
 {
   services.openssh = {
-    enable = secrets.services.openssh.enable;
+    enable = true;
     settings = {
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
