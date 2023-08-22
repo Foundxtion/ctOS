@@ -34,7 +34,7 @@ in
     };	
     "grafana.s3l4h.com" = {
       enableACME = true;
-      addSSL = true;
+      forceSSL = true;
       locations."/" = {
         extraConfig = "proxy_set_header Host grafana.s3l4h.com;";
         proxyPass = "http://${toString grafana_settings.server.http_addr}:${toString grafana_settings.server.http_port}/";
