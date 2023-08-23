@@ -15,4 +15,8 @@ in
     port = server.portunus.port;
     domain = server.portunus.domain;
   };
+
+  systemd.services.portunus = {
+    after = ["acme-${server.portunus.domain}.service"];
+  };
 }
