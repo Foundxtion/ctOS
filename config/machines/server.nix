@@ -42,28 +42,10 @@ in
         proxyWebsockets = true;
       };
     };
-
-    "ldap.s3l4h.com" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        extraConfig = "proxy_set_header Host ldap.s3l4h.com;";
-        proxyPass = "http://localhost:${toString portunus_port}/";
-        proxyWebsockets = true;
-      };
-    };
   };
 
   mailserver = {
     fqdn = "s3l4h.com";
     domains = ["s3l4h.com"];
-  };
-  ldap = {
-    suffix = "dc=s3l4h,dc=com";
-  };
-
-  portunus = {
-    domain = "ldap.s3l4h.com";
-    port = portunus_port;
   };
 }
