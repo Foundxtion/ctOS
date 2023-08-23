@@ -19,4 +19,10 @@
       password = "";
     };
   };
+  mailserver.loginAccounts = {
+    "user1@example.com" = {
+      # Generate one with nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
+      hashedPassword = "";
+    };
+  };
 }

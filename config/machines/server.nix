@@ -42,4 +42,9 @@ in
       };
     };
   };
+
+  mailserver = {
+    fqdn = "s3l4h.com";
+    domains = ["s3l4h.com"];
+  };
 }
