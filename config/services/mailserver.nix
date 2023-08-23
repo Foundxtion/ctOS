@@ -12,7 +12,7 @@ in
 		})
 	];
 	mailserver = {
-		enable = true;
+		enable = false;
 		fqdn = server.mailserver.fqdn;
 		domains = server.mailserver.domains;
 		loginAccounts = secrets.mailserver.loginAccounts;
