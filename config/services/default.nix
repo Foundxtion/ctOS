@@ -6,5 +6,6 @@
     ./mailserver.nix
     ./nginx.nix
     ./openssh.nix
+    ./portunus.nix
   ];
 }
