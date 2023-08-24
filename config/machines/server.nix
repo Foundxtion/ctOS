@@ -10,7 +10,6 @@ let
       root_url = "https://grafana.s3l4h.com/";
     };
   };
-  portunus_port = 8080;
 in
 {
   ddclient = {
@@ -47,5 +46,11 @@ in
   mailserver = {
     fqdn = "s3l4h.com";
     domains = ["s3l4h.com"];
+  };
+
+  openldap = {
+    olcRootDN = "cn=admin,dc=s3l4h,dc=com";
+    olcSuffix = "dc=s3l4h,dc=com";
+    domain = "ldap.s3l4h.com";
   };
 }
