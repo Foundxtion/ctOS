@@ -47,10 +47,4 @@ in
     fqdn = "s3l4h.com";
     domains = ["s3l4h.com"];
   };
-
-  openldap = {
-    olcRootDN = "cn=admin,dc=s3l4h,dc=com";
-    olcSuffix = "dc=s3l4h,dc=com";
-    domain = "ldap.s3l4h.com";
-  };
 }

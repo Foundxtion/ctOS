@@ -25,7 +25,4 @@
       hashedPassword = "";
     };
   };
-  openldap = {
-    adminPW = "";
-  };
 }
