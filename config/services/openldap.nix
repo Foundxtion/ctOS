@@ -72,4 +72,5 @@ in
   security.acme.certs.${server.openldap.domain} = {
     extraDomainNames = [];
   };
+  security.acme.defaults.dnsProvider = server.openldap.dnsProvider;
 }
