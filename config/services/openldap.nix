@@ -8,7 +8,7 @@ in
     enable = true;
 
     /* Enable plained and secure connections */
-    urlList = [ "ldap://" ];
+    urlList = [ "ldap:///" ];
 
 	settings = {
       attrs = {
