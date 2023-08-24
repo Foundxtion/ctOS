@@ -68,4 +68,8 @@ in
   /* make acme certificates accessible by openldap */
   security.acme.defaults.group = "certs";
   users.groups.certs.members = [ "openldap" ];
+
+  security.acme.certs.${server.openldap.domain} = {
+    extraDomainNames = [];
+  };
 }
