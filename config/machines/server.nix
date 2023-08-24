@@ -52,6 +52,5 @@ in
     olcRootDN = "cn=admin,dc=s3l4h,dc=com";
     olcSuffix = "dc=s3l4h,dc=com";
     domain = "ldap.s3l4h.com";
-    dnsProvider = "namecheap";
   };
 }

@@ -8,20 +8,11 @@ in
     enable = true;
 
     /* Enable plained and secure connections */
-    urlList = [ "ldap://" "ldaps://"];
+    urlList = [ "ldap://" ];
 
 	settings = {
       attrs = {
         olcLogLevel = "conns config";
-
-        /* settings for acme ssl */
-        olcTLSCACertificateFile = "/var/lib/acme/${server.openldap.domain}/full.pem";
-        olcTLSCertificateFile = "/var/lib/acme/${server.openldap.domain}/cert.pem";
-        olcTLSCertificateKeyFile = "/var/lib/acme/${server.openldap.domain}/key.pem";
-        olcTLSCipherSuite = "HIGH:MEDIUM:+3DES:+RC4:+aNULL";
-        olcTLSCRLCheck = "none";
-        olcTLSVerifyClient = "never";
-        olcTLSProtocolMin = "3.1";
       };
 
       children = {
@@ -57,20 +48,5 @@ in
         };
       };
     };
-
   };
-
-  systemd.services.openldap = {
-    wants = [ "acme-${server.openldap.domain}.service" ];
-    after = [ "acme-${server.openldap.domain}.service" ];
-  };
-
-  /* make acme certificates accessible by openldap */
-  security.acme.defaults.group = "certs";
-  users.groups.certs.members = [ "openldap" ];
-
-  security.acme.certs.${server.openldap.domain} = {
-    extraDomainNames = [];
-  };
-  security.acme.defaults.dnsProvider = server.openldap.dnsProvider;
 }
