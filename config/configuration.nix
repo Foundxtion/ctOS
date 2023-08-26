@@ -15,7 +15,10 @@ in
     ./hardwareAddons
     (import "${home-manager}/nixos")
   ];
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config =  {
+    allowUnfree = true;
+    cudaSupport = true;
+  };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "23.05";
