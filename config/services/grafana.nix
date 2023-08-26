@@ -5,7 +5,7 @@ let
 in
 {
   services.grafana = {
-    enable = true;
+    enable = false;
     settings = server.grafana.settings;
   };
 
