@@ -7,6 +7,7 @@
       man-pages
       neofetch
       tree
+      wget
       zip
     ];
   };
