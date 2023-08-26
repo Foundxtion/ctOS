@@ -7,6 +7,9 @@
 
   programs.zsh = rec {
     enable = true;
+    shellAliases = {
+      update="(cd /root/nixos && git pull && nixos rebuild switch)";
+    };
 
 	plugins = [
       {
