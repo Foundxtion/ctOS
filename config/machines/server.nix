@@ -10,6 +10,7 @@ let
       root_url = "https://grafana.s3l4h.com/";
     };
   };
+  secrets = import ../secrets.nix;
 in
 {
   ddclient = {
@@ -38,6 +39,15 @@ in
       locations."/" = {
         extraConfig = "proxy_set_header Host grafana.s3l4h.com;";
         proxyPass = "http://${toString grafana_settings.server.http_addr}:${toString grafana_settings.server.http_port}/";
+        proxyWebsockets = true;
+      };
+    };
+    "cloud.s3l4h.com" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        extraConfig = "proxy_set_header Host cloud.s3l4h.com;";
+        proxyPass = "http://${toString secrets.nas.hostname}:${toString secrets.nas.port}/";
         proxyWebsockets = true;
       };
     };

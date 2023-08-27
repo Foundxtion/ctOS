@@ -25,4 +25,8 @@
       hashedPassword = "";
     };
   };
+  nas = {
+    hostname = "";
+    port = 0;
+  };
 }
