@@ -51,6 +51,15 @@ in
         proxyWebsockets = true;
       };
     };
+    "vault.s3l4h.com" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        extraConfig = "proxy_set_header Host vault.s3l4h.com;";
+        proxyPass = "http://${toString secrets.vault.hostname}:${toString secrets.vault.port}/";
+        proxyWebsockets = true;
+      };
+    };
   };
 
   mailserver = {

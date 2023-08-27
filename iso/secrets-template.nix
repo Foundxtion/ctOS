@@ -29,4 +29,8 @@
     hostname = "";
     port = 0;
   };
+  vault = {
+    hostname = "";
+    port = 0;
+  };
 }
