@@ -15,8 +15,8 @@ in
         prefixLength = secrets.network.prefixLength;
       }];
     firewall = {
-        allowedTCPPorts = [22 80 88 389 443 464 636 749];
-        allowedUDPPorts = [22 80 88 389 443 464 636 749];
+        allowedTCPPorts = [22 80 88 389 443 464 636 749 8022];
+        allowedUDPPorts = [22 80 88 389 443 464 636 749 8022];
     };
   }
   else {
