@@ -1,3 +1,5 @@
 #!/bin/sh
-cp iso/secrets-template.nix iso/secrets.nix;
-nix-build '<nixpkgs/nixos>' -I nixos-config=iso/iso.nix --dry-run && rm iso/secrets.nix && echo "Test passed !"
+cp settings/serverSettings.nix settings/settings.nix
+nix-build '<nixpkgs/nixos>' -I nixos-config=settings/isoSettings.nix --dry-run && echo "Test passed !"
+
+rm settings/settings.nix;
