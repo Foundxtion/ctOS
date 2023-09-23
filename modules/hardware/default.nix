@@ -1,7 +1,9 @@
 {config, pkgs, ...}:
 {
   imports = [
-      ./nvidia.nix
       ./amd.nix
+      ./bluetooth.nix
+      ./nvidia.nix
+      ./pulseaudio.nix
   ];
 }

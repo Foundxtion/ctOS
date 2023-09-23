@@ -6,11 +6,11 @@
     imports = [ ../installer ];
     fndx.networking = {
         # Enable / disable Network IP Attribution... (default: true)
-        useDHCP = false;
+        useDHCP = true;
         # ... Or (advanced) use static address !
-        ipv4Address = "255.255.255.255";
-        prefixLength = 0;
-        defaultGateway = "255.255.255.255";
+        #ipv4Address = "255.255.255.255";
+        #prefixLength = 0;
+        #defaultGateway = "255.255.255.255";
     };
 
     installer = {
@@ -18,9 +18,9 @@
         git-remote = "https://github.com/foundxtion/foundxtion";
 
         # Are you installing a server ?
-        # If yes, you may want to enable ssh into root
+        # If yes, you may want to enable ssh into root (default: false)
         ssh = {
-            enable = true;
+            enable = false;
             usedRootKey = "";
         };
     };

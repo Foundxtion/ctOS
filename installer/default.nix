@@ -13,6 +13,7 @@
         ./ssh.nix
         # Core imports
         ../modules
+        ../pkgs
     ];
 
     environment.systemPackages = with pkgs; [

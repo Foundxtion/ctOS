@@ -1,11 +1,7 @@
-{config, lib, pkgs, ...}:
+{osConfig, lib, pkgs, ...}:
+with lib;
 {
-    programs.direnv = {
-        enable = true;
-        nix-direnv.enable = true;
-    };
-
-    programs.zsh = rec {
+    programs.zsh = mkIf osConfig.fndx.packages.zsh.enable {
         enable = true;
         shellAliases = {
             update="(cd /root/nixos && git pull && nixos-rebuild switch)";
