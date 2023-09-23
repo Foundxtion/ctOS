@@ -56,10 +56,10 @@ with lib;
                 ${config.system.build.nixos-generate-config}/bin/nixos-generate-config --root /mnt;
                 git clone ${config.installer.git-remote} /mnt/root/nixos;
                 cp /etc/settings.nix /mnt/root/nixos/settings;
-                mv /mnt/etc/nixos/hardware-configuration.nix /mnt/root/nixos/entrypoint;
+                mv /mnt/etc/nixos/hardware-configuration.nix /mnt/root/nixos;
                 rm -rf /mnt/etc/nixos;
                 cd /mnt/etc;
-                ln -sr ../root/nixos/entrypoint /mnt/etc/nixos;
+                ln -sr ../root/nixos/ /mnt/etc/nixos;
     
                 echo "Installing NixOS...";
                 ${config.system.build.nixos-install}/bin/nixos-install --no-root-passwd;
