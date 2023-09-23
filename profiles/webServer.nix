@@ -62,6 +62,7 @@ with lib;
         fndx.services.nginx = {
             enable = true;
             virtualHosts = cfg.virtualHosts;
+            acme-email = cfg.acme-email;
         };
     };
 }
