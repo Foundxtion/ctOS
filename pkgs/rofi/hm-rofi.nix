@@ -9,6 +9,6 @@ with lib;
     programs.rofi = mkIf cfg.enable {
         enable = true;
         terminal = defaultTerminal;
-        theme = "onedark";
+        theme = "spotlight-dark";
     };
 }
