@@ -1,4 +1,4 @@
-# This is the iso-settings.nix template !
+# This is the isoSettings.nix template !
 # Comment out the configuration you might use
 
 { pkgs, config, ...}:

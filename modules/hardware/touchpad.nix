@@ -3,7 +3,7 @@ with lib;
 {
     options.fndx.hardware.touchpad.enable = mkEnableOption "Touchpad for Foundxtion";
 
-    config = mkIf fndx.hardware.touchpad.enable {
+    config = mkIf config.fndx.hardware.touchpad.enable {
         services.xserver.libinput = {
             enable = true;
             touchpad = {

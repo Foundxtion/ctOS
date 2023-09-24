@@ -5,5 +5,6 @@
       ./bluetooth.nix
       ./nvidia.nix
       ./pulseaudio.nix
+      ./touchpad.nix
   ];
 }
