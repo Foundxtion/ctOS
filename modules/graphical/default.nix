@@ -30,7 +30,7 @@ with lib;
 		fonts = {
 		    enableDefaultFonts = true;
 		    enableGhostscriptFonts = true;
-		    packages = with pkgs; [
+		    fonts = with pkgs; [
 		      corefonts
 		      (nerdfonts.override { fonts = [ "DejaVuSansMono" "Iosevka" "Meslo" ]; })
 		      unifont_upper
