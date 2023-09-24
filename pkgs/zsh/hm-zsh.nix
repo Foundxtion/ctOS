@@ -3,14 +3,9 @@ with lib;
 {
     programs.zsh = mkIf osConfig.fndx.packages.zsh.enable {
         enable = true;
+        enableAutosuggestions = true;
         shellAliases = {
             update="(cd /root/nixos && git pull && nixos-rebuild switch)";
-        };
-        zplug = {
-          enable = true;
-          plugins = [
-            { name = "zsh-users/zsh-autosuggestions"; }
-          ];
         };
         plugins = [
             {
