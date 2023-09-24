@@ -14,7 +14,7 @@ with lib;
                 };
             };
 
-            font.normal.family = "MesloLGS NF";
+            font.normal.family = "DejaVuSansM Nerd Font";
             font.normal.size = 36;
 
             window.opacity = 0.7;
