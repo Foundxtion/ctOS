@@ -7,6 +7,7 @@ with lib;
             update="(cd /root/nixos && git pull && nixos-rebuild switch)";
         };
         zplug = {
+          enable = true;
           plugins = [
             { name = "zsh-users/zsh-autosuggestions"; }
           ];
