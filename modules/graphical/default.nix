@@ -28,7 +28,7 @@ with lib;
         fndx.hardware.bluetooth.enable = true;
         fndx.hardware.pulseaudio.enable = true;
 		fonts = {
-		    enableDefaultPackages = true;
+		    enableDefaultFonts = true;
 		    enableGhostscriptFonts = true;
 		    packages = with pkgs; [
 		      corefonts
