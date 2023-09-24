@@ -17,7 +17,10 @@ with lib;
                 smartBorders = "on";
                 smartGaps = true;
             };
-            window.border = 0;
+            window =  {
+                titlebar = false;
+                border = 0;
+            };
             menu = "${pkgs.rofi}/bin/rofi -show drun";
             terminal = defaultTerminal;
 
