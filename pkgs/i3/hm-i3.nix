@@ -17,11 +17,13 @@ with lib;
                 smartBorders = "on";
                 smartGaps = true;
             };
+            window.border = 0;
             menu = "${pkgs.rofi}/bin/rofi -show drun";
             terminal = defaultTerminal;
 
             modifier = mod;
             floating.modifier = mod;
+
             workspaceAutoBackAndForth = true;
 
             keybindings = {
