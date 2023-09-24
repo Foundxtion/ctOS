@@ -6,6 +6,7 @@ with lib;
 {
     options = {
         fndx.graphical.enable = mkEnableOption "Foundxtion graphic interface";
+        fndx.graphical.enableTouchpad = mkEnableOption "touchpad on Foundxtion graphical interface";
         fndx.graphical.type = mkOption {
             example = "gnome";
             type = types.str;
@@ -22,11 +23,16 @@ with lib;
         services.xserver = {
             enable = true;
             desktopManager.xterm.enable = false;
+            layout = "us";
+            xkbVariant = "";
+            autorun = true;
         };
+
         fndx.packages.i3.enable = mkIf (cfg.type == "i3") true;
         fndx.packages.gnome.enable = mkIf (cfg.type == "gnome") true;
         fndx.hardware.bluetooth.enable = true;
         fndx.hardware.pulseaudio.enable = true;
+        fndx.hardware.touchpad.enable = cfg.enableTouchpad;
 		fonts = {
 		    enableDefaultFonts = true;
 		    enableGhostscriptFonts = true;
