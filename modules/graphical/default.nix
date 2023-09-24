@@ -27,5 +27,14 @@ with lib;
         fndx.packages.gnome.enable = mkIf (cfg.type == "gnome") true;
         fndx.hardware.bluetooth.enable = true;
         fndx.hardware.pulseaudio.enable = true;
+		fonts = {
+		    enableDefaultPackages = true;
+		    enableGhostscriptFonts = true;
+		    packages = with pkgs; [
+		      corefonts
+		      (nerdfonts.override { fonts = [ "DejaVuSansMono" "Iosevka" "Meslo" ]; })
+		      unifont_upper
+		    ];
+		};
     };
 }
