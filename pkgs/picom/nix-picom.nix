@@ -25,7 +25,7 @@ with lib;
                     method = "dual-kawase";
                     strength = 12;
                     background = false;
-                    background-iframe = false;
+                    background-frame = false;
                     background-fixed = false;
                 };
                 corner-radius = 10;
