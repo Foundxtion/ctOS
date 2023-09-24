@@ -6,7 +6,11 @@ with lib;
         shellAliases = {
             update="(cd /root/nixos && git pull && nixos-rebuild switch)";
         };
-
+        zplug = {
+          plugins = [
+            { name = "zsh-users/zsh-autosuggestions"; }
+          ];
+        };
         plugins = [
             {
                 name = "powerlevel10k";
