@@ -49,4 +49,9 @@ with lib;
 
 
     home.sessionVariables.GTK_THEME = "Whitesur";
+    home.packages = mkIf cfg.enable [
+        unstable.whitesur-gtk-theme
+        unstable.whitesur-cursors
+        unstable.whitesur-icon-theme
+    ];
 }
