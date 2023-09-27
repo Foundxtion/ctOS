@@ -2,6 +2,9 @@
 let
     cfg = osConfig.fndx.packages.gnome;
     unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) {};
+    Settings = ''
+      gtk-application-prefer-dark-theme=1
+    '';
 in
 with lib;
 { 
@@ -37,4 +40,13 @@ with lib;
             package = unstable.whitesur-cursors;
         };
     };
+
+    gtk3.extraConfig = mkIf cfg.enable {
+       inherit Settings;
+    };
+    gtk4.extraConfig = mkIf cfg.enable {
+       inherit Settings;
+    };
+
+    home.sessionVariables.GTK_THEME = "Whitesur";
 }
