@@ -11,6 +11,10 @@ with lib;
     dconf = mkIf cfg.enable {
         enable = true;
         settings = {
+            "org/gnome/desktop/interface" = {
+                color-scheme = "prefer-dark";
+                enable-hot-corners = false;
+            };
             "org/gnome/desktop/background" = {
                 "picture-uri" = "${../../wallpapers/fire.jpg}";
                 "picture-uri-dark" = "${../../wallpapers/fire.jpg}";
@@ -26,17 +30,17 @@ with lib;
         enable = true;
 
         iconTheme = {
-            name = "Whitesur";
+            name = "Whitesur-icon";
             package = unstable.whitesur-icon-theme;
         };
 
         theme = {
-            name = "Whitesur";
+            name = "Whitesur-theme";
             package = unstable.whitesur-gtk-theme;
         };
 
         cursorTheme = {
-            name = "Whitesur";
+            name = "Whitesur-cursor";
             package = unstable.whitesur-cursors;
         };
         gtk3.extraConfig = mkIf cfg.enable {
@@ -48,7 +52,7 @@ with lib;
     };
 
 
-    home.sessionVariables.GTK_THEME = "Whitesur";
+    home.sessionVariables.GTK_THEME = "Whitesur-theme";
     home.packages = mkIf cfg.enable [
         unstable.whitesur-gtk-theme
         unstable.whitesur-cursors
