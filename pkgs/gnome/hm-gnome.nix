@@ -9,9 +9,11 @@ with lib;
         settings = {
             "org/gnome/desktop/background" = {
                 "picture-uri" = "${../../wallpapers/fire.jpg}";
+                "picture-uri-dark" = "${../../wallpapers/fire.jpg}";
             };
             "org/gnome/desktop/screensaver" = {
                 "picture-uri" = "${../../wallpapers/fire.jpg}";
+                "picture-uri-dark" = "${../../wallpapers/fire.jpg}";
             };
         };
     }; 
