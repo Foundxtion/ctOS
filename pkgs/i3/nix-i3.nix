@@ -26,7 +26,6 @@ with lib;
                 enable = true;
                 package = pkgs.i3-gaps;
                 extraPackages = with pkgs; [
-                    firefox
                     spectacle
                     i3lock-fancy-rapid
                 ];
