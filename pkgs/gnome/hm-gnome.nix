@@ -39,14 +39,14 @@ with lib;
             name = "Whitesur";
             package = unstable.whitesur-cursors;
         };
+        gtk3.extraConfig = mkIf cfg.enable {
+           inherit Settings;
+        };
+        gtk4.extraConfig = mkIf cfg.enable {
+           inherit Settings;
+        };
     };
 
-    gtk3.extraConfig = mkIf cfg.enable {
-       inherit Settings;
-    };
-    gtk4.extraConfig = mkIf cfg.enable {
-       inherit Settings;
-    };
 
     home.sessionVariables.GTK_THEME = "Whitesur";
 }
