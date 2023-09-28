@@ -13,7 +13,7 @@ with lib;
             displayManager = {
                 autoLogin.enable = false;
                 lightdm = {
-                    background = ../../wallpapers/fire.jpg;
+                    background = config.fndx.graphical.background;
                     greeters.enso = {
                         enable = true;
                         blur = true;
@@ -30,7 +30,7 @@ with lib;
                     i3lock-fancy-rapid
                 ];
                 extraSessionCommands = ''
-                  ${pkgs.feh}/bin/feh --bg-scale --fill ${../../wallpapers/fire.jpg}
+                  ${pkgs.feh}/bin/feh --bg-scale --fill ${config.fndx.graphical.background}
                 '';
             };
         };

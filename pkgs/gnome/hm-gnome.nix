@@ -12,12 +12,12 @@ with lib;
         enable = true;
         settings = {
             "org/gnome/desktop/background" = {
-                "picture-uri" = "${../../wallpapers/fire.jpg}";
-                "picture-uri-dark" = "${../../wallpapers/fire.jpg}";
+                "picture-uri" = "${config.fndx.graphical.background}";
+                "picture-uri-dark" = "${config.fndx.graphical.background}";
             };
             "org/gnome/desktop/screensaver" = {
-                "picture-uri" = "${../../wallpapers/fire.jpg}";
-                "picture-uri-dark" = "${../../wallpapers/fire.jpg}";
+                "picture-uri" = "${config.fndx.graphical.background}";
+                "picture-uri-dark" = "${config.fndx.graphical.background}";
             };
         };
     }; 

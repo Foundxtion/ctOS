@@ -12,6 +12,11 @@ with lib;
             type = types.str;
             description = mdDoc "Whether to enable GNOME or i3 interface";
         };
+        fndx.graphical.background = mkOption {
+            default = ../../wallpapers/fire.jpg;
+
+            description = mdDoc "Foundxtion background for graphical interface";
+        };
     };
 
     config = mkIf cfg.enable {
