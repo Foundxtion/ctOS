@@ -12,14 +12,34 @@ with lib;
         enable = true;
         settings = {
             "org/gnome/desktop/background" = {
-                "picture-uri" = "${config.fndx.graphical.background}";
-                "picture-uri-dark" = "${config.fndx.graphical.background}";
+                "picture-uri" = "${osConfig.fndx.graphical.background}";
+                "picture-uri-dark" = "${osConfig.fndx.graphical.background}";
             };
             "org/gnome/desktop/screensaver" = {
-                "picture-uri" = "${config.fndx.graphical.background}";
-                "picture-uri-dark" = "${config.fndx.graphical.background}";
+                "picture-uri" = "${osConfig.fndx.graphical.background}";
+                "picture-uri-dark" = "${osConfig.fndx.graphical.background}";
             };
         };
     }; 
+    
+    gtk = mkIf cfg.enable {
+        enable = true;
 
+        iconTheme = {
+            name = "WhiteSur-Icon";
+            package = pkgs.whitesur-icon-theme;
+        };
+        theme = {
+            name = "WhiteSur-Theme";
+            package = pkgs.whitesur-gtk-theme;
+        };
+    };
+
+    home.sessionVariables.GTK_THEME = mkIf cfg.enable "WhiteSur-Theme";
+
+    home.packages = mkIf cfg.enable (with pkgs; [
+        gnomeExtensions.big-sur-status-area
+        whitesur-gtk-theme
+        whitesur-icon-theme
+    ]);
 }
