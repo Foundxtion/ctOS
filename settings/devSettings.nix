@@ -13,5 +13,14 @@
     
     fndx.dev = {
         enable = true;
+        cpp.enable = true;
+        java.enable = true;
+        web.enable = true;
+        rust.enable = true;
+    };
+
+    fndx.janus = {
+        enable = true;
+        realm = "EXAMPLE.COM";
     };
 }
