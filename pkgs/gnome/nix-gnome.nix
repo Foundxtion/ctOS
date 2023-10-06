@@ -41,5 +41,22 @@ with lib;
 		]);
         programs.dconf.enable = true;
         fndx.packages.alacritty.enable = true;
+
+        nixpkgs.overlays = [
+            (final: prev: {
+                alacritty = prev.alacritty.overrideAttrs (oldAttrs: {
+                    postInstall = (oldAttrs.postInstall or "") + ''
+                        substituteInPlace $out/share/applications/Alacritty.desktop \
+                            --replace "[Desktop Entry]
+                            Type=Application
+                            TryExec=alacritty
+                            Exec=alacritty" "[Desktop Entry]
+                            Type=Application
+                            TryExec=alacritty
+                            Exec=env WINIT_UNIX_BACKEND=x11 alacritty"
+                    '';
+                });
+            }) 
+        ];
     };
 }
