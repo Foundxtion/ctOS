@@ -1,7 +1,6 @@
 {lib, osConfig, pkgs, ...}:
 let
     cfg = osConfig.fndx.packages.gnome;
-    unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) {};
     Settings = ''
       gtk-application-prefer-dark-theme=1
     '';
@@ -19,6 +18,19 @@ with lib;
                 "picture-uri" = "${osConfig.fndx.graphical.background}";
                 "picture-uri-dark" = "${osConfig.fndx.graphical.background}";
             };
+            "org/gnome/shell" = {
+                disable-user-extensions = false;
+
+                enabled-extensions = [
+                    "user-themes@gnome-shell-extensions.gcampax.github.com"
+                ];
+            };
+            "org/gnome/shell/extensions/user-theme" = {
+                name = "WhiteSur-Dark";
+            };
+            "org/gnome/desktop/interface" = {
+                color-scheme = "prefer-dark";
+            };
         };
     }; 
     
@@ -35,7 +47,9 @@ with lib;
         };
     };
 
-    home.sessionVariables.GTK_THEME = mkIf cfg.enable "WhiteSur-Theme";
+    home.sessionVariables = mkIf cfg.enable {
+        GTK_THEME = "WhiteSur-Dark";
+    };
 
     home.packages = mkIf cfg.enable (with pkgs; [
         gnomeExtensions.big-sur-status-area
