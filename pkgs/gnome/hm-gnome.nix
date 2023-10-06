@@ -18,6 +18,7 @@ with lib;
                 "picture-uri" = "${osConfig.fndx.graphical.background}";
                 "picture-uri-dark" = "${osConfig.fndx.graphical.background}";
             };
+
             "org/gnome/shell" = {
                 disable-user-extensions = false;
 
@@ -25,11 +26,20 @@ with lib;
                     "user-themes@gnome-shell-extensions.gcampax.github.com"
                 ];
             };
+
             "org/gnome/shell/extensions/user-theme" = {
                 name = "WhiteSur-Dark";
             };
+
+            "org/gnome/desktop/wm/preferences" = {
+                button-layout = "close,minimize,maximize:appmenu";
+            };
+
             "org/gnome/desktop/interface" = {
                 color-scheme = "prefer-dark";
+                cursor-theme = "Adwaita";
+                icon-theme = "WhiteSur-dark";
+                gtk-theme = "WhiteSur-Dark";
             };
         };
     }; 
@@ -38,11 +48,11 @@ with lib;
         enable = true;
 
         iconTheme = {
-            name = "WhiteSur-Icon";
+            name = "Whitesur-icon-theme";
             package = pkgs.whitesur-icon-theme;
         };
         theme = {
-            name = "WhiteSur-Theme";
+            name = "Whitesur-gtk-theme";
             package = pkgs.whitesur-gtk-theme;
         };
     };
