@@ -24,6 +24,7 @@ with lib;
 
                 enabled-extensions = [
                     "user-themes@gnome-shell-extensions.gcampax.github.com"
+                    "user-theme@gnome-shell-extensions.gcampax.github.com"
                 ];
             };
 
