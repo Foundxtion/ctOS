@@ -62,7 +62,6 @@ with lib;
 
     home.sessionVariables = mkIf cfg.enable {
         GTK_THEME = "WhiteSur-Dark";
-        WAYLAND_DISPLAY = "";
     };
 
     home.packages = mkIf cfg.enable (with pkgs; [
