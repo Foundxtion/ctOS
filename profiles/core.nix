@@ -8,8 +8,6 @@
         tree
         wget
         zip
-
-        firefox
     ];
 
     fndx.packages.vim.enable = true;

@@ -33,6 +33,10 @@ with lib;
             autorun = true;
         };
 
+        environment.systemPackages = with pkgs; [
+            firefox
+        ];
+
         fndx.packages.i3.enable = mkIf (cfg.type == "i3") true;
         fndx.packages.gnome.enable = mkIf (cfg.type == "gnome") true;
         fndx.hardware.bluetooth.enable = true;
