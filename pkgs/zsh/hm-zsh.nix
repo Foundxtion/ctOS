@@ -4,6 +4,8 @@ with lib;
     programs.zsh = mkIf osConfig.fndx.packages.zsh.enable {
         enable = true;
         enableAutosuggestions = true;
+        enableCompletion = true;
+        autocd = true;
         shellAliases = {
             update="(cd /root/nixos && git pull && nixos-rebuild switch)";
         };
