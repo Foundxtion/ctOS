@@ -48,11 +48,11 @@ with lib;
         enable = true;
 
         iconTheme = {
-            name = "Whitesur-icon-theme";
+            name = "WhiteSur-dark";
             package = pkgs.whitesur-icon-theme;
         };
         theme = {
-            name = "Whitesur-gtk-theme";
+            name = "WhiteSur-Dark";
             package = pkgs.whitesur-gtk-theme;
         };
     };
