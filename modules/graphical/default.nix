@@ -17,6 +17,12 @@ with lib;
 
             description = mdDoc "Foundxtion background for graphical interface";
         };
+	fndx.graphical.hidpi = mkOption {
+	    default = null;
+	    example = 90;
+	    description = mdDoc "Option to set the dpi for 4K Display and Apple's Retina Display";
+	    type = types.nullOr types.int;
+	};
     };
 
     config = mkIf cfg.enable {
@@ -31,6 +37,7 @@ with lib;
             layout = "us";
             xkbVariant = "";
             autorun = true;
+	    dpi = mkIf (cfg.hidpi != null) cfg.hidpi;
         };
 
         environment.systemPackages = with pkgs; [
