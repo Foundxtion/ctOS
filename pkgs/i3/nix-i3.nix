@@ -28,6 +28,7 @@ with lib;
                 extraPackages = with pkgs; [
                     spectacle
                     i3lock-fancy-rapid
+		    light
                 ];
                 extraSessionCommands = ''
                   ${pkgs.feh}/bin/feh --bg-scale --fill ${config.fndx.graphical.background}
