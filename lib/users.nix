@@ -22,7 +22,7 @@ with lib;
         users.users."${config.fndx.user.name}" = {
             initialHashedPassword = config.fndx.user.initialHashedPassword;
             isNormalUser = true;
-            extraGroups = [ "wheel" "networkmanager" ] ++ optionals (config.fndx.services.docker.enable) [ "docker" ];
+            extraGroups = [ "wheel" "networkmanager" "video" ] ++ optionals (config.fndx.services.docker.enable) [ "docker" ];
             openssh.authorizedKeys.keys = mkIf config.fndx.services.openssh.enable config.fndx.services.openssh.authorizedKeys;
         };
         home-manager.users."${config.fndx.user.name}" = import ../pkgs/homeManager.nix;
