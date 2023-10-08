@@ -50,7 +50,7 @@ with lib;
 
                 ldap_uri = ${server}
                 ldap_search_base = ${dn}
-		auth_provider = krb5;
+		auth_provider = krb5
 		krb5_server = ${lib.strings.toLower cfg.realm}
 		krb5_kpasswd = ${lib.strings.toLower cfg.realm}
 		krb5_realm = ${lib.strings.toUpper cfg.realm}
