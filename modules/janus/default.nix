@@ -46,7 +46,6 @@ with lib;
 
                 [domain/${lib.strings.toLower cfg.realm}]
                 id_provider = ldap
-                auth_provider = ldap
 
                 ldap_uri = ${server}
                 ldap_search_base = ${dn}
