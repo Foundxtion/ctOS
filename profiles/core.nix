@@ -8,6 +8,9 @@
         tree
         wget
         zip
+	unzip
+	nmap
+	lsof
     ];
 
     fndx.packages.vim.enable = true;
