@@ -40,6 +40,7 @@ with lib;
 [sssd]
     config_file_version = 2
     domains = ${lib.strings.toLower cfg.realm}
+    services = nss, pam
 
 [nss]
     override_shell = ${config.users.defaultUserShell}/bin/zsh
