@@ -24,8 +24,12 @@ with lib;
     config = mkIf cfg.enable {
         fndx.authentication.ldap = {
             enable = true;
-            server = "ldaps://${cfg.realm}";
+            server = "ldap://ldap.${lib.strings.toLower cfg.realm}";
             dn = dnBuilder cfg.realm;
         };
+	fndx.authentication.krb5 = {
+	    enable = true;
+	    realm = cfg.realm;
+	};
     };
 }
