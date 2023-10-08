@@ -36,6 +36,7 @@ with lib;
                 "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle";
                 "XF86MonBrightnessUp" = "exec --no-startup-id light -A 4";
                 "XF86MonBrightnessDown" = "exec --no-startup-id light -U 5";
+		"${mod}+Shift+E" = "exit";
                 "${mod}+l" = "exec i3lock-fancy-rapid 5 3";
                 "${mod}+Return" = "exec alacritty";
                 "${mod}+a" = "exec firefox";
