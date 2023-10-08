@@ -55,7 +55,7 @@ with lib;
             '';
         };
 
-	environment.systemPackages = [
+	environment.systemPackages = with pkgs; [
 	    openldap
 	];
 
