@@ -73,11 +73,14 @@ with lib;
                 allowedTCPPorts = allowedPorts;
                 allowedUDPPorts = allowedPorts;
             };
+	    usePredictableInterfaceNames = true;
+	    interfaces = mkIf (!config.fndx.networking.useDHCP) {
+	    	eth0.ipv4.addresses = [{
+                    address = config.fndx.networking.ipv4Address;
+                    prefixLength = config.fndx.networking.prefixLength;
+		}];
+	    };
 
-            interfaces.eth0.ipv4.addresses = mkIf (! config.fndx.networking.useDHCP) [{
-                address = config.fndx.networking.ipv4Address;
-                prefixLength = config.fndx.networking.prefixLength;
-            }];
             defaultGateway = mkIf (! config.fndx.networking.useDHCP) config.fndx.networking.defaultGateway;
 	    nameservers = [ "8.8.8.8" ];
         };
