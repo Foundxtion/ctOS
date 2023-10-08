@@ -10,7 +10,7 @@ with lib;
             realm = mkOption {
                 example = "EXAMPLE.ORG";
                 type = types.str;
-                documentation = mdDoc "The address that acts as kdc admin_server and realm name";
+                description = mdDoc "The address that acts as kdc admin_server and realm name";
             };
         };
     };
