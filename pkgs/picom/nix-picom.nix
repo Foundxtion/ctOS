@@ -22,7 +22,7 @@ with lib;
 
             settings = {
                 blur = {
-                    method = "dual-kawase";
+                    method = "dual_kawase";
                     strength = 12;
                     background = false;
                     background-frame = false;
