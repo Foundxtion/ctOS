@@ -3,6 +3,7 @@ let
     cfg = config.fndx.janus;
     dnBuilder = with lib.strings; (server_name: concatMapStringsSep "," (x: "dc=" + x) (splitString "." (toLower server_name)));
     server = "ldap://ldap.${lib.strings.toLower cfg.realm}";
+    dn = dnBuilder cfg.realm;
 in
 with lib;
 {
@@ -26,7 +27,7 @@ with lib;
         fndx.authentication.ldap = {
             enable = true;
             server = server;
-            dn = dnBuilder cfg.realm;
+            dn = dn;
         };
 	fndx.authentication.krb5 = {
 	    enable = true;
@@ -48,7 +49,7 @@ with lib;
                 auth_provider = ldap
 
                 ldap_uri = ${server}
-                ldap_search_base = ${cfg.dn}
+                ldap_search_base = ${dn}
 		auth_provider = krb5;
 		krb5_server = ${lib.strings.toLower cfg.realm}
 		krb5_kpasswd = ${lib.strings.toLower cfg.realm}
