@@ -37,26 +37,24 @@ with lib;
         services.sssd = {
             enable = true;
             config = ''
-                [sssd]
-                config_file_version = 2
-                domains = ${lib.strings.toLower cfg.realm}
+[sssd]
+    config_file_version = 2
+    domains = ${lib.strings.toLower cfg.realm}
 
-                [nss]
-                override_shell = ${config.users.defaultUserShell}/bin/zsh
+[nss]
+    override_shell = ${config.users.defaultUserShell}/bin/zsh
 
-                [domain/${lib.strings.toLower cfg.realm}]
-                id_provider = ldap
-
-                ldap_uri = ${server}
-                ldap_search_base = ${dn}
-		auth_provider = krb5
-		krb5_server = ${lib.strings.toLower cfg.realm}
-		krb5_kpasswd = ${lib.strings.toLower cfg.realm}
-		krb5_realm = ${lib.strings.toUpper cfg.realm}
-
-                entry_cache_timeout = 600
-                ldap_network_timeout = 2
-		cache_credentials = True
+[domain/${lib.strings.toLower cfg.realm}]
+    id_provider = ldap
+    ldap_uri = ${server}
+    ldap_search_base = ${dn}
+    auth_provider = krb5
+    krb5_server = ${lib.strings.toLower cfg.realm}
+    krb5_kpasswd = ${lib.strings.toLower cfg.realm}
+    krb5_realm = ${lib.strings.toUpper cfg.realm}
+    entry_cache_timeout = 600
+    ldap_network_timeout = 2
+    cache_credentials = True
             '';
         };
     };
