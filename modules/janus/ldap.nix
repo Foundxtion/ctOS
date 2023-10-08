@@ -55,6 +55,10 @@ with lib;
             '';
         };
 
+	environment.systemPackages = [
+	    openldap
+	];
+
         users.ldap = {
             enable = true;
             base = cfg.dn;
