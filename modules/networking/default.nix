@@ -79,6 +79,7 @@ with lib;
                 prefixLength = config.fndx.networking.prefixLength;
             }];
             defaultGateway = mkIf (! config.fndx.networking.useDHCP) config.fndx.networking.defaultGateway;
+	    nameservers = [ "8.8.8.8" ];
         };
     };
 }
