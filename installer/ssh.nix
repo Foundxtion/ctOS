@@ -15,6 +15,7 @@ with lib;
     };
 
     config = mkIf config.installer.ssh.enable {
+    	fndx.networking.extraAllowedPorts = [ 22 ];
         systemd.services.ssh.wantedBy = pkgs.lib.mkForce ["multi-user.target"];
         users.users.root.openssh.authorizedKeys.keys = [ config.installer.ssh.usedRootKey ];
     };
