@@ -13,7 +13,7 @@ with lib;
             displayManager = {
                 autoLogin.enable = false;
                 lightdm = {
-                    background = config.fndx.graphical.background;
+                    background = config.fndx.graphical.loginBackground;
                     greeters.enso = {
                         enable = true;
                         blur = true;

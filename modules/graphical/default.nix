@@ -17,6 +17,11 @@ with lib;
 
             description = mdDoc "Foundxtion background for graphical interface";
         };
+	fndx.graphical.loginBackground = mkOption {
+            default = ../../wallpapers/fire.jpg;
+
+            description = mdDoc "Foundxtion login background for graphical interface";
+        };
 	fndx.graphical.hidpi = mkOption {
 	    default = null;
 	    example = 90;
@@ -42,21 +47,22 @@ with lib;
 
         environment.systemPackages = with pkgs; [
             firefox
+	    feh
         ];
 
-        fndx.packages.i3.enable = mkIf (cfg.type == "i3") true;
-        fndx.packages.gnome.enable = mkIf (cfg.type == "gnome") true;
-        fndx.hardware.bluetooth.enable = true;
-        fndx.hardware.pulseaudio.enable = true;
-        fndx.hardware.touchpad.enable = cfg.enableTouchpad;
-		fonts = {
-		    enableDefaultFonts = true;
-		    enableGhostscriptFonts = true;
-		    fonts = with pkgs; [
-		      corefonts
-		      (nerdfonts.override { fonts = [ "DejaVuSansMono" "Iosevka" "Meslo" ]; })
-		      unifont_upper
-		    ];
-		};
+	fndx.packages.i3.enable = mkIf (cfg.type == "i3") true;
+	fndx.packages.gnome.enable = mkIf (cfg.type == "gnome") true;
+	fndx.hardware.bluetooth.enable = true;
+	fndx.hardware.pulseaudio.enable = true;
+	fndx.hardware.touchpad.enable = cfg.enableTouchpad;
+	fonts = {
+		enableDefaultFonts = true;
+		enableGhostscriptFonts = true;
+		fonts = with pkgs; [
+			corefonts
+				(nerdfonts.override { fonts = [ "DejaVuSansMono" "Iosevka" "Meslo" ]; })
+				unifont_upper
+		];
+	};
     };
 }
