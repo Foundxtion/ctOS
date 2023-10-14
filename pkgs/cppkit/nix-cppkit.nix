@@ -14,6 +14,7 @@ with lib;
             clang-tools
             gcc
             gnumake
+            cmake
             jetbrains.clion
         ];
     };
