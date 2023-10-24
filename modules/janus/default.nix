@@ -33,6 +33,10 @@ with lib;
 	    enable = true;
 	    realm = cfg.realm;
 	};
+        security.pam.services = {
+            systemd-user.makeHomeDir = true;
+            sssd.makeHomeDir = true;
+        };
 
         services.sssd = {
             enable = true;
