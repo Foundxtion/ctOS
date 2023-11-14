@@ -2,7 +2,7 @@
 let
     cfg = config.fndx.janus;
     dnBuilder = with lib.strings; (server_name: concatMapStringsSep "," (x: "dc=" + x) (splitString "." (toLower server_name)));
-    server = "ldap://ldap.${lib.strings.toLower cfg.realm}";
+    server = "ldap://${lib.strings.toLower cfg.realm}";
     dn = dnBuilder cfg.realm;
 in
 with lib;

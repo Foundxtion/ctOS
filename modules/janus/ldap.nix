@@ -31,6 +31,11 @@ with lib;
             base = cfg.dn;
             server = cfg.server;
             nsswitch = false;
+            extraConfig = ''
+SASL_MECH GSSAPI
+SASL_REALM ${config.fndx.janus.realm}
+SASL_NOCANON on
+'';
         };
     };
 }

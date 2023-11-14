@@ -28,7 +28,7 @@ with lib;
                 default_realm = strings.toUpper cfg.realm; 
                 dns_fallback = true;
                 dns_canonicalize_hostname = false;
-                rnds = false;
+                rdns = false;
                 forwardable = true;
             };
             realms = {
