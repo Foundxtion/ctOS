@@ -4,7 +4,7 @@
         ./graphical
         ./hardware
         ./home-manager
-        ./janus
+        ./netauth
         ./networking
         ./nix
         ./services
