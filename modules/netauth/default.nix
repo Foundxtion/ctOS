@@ -14,7 +14,7 @@ with lib;
 
     options = {
         fndx.netauth = {
-            enable = mkEnableOption "Foundxtion network authentication";
+            enable = mkEnableOption "NetAuth: Foundxtion network authentication client";
             realm = mkOption {
                 example = "EXAMPLE.ORG";
                 type = types.str;

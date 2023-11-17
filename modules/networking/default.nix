@@ -73,7 +73,6 @@ with lib;
                 allowedTCPPorts = allowedPorts;
                 allowedUDPPorts = allowedPorts;
             };
-	    usePredictableInterfaceNames = true;
 	    interfaces = mkIf (!config.fndx.networking.useDHCP) {
 	    	eth0.ipv4.addresses = [{
                     address = config.fndx.networking.ipv4Address;

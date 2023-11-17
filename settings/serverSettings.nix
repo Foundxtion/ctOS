@@ -1,6 +1,6 @@
 # This is the serverSettings.nix template !
 
-{ pkgs, config, ...}:
+{ pkgs, config, lib, ...}:
 let
     domain = "example.com";
 in
@@ -40,4 +40,9 @@ in
         authorizedKeys = [""];
     };
     fndx.services.docker.enable = true;
+    fndx.services.netauth = {
+        enable = true;
+        organisationName = "Example";
+        realm = lib.strings.toUpper domain;
+    };
 }
