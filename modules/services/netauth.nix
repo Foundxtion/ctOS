@@ -74,6 +74,9 @@ with lib;
                 volumes = [
                     "/var/lib/acme/${hostName}:/certificates"
                 ];
+                extraOptions = [
+                    "--hostname=${hostName}"
+                ];
             };
         };
 
