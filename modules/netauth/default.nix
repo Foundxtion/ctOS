@@ -2,7 +2,7 @@
 let
     cfg = config.fndx.netauth;
     dnBuilder = with lib.strings; (server_name: concatMapStringsSep "," (x: "dc=" + x) (splitString "." (toLower server_name)));
-    server = "ldap://${lib.strings.toLower cfg.realm}";
+    server = "ldaps://${lib.strings.toLower cfg.realm}";
     dn = dnBuilder cfg.realm;
 in
 with lib;

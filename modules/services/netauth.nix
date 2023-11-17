@@ -68,6 +68,7 @@ with lib;
                     KRB_MASTER_PASSWORD = "${cfg.masterPassword}";
                     KDC_PASSWORD = "${cfg.kdcPassword}";
                     KADMIN_PASSWORD = "${cfg.kadminPassword}";
+                    SSL_ENABLE = "1";
                 };
 
                 volumes = [
