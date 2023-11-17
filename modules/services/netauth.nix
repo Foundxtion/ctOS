@@ -51,7 +51,7 @@ with lib;
         virtualisation.oci-containers.containers = {
             netauth = {
                 autoStart = true;
-                image = "s3l4h/netauth";
+                image = "s3l4h/netauth:1.0";
                 ports = [ 
                     "636:636"
                     "389:389"
