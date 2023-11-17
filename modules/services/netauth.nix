@@ -47,6 +47,7 @@ with lib;
     };
 
     config = mkIf cfg.enable {
+        virtualisation.oci-containers.backend = "docker";
         virtualisation.oci-containers.containers = {
             netauth = {
                 autoStart = true;
