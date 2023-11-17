@@ -6,17 +6,17 @@ with lib;
 {
     options = {
         fndx.authentication.ldap = {
-            enable = mkEnableOption "Janus LDAP configuration";
+            enable = mkEnableOption "NetAuth LDAP configuration";
 
             server = mkOption {
                 example = "ldaps://ldap.example.org"; 
                 type = types.str;
-                description = mdDoc "Janus LDAP server url";
+                description = mdDoc "NetAuth LDAP server url";
             };
             dn = mkOption {
                 example = "dc=example,dc=org"; 
                 type = types.str;
-                description = mdDoc "Janus LDAP base search dn";
+                description = mdDoc "NetAuth LDAP base search dn";
             };
         }; 
     };
@@ -33,7 +33,7 @@ with lib;
             nsswitch = false;
             extraConfig = ''
 SASL_MECH GSSAPI
-SASL_REALM ${config.fndx.janus.realm}
+SASL_REALM ${config.fndx.netauth.realm}
 SASL_NOCANON on
 '';
         };

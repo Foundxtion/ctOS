@@ -19,7 +19,7 @@
         rust.enable = true;
     };
 
-    fndx.janus = {
+    fndx.netauth = {
         enable = true;
         realm = "EXAMPLE.COM";
     };

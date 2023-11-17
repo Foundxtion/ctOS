@@ -6,7 +6,7 @@ with lib;
 {
     options = {
         fndx.authentication.krb5 = {
-            enable = mkEnableOption "Janus Krb5 configuration";
+            enable = mkEnableOption "NetAuth Krb5 configuration";
             realm = mkOption {
                 example = "EXAMPLE.ORG";
                 type = types.str;

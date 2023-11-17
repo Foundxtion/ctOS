@@ -1,6 +1,6 @@
 {config, lib, pkgs, ...}:
 let
-    cfg = config.fndx.janus;
+    cfg = config.fndx.netauth;
     dnBuilder = with lib.strings; (server_name: concatMapStringsSep "," (x: "dc=" + x) (splitString "." (toLower server_name)));
     server = "ldap://${lib.strings.toLower cfg.realm}";
     dn = dnBuilder cfg.realm;
@@ -13,12 +13,12 @@ with lib;
     ];
 
     options = {
-        fndx.janus = {
+        fndx.netauth = {
             enable = mkEnableOption "Foundxtion network authentication";
             realm = mkOption {
                 example = "EXAMPLE.ORG";
                 type = types.str;
-                description = mdDoc "Janus realm";
+                description = mdDoc "NetAuth realm";
             };
         };
     };
