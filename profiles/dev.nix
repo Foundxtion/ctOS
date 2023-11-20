@@ -24,5 +24,9 @@ with lib;
         fndx.packages.javakit.enable = cfg.java.enable;
         fndx.packages.webkit.enable = cfg.web.enable;
         fndx.packages.rustkit.enable = cfg.rust.enable;
+
+        environment.systemPackages = with pkgs; [
+            thunderbird
+        ];
     };
 }
