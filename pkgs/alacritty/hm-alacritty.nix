@@ -17,7 +17,13 @@ with lib;
             font.normal.family = "DejaVuSansM Nerd Font";
             font.normal.size = 36;
 
-            window.opacity = 0.7;
+            window = {
+                opacity = 0.7;
+                dimensions = {
+                    columns = 80;
+                    lines = 30;
+                };
+            };
         };
     };
 }
