@@ -83,7 +83,7 @@ with lib;
                 "${mod}+Shift+7" = "move container workspace number 7";
                 "${mod}+Shift+8" = "move container workspace number 8";
                 "${mod}+Shift+9" = "move container workspace number 9";
-                "${mod}+Shift+10" = "move container workspace number 10";
+                "${mod}+Shift+0" = "move container workspace number 10";
                 "${mod}+Shift+c" = "reload";
                 "${mod}+Shift+r" = "restart";
 
