@@ -18,7 +18,8 @@ with lib;
         fndx.packages.discord.enable = true;
 
         environment.systemPackages = with pkgs; [
-            teams
+            teams-for-linux
         ];
+
     };
 }
