@@ -16,10 +16,5 @@ with lib;
 
         fndx.packages.vscode.enable = true;
         fndx.packages.discord.enable = true;
-
-        environment.systemPackages = with pkgs; [
-            teams-for-linux
-        ];
-
     };
 }
