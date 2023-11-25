@@ -11,7 +11,10 @@ with lib;
     config = mkIf cfg.enable {
         services.xserver = {
             enable = true;
-            displayManager.sddm.enable = true;
+            displayManager.sddm = {
+                enable = true;
+                theme = "WhiteSur";
+            };
             desktopManager.plasma5.enable = true;
         };
 
@@ -29,8 +32,10 @@ with lib;
         fndx.packages.rofi.enable = true;
         fndx.packages.alacritty.enable = true;
 
-        environment.systemPackages = let themes = pkgs.libsForQt5.callPackage ../themes/whitesur-kde {}; in [
-            themes
+        environment.systemPackages = let theme = pkgs.libsForQt5.callPackage ../themes/whitesur-kde {}; in [
+            theme
+            pkgs.whitesur-icon-theme
+            pkgs.libsForQt5.qtstyleplugin-kvantum
         ];
     };
 }

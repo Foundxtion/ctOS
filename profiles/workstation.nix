@@ -13,5 +13,12 @@ with lib;
             enable = true;
             type = "plasma";
         };
+
+        fndx.package.vscode.enable = true;
+        fndx.packages.discord.enable = true;
+
+        environment.systemPackages = with pkgs; [
+            teams
+        ];
     };
 }
