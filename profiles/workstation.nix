@@ -11,7 +11,7 @@ with lib;
     config = mkIf cfg.enable {
         fndx.graphical = {
             enable = true;
-            type = "gnome";
+            type = "plasma";
         };
     };
 }

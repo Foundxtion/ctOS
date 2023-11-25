@@ -9,6 +9,7 @@
     ./javakit/nix-javakit.nix
     ./nautilus/nix-nautilus.nix
     ./picom/nix-picom.nix
+    ./plasma/nix-plasma.nix
     ./rofi/nix-rofi.nix
     ./rustkit/nix-rustkit.nix
     ./vim/nix-vim.nix
