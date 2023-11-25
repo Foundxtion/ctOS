@@ -14,7 +14,7 @@ with lib;
             type = "plasma";
         };
 
-        fndx.package.vscode.enable = true;
+        fndx.packages.vscode.enable = true;
         fndx.packages.discord.enable = true;
 
         environment.systemPackages = with pkgs; [
