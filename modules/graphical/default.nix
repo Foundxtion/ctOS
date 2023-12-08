@@ -57,9 +57,9 @@ with lib;
 	fndx.hardware.pulseaudio.enable = true;
 	fndx.hardware.touchpad.enable = cfg.enableTouchpad;
 	fonts = {
-		enableDefaultFonts = true;
+		enableDefaultPackages = true;
 		enableGhostscriptFonts = true;
-		fonts = with pkgs; [
+		packages = with pkgs; [
 			corefonts
 				(nerdfonts.override { fonts = [ "DejaVuSansMono" "Iosevka" "Meslo" ]; })
 				unifont_upper
