@@ -62,11 +62,13 @@ with lib;
             networkmanager.enable = true;
 
             firewall = let allowedPorts = optionals (config.fndx.services.nginx.enable) [ 
-                80 443
+              80 443
             ] ++ optionals (config.fndx.services.openssh.enable) [
-                22
+              22
             ] ++ optionals (config.fndx.services.mailserver.enable) [
-                25 993 995 
+              25 993 995 
+            ] ++ optionals (config.fndx.services.netauth.enable) [
+              749 464 88 389 636
             ] ++ config.fndx.networking.extraAllowedPorts;
             in
             {
