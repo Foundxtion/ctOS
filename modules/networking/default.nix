@@ -59,6 +59,7 @@ with lib;
         networking = {
             wireless.enable = false;
             hostName = config.fndx.networking.hostName;
+
             networkmanager.enable = true;
 
             firewall = let allowedPorts = optionals (config.fndx.services.nginx.enable) [ 
@@ -72,6 +73,7 @@ with lib;
             ] ++ config.fndx.networking.extraAllowedPorts;
             in
             {
+                enable = true;
                 allowedTCPPorts = allowedPorts;
                 allowedUDPPorts = allowedPorts;
             };
