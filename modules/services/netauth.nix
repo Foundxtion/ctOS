@@ -73,6 +73,8 @@ with lib;
 
                 volumes = [
                     "/var/lib/acme/${hostName}:/certificates"
+                    "/opt/netauth/etc:/etc"
+                    "/opt/netauth/lib:/var/lib"
                 ];
                 extraOptions = [
                     "--hostname=${hostName}"
