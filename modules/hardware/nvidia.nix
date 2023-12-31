@@ -12,6 +12,8 @@ with lib;
             driSupport32Bit = true;
         };
 
+        services.xserver.videoDrivers = [ "nvidia" ];
+
         hardware.nvidia = {
             modesetting.enable = true;
             open = false;
@@ -20,8 +22,9 @@ with lib;
             package = config.boot.kernelPackages.nvidiaPackages.stable;
         };
 
-        environment.variables = {
-            CUDA_PATH = "${pkgs.cudatoolkit}";      
-        };
+        # environment.variables = {
+        #    CUDA_PATH = "${pkgs.cudatoolkit}";      
+        # };
+        boot.kernelModules = [ "nvidia_uvm" ];
     };
 }
