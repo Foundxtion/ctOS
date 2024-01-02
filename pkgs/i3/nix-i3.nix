@@ -15,7 +15,7 @@ with lib;
                 autoLogin.enable = false;
                 sddm = {
                     enable = true;
-                    theme = "sddm-chili-theme";
+                    theme = "chili";
                 };
                 defaultSession = "none+i3";
             };
