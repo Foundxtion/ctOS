@@ -10,14 +10,12 @@ with lib;
 
     config = mkIf cfg.enable {
         services.xserver = {
+            upscaleDefaultCursor = true;
             displayManager = {
                 autoLogin.enable = false;
-                lightdm = {
-                    background = config.fndx.graphical.loginBackground;
-                    greeters.enso = {
-                        enable = true;
-                        blur = true;
-                    };
+                sddm = {
+                    enable = true;
+                    theme = "sddm-chili-theme";
                 };
                 defaultSession = "none+i3";
             };
@@ -41,5 +39,9 @@ with lib;
         fndx.packages.alacritty.enable = true;
         fndx.packages.picom.enable = true;
         fndx.packages.nautilus.enable = true;
+
+        environment.systemPackages = with pkgs; [
+            themes.sddm-chili-theme
+        ];
     };
 }
