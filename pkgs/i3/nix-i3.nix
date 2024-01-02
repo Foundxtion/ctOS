@@ -41,7 +41,7 @@ with lib;
         fndx.packages.nautilus.enable = true;
 
         environment.systemPackages = with pkgs; [
-            themes.sddm-chili-theme
+            sddm-chili-theme
         ];
     };
 }
