@@ -26,7 +26,7 @@ with lib;
     config  = mkIf config.fndx.services.nginx.enable {
         services.nginx = {
             enable = true;
-            recommendedProxySettings = true;
+            # recommendedProxySettings = true;
             virtualHosts = config.fndx.services.nginx.virtualHosts;
         };
 
