@@ -64,7 +64,7 @@ with lib;
                 "${mod}+space" = "focus mde_toggle";
                 "${mod}+Shift+P" = "
                 exec --no-startup-id ${./external_monitor_handler.sh};
-                ${pkgs.feh}/bin/feh --bg-scale --fill ${config.fndx.graphical.background};
+                ${pkgs.feh}/bin/feh --bg-scale --fill ${osConfig.fndx.graphical.background};
                 ";
 
                 "${mod}+1" = "workspace number 1";
