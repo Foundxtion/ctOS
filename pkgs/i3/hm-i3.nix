@@ -61,7 +61,8 @@ with lib;
 
                 "${mod}+f" = "fullscreen toggle";
                 "${mod}+Shift+space" = "floating toggle";
-                "${mod}+space" = "focus mode_toggle";
+                "${mod}+space" = "focus mde_toggle";
+                "${mod}+Shift+P" = "exec --no-startup-id ${./external_monitor_handler.sh}";
 
                 "${mod}+1" = "workspace number 1";
                 "${mod}+2" = "workspace number 2";
@@ -88,6 +89,7 @@ with lib;
                 "${mod}+Shift+r" = "restart";
 
                 "${mod}+r" = "mode \"resize\"";
+
             };
 
             modes.resize = {
