@@ -62,7 +62,10 @@ with lib;
                 "${mod}+f" = "fullscreen toggle";
                 "${mod}+Shift+space" = "floating toggle";
                 "${mod}+space" = "focus mde_toggle";
-                "${mod}+Shift+P" = "exec --no-startup-id ${./external_monitor_handler.sh}";
+                "${mod}+Shift+P" = '''
+                exec --no-startup-id ${./external_monitor_handler.sh};
+                ${pkgs.feh}/bin/feh --bg-scale --fill ${config.fndx.graphical.background};
+                ''';
 
                 "${mod}+1" = "workspace number 1";
                 "${mod}+2" = "workspace number 2";
