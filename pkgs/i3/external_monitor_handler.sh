@@ -31,4 +31,4 @@ else
     xrandr --output "$external_display" --off;
 fi
 
-
+"$1"/bin/feh --bg-scale --fill "$2";
