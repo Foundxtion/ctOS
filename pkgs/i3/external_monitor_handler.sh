@@ -17,9 +17,10 @@ if [ -z "$ext_dp_on" ]; then
     echo "Setting up external display";
     # we haven't switch to external display yet
     echo "$external_display" > "$FILE_PATH";
-    xrandr --auto --output "$external_display" --same-as "$builtin_display" --scale 2x2;
+    xrandr --auto --output "$external_display" --same-as "$builtin_display";
     xrandr --auto;
     xrandr --output "$builtin_display" --off;
+    xrandr --output "$external_display" --scale 2x2;
 else
     # we've switch to external display and we now want to go back to builtin
     # display
