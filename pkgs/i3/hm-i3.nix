@@ -101,6 +101,10 @@ with lib;
                 "Return" = "mode \"default\"";
                 "Escape" = "mode \"default\"";
             };
+
+            startup = [
+                { command = "i3-msg workspace 1"; always = false; notification = false; }
+            ];
         };
     };
 }
