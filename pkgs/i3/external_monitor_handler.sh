@@ -1,6 +1,14 @@
 #!/bin/sh
 displays=$(xrandr -q | grep " connected" | cut -d ' ' -f1)
 
+nb_displays=$(echo "$displays" | wc -l)
+
+if [ "$nb_displays" -eq "1" ]; then
+    # we do not have any external display connected
+    # so we end the process
+    exit 0;
+fi
+
 FILE_PATH="/tmp/external_display";
 
 if [ -f "$FILE_PATH" ]; then
