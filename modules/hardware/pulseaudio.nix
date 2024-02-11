@@ -5,6 +5,10 @@ with lib;
 
     config = mkIf config.fndx.hardware.pulseaudio.enable {
         hardware.pulseaudio.enable = true;
+        hardware.pulseaudio = {
+            enable = true;
+            package = pkgs.pulseaudioFull;
+        };
 
         environment.systemPackages = with pkgs; [
             pavucontrol
