@@ -14,6 +14,7 @@
     fndx.dev = {
         enable = true;
         cpp.enable = true;
+        csharp.enable = true;
         java.enable = true;
         web.enable = true;
         rust.enable = true;

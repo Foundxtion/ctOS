@@ -23,7 +23,7 @@ with lib;
             description = mdDoc "Foundxtion login background for graphical interface";
         };
 	fndx.graphical.hidpi = mkOption {
-	    default = null;
+	    default = 90;
 	    example = 90;
 	    description = mdDoc "Option to set the dpi for 4K Display and Apple's Retina Display";
 	    type = types.nullOr types.int;

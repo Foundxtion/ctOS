@@ -3,6 +3,7 @@
   imports = [
     ./alacritty/nix-alacritty.nix
     ./cppkit/nix-cppkit.nix
+    ./csharpkit/nix-csharpkit.nix
     ./discord/nix-discord.nix
     ./gnome/nix-gnome.nix
     ./i3/nix-i3.nix
