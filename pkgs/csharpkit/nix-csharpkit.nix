@@ -8,7 +8,7 @@ with lib;
         fndx.packages.csharpkit.enable = mkEnableOption "C# development kit for Foundxtion";
         fndx.packages.csharpkit.dotnetPackage = mkOption {
             type = lib.types.package;
-            default = pkgs.dotnet-sdk_7;
+            default = pkgs.dotnet-sdk_8;
             description = "The dotnet package version to use";
         };
     };
