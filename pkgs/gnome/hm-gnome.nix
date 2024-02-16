@@ -1,9 +1,6 @@
 {lib, osConfig, pkgs, ...}:
 let
     cfg = osConfig.fndx.packages.gnome;
-    Settings = ''
-      gtk-application-prefer-dark-theme=1
-    '';
 in
 with lib;
 { 
@@ -46,27 +43,8 @@ with lib;
             };
         };
     }; 
-    
-    gtk = mkIf cfg.enable {
-        enable = true;
-
-        iconTheme = {
-            name = "WhiteSur-dark";
-            package = pkgs.whitesur-icon-theme;
-        };
-        theme = {
-            name = "WhiteSur-Dark";
-            package = pkgs.whitesur-gtk-theme;
-        };
-    };
-
-    home.sessionVariables = mkIf cfg.enable {
-        GTK_THEME = "WhiteSur-Dark";
-    };
 
     home.packages = mkIf cfg.enable (with pkgs; [
         gnomeExtensions.big-sur-status-area
-        whitesur-gtk-theme
-        whitesur-icon-theme
     ]);
 }

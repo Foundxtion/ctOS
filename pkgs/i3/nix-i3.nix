@@ -39,6 +39,7 @@ with lib;
         fndx.packages.alacritty.enable = true;
         fndx.packages.picom.enable = true;
         fndx.packages.nautilus.enable = true;
+        fndx.packages.gtk.enable = true;
 
         environment.systemPackages = with pkgs; [
             sddm-chili-theme

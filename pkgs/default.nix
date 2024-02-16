@@ -6,6 +6,7 @@
     ./csharpkit/nix-csharpkit.nix
     ./discord/nix-discord.nix
     ./gnome/nix-gnome.nix
+    ./gtk/nix-gtk.nix
     ./i3/nix-i3.nix
     ./javakit/nix-javakit.nix
     ./nautilus/nix-nautilus.nix

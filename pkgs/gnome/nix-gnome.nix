@@ -41,5 +41,6 @@ with lib;
 		]);
         programs.dconf.enable = true;
         fndx.packages.alacritty.enable = true;
+        fndx.packages.gtk.enable = true;
     };
 }
