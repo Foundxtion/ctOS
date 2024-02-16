@@ -30,17 +30,6 @@ with lib;
             "org/gnome/shell/extensions/user-theme" = {
                 name = "WhiteSur-Dark";
             };
-
-            "org/gnome/desktop/wm/preferences" = {
-                button-layout = "close,minimize,maximize:appmenu";
-            };
-
-            "org/gnome/desktop/interface" = {
-                color-scheme = "prefer-dark";
-                cursor-theme = "Adwaita";
-                icon-theme = "WhiteSur-dark";
-                gtk-theme = "WhiteSur-Dark";
-            };
         };
     }; 
 

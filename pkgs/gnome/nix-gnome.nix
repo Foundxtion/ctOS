@@ -39,7 +39,6 @@ with lib;
 			   	hitori # sudoku game
 			   	atomix # puzzle game
 		]);
-        programs.dconf.enable = true;
         fndx.packages.alacritty.enable = true;
         fndx.packages.gtk.enable = true;
     };

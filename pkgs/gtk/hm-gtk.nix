@@ -7,6 +7,22 @@ let
 in
 with lib;
 { 
+    dconf = mkIf cfg.enable {
+        enable = true;
+        settings = {
+            "org/gnome/desktop/wm/preferences" = {
+                button-layout = "close,minimize,maximize:appmenu";
+            };
+
+            "org/gnome/desktop/interface" = {
+                color-scheme = "prefer-dark";
+                cursor-theme = "Adwaita";
+                icon-theme = "WhiteSur-dark";
+                gtk-theme = "WhiteSur-Dark";
+            };
+        };
+    };
+
     gtk = mkIf cfg.enable {
         enable = true;
 
