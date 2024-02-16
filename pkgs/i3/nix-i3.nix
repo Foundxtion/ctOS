@@ -40,6 +40,7 @@ with lib;
         fndx.packages.picom.enable = true;
         fndx.packages.nautilus.enable = true;
         fndx.packages.gtk.enable = true;
+        programs.dconf.enable = true;
 
         environment.systemPackages = with pkgs; [
             sddm-chili-theme

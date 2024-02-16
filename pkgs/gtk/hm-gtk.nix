@@ -19,13 +19,13 @@ with lib;
             package = pkgs.whitesur-gtk-theme;
         };
 
-    gtk3.extraConfig = mkIf cfg.enable {
-        inherit Settings;
-    };
+        gtk3.extraConfig = mkIf cfg.enable {
+            inherit Settings;
+        };
 
-    gtk4.extraConfig = mkIf cfg.enable {
-        inherit Settings;
-    };
+        gtk4.extraConfig = mkIf cfg.enable {
+            inherit Settings;
+        };
     };
 
 
