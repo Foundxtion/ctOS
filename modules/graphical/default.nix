@@ -47,6 +47,7 @@ with lib;
 
         environment.systemPackages = with pkgs; [
             firefox
+            google-chrome
 	    feh
         ];
 
