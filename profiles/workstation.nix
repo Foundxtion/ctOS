@@ -19,6 +19,7 @@ with lib;
 
         environment.systemPackages = with pkgs; [
             obsidian
+            cider
         ];
     };
 }
