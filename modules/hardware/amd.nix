@@ -8,5 +8,9 @@ with lib;
     config = mkIf config.fndx.hardware.amd.enable {
        boot.initrd.kernelModules = ["amdgpu"]; 
        services.xserver.videoDrivers = [ "amdgpu" ];
+
+       environment.systemPackages = with pkgs; [
+           nvtop
+       ];
     };
 }

@@ -26,5 +26,9 @@ with lib;
         #    CUDA_PATH = "${pkgs.cudatoolkit}";      
         # };
         boot.kernelModules = [ "nvidia_uvm" ];
+
+        environment.systemPackages = with pkgs; [
+            nvtop
+        ];
     };
 }
