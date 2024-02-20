@@ -28,7 +28,7 @@ with lib;
         boot.kernelModules = [ "nvidia_uvm" ];
 
         environment.systemPackages = with pkgs; [
-            nvtop
+            nvtop-nvidia
         ];
     };
 }

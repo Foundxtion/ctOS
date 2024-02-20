@@ -10,7 +10,7 @@ with lib;
        services.xserver.videoDrivers = [ "amdgpu" ];
 
        environment.systemPackages = with pkgs; [
-           nvtop
+           nvtop-amd
        ];
     };
 }
