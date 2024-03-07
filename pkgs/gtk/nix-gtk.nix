@@ -12,7 +12,7 @@ with lib;
         programs.dconf.enable = true;
         environment.sessionVariables = rec {
             GTK_THEME = "WhiteSur-Dark";
-            GDK_SCALE = "2";
+            # GDK_SCALE = "2"; This also adjusts scaling of things like Firefox...
         };
     };
 }
