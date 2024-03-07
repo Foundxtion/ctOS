@@ -10,5 +10,9 @@ with lib;
 
     config = mkIf cfg.enable {
         programs.dconf.enable = true;
+        environment.sessionVariables = rec {
+            GTK_THEME = "WhiteSur-Dark";
+            GDK_SCALE = "2";
+        };
     };
 }

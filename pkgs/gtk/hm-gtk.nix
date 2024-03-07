@@ -44,11 +44,6 @@ with lib;
         };
     };
 
-
-    home.sessionVariables = mkIf cfg.enable {
-        GTK_THEME = "WhiteSur-Dark";
-    };
-
     home.packages = mkIf cfg.enable (with pkgs; [
         whitesur-gtk-theme
         whitesur-icon-theme

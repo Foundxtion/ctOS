@@ -36,6 +36,7 @@ with lib;
                 "XF86AudioMicMute" = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle";
                 "XF86MonBrightnessUp" = "exec --no-startup-id light -A 4";
                 "XF86MonBrightnessDown" = "exec --no-startup-id light -U 5";
+                "XF86Display" = "exec --no-startup-id ${./external_monitor_handler.sh} \"${pkgs.feh}\" \"${osConfig.fndx.graphical.background}\"";
 		"${mod}+Shift+E" = "exit";
                 "${mod}+l" = "exec i3lock-fancy-rapid 5 3";
                 "${mod}+Return" = "exec alacritty";
@@ -62,7 +63,6 @@ with lib;
                 "${mod}+f" = "fullscreen toggle";
                 "${mod}+Shift+space" = "floating toggle";
                 "${mod}+space" = "focus mde_toggle";
-                "${mod}+Shift+P" = "exec --no-startup-id ${./external_monitor_handler.sh} \"${pkgs.feh}\" \"${osConfig.fndx.graphical.background}\"";
 
                 "${mod}+1" = "workspace number 1";
                 "${mod}+2" = "workspace number 2";
