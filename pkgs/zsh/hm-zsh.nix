@@ -5,6 +5,7 @@ with lib;
         enable = true;
         enableAutosuggestions = true;
         enableCompletion = true;
+        syntaxHighlighting.enable = true;
         autocd = true;
         shellAliases = {
             update="(cd /root/nixos && git pull && nixos-rebuild switch)";
