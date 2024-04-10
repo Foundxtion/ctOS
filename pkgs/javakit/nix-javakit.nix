@@ -12,6 +12,7 @@ with lib;
         environment.systemPackages = with pkgs; [
             jetbrains.idea-ultimate
             openjdk17
+            openjdk11
         ];
     };
 }
