@@ -11,6 +11,8 @@
 	unzip
 	nmap
 	lsof
+        jq
+        autojump
     ];
 
     fndx.packages.vim.enable = true;
