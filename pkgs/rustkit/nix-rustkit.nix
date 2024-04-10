@@ -12,6 +12,8 @@ with lib;
         environment.systemPackages = with pkgs; [
             rustup
             jetbrains.clion
+            cargo
+            rustc
         ];
     };
 }
