@@ -13,12 +13,12 @@ with lib;
             description = mdDoc "Whether to enable GNOME or i3 interface";
         };
         fndx.graphical.background = mkOption {
-            default = ../../wallpapers/fire.jpg;
+            default = ../../wallpapers/macos-1.jpg;
 
             description = mdDoc "Foundxtion background for graphical interface";
         };
 	fndx.graphical.loginBackground = mkOption {
-            default = ../../wallpapers/fire.jpg;
+            default = ../../wallpapers/macos-1.jpg;
 
             description = mdDoc "Foundxtion login background for graphical interface";
         };

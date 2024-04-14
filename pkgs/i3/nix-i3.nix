@@ -42,7 +42,11 @@ with lib;
         fndx.packages.gtk.enable = true;
 
         environment.systemPackages = with pkgs; [
-            sddm-chili-theme
+            (sddm-chili-theme.override {
+                themeConfig = {
+                    background = config.fndx.graphical.loginBackground;
+                };
+            })
         ];
     };
 }
