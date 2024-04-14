@@ -5,7 +5,7 @@
       ./modules
       ./pkgs
       ./profiles
-      ./settings/settings.nix
+      ./settings.nix
       ./hardware-configuration.nix
   ];
 

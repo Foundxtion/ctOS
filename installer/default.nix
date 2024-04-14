@@ -27,7 +27,7 @@
 
     environment.etc = {
         "settings.nix" = {
-            source = ../settings/settings.nix;
+            source = ../settings.nix;
             mode = "0600";
         };
     };

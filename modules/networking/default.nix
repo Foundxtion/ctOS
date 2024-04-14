@@ -57,6 +57,7 @@ with lib;
 
     config = {
         networking = {
+            useDHCP = mkForce config.fndx.networking.useDHCP;
             wireless.enable = false;
             hostName = config.fndx.networking.hostName;
 
