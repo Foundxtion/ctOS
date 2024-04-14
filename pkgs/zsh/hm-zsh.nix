@@ -8,7 +8,7 @@ with lib;
         syntaxHighlighting.enable = true;
         autocd = true;
         shellAliases = {
-            update="(cd /root/nixos && git pull && nixos-rebuild switch)";
+            update="(cd /etc/nixos && git pull && nixos-rebuild switch)";
         };
         plugins = [
             {
