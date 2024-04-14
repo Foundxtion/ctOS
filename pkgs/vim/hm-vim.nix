@@ -482,7 +482,7 @@ with lib;
 
         "languageserver": {
           "nix": {
-              "command": "${pkgs.rnix-lsp}/bin/rnix-lsp",
+              "command": "${pkgs.nixd}/bin/nixd",
               "filetypes": ["nix"]
           }
         }

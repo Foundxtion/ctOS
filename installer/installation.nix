@@ -28,7 +28,7 @@ with lib;
                 echo "Test passed!";
     
                 echo "Adding home-manager channel...";
-                nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager;
+                nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager;
                 nix-channel --update;
     
                 echo "Creating partitions...";
@@ -54,12 +54,14 @@ with lib;
     
                 echo "Generating config...";
                 ${config.system.build.nixos-generate-config}/bin/nixos-generate-config --root /mnt;
-                git clone ${config.installer.git-remote} /mnt/root/nixos;
-                cp /etc/settings.nix /mnt/root/nixos/settings;
-                mv /mnt/etc/nixos/hardware-configuration.nix /mnt/root/nixos;
+                mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/hardware-configuration.nix;
                 rm -rf /mnt/etc/nixos;
-                cd /mnt/etc;
-                ln -sr ../root/nixos/ /mnt/etc/nixos;
+                git clone ${config.installer.git-remote} /mnt/etc/nixos;
+                mv /mnt/etc/hardware-configuration.nix /mnt/etc/nixos/hardware-configuration.nix;
+                mkdir -p /mnt/root/settings/;
+                cp /etc/settings.nix /mnt/root/settings/settings.nix;
+                cd /mnt/etc/nixos;
+                ln -sr ../../root/settings/settings.nix /mnt/etc/nixos/settings.nix;
     
                 echo "Installing NixOS...";
                 ${config.system.build.nixos-install}/bin/nixos-install --no-root-passwd;

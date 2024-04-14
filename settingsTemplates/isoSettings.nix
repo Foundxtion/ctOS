@@ -3,7 +3,7 @@
 
 { pkgs, config, ...}:
 {
-    imports = [ ../installer ];
+    imports = [ ./installer ];
     fndx.networking = {
         # Enable / disable Network IP Attribution... (default: true)
         useDHCP = true;
