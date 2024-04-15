@@ -5,6 +5,7 @@
     ./cppkit/nix-cppkit.nix
     ./csharpkit/nix-csharpkit.nix
     ./discord/nix-discord.nix
+    ./firefox/nix-firefox.nix
     ./gnome/nix-gnome.nix
     ./gtk/nix-gtk.nix
     ./i3/nix-i3.nix

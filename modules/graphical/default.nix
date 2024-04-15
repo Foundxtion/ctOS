@@ -46,10 +46,11 @@ with lib;
         };
 
         environment.systemPackages = with pkgs; [
-            firefox
             google-chrome
 	    feh
         ];
+
+        fndx.packages.firefox.enable = true;
 
 	fndx.packages.i3.enable = mkIf (cfg.type == "i3") true;
 	fndx.packages.gnome.enable = mkIf (cfg.type == "gnome") true;
