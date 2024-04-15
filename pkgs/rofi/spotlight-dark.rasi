@@ -40,8 +40,8 @@ inputbar {
 
 icon-search {
     expand:     false;
-    filename:   "search";
-    size: 28px;
+    filename:   "search-icon";
+    size: 70px;
 }
 
 icon-search, entry, element-icon, element-text {
@@ -51,7 +51,7 @@ icon-search, entry, element-icon, element-text {
 entry {
     font:   inherit;
 
-    placeholder         : "Search";
+    placeholder         : "Spotlight Search";
     placeholder-color   : @fg2;
 }
 
@@ -66,8 +66,9 @@ textbox {
 }
 
 listview {
-    lines:      10;
-    columns:    1;
+    require-input: true;
+    lines:         10;
+    columns:       1;
 
     fixed-height:   false;
     border:         1px 0 0;
