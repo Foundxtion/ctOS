@@ -13,6 +13,7 @@
     ./nautilus/nix-nautilus.nix
     ./picom/nix-picom.nix
     ./plasma/nix-plasma.nix
+    ./polybar/nix-polybar.nix
     ./rofi/nix-rofi.nix
     ./rustkit/nix-rustkit.nix
     ./vim/nix-vim.nix

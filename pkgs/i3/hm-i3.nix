@@ -62,7 +62,7 @@ with lib;
 
                 "${mod}+f" = "fullscreen toggle";
                 "${mod}+Shift+space" = "floating toggle";
-                "${mod}+space" = "focus mde_toggle";
+                "${mod}+space" = "focus mode_toggle";
 
                 "${mod}+1" = "workspace number 1";
                 "${mod}+2" = "workspace number 2";
@@ -104,7 +104,9 @@ with lib;
 
             startup = [
                 { command = "i3-msg workspace 1"; always = false; notification = false; }
+                { command = "systemctl --user restart polybar"; always = true; notification = false; }
             ];
+            bars = [ ];
         };
     };
 }

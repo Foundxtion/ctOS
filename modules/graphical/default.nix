@@ -62,9 +62,10 @@ with lib;
 		enableDefaultPackages = true;
 		enableGhostscriptFonts = true;
 		packages = with pkgs; [
-			corefonts
-				(nerdfonts.override { fonts = [ "DejaVuSansMono" "Iosevka" "Meslo" ]; })
-				unifont_upper
+                    corefonts
+                    (nerdfonts.override { fonts = [ "DejaVuSansMono" "Iosevka" "Meslo" ]; })
+                    unifont_upper
+                    google-fonts
 		];
 	};
     };

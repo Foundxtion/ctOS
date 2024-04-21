@@ -21,6 +21,8 @@ external_display=$(echo "$displays" | sort -d | head -n1)
 echo "builtin_display = $builtin_display";
 echo "external_display = $external_display";
 
+systemctl --user restart polybar.service;
+
 if [ -z "$ext_dp_on" ]; then
     echo "Setting up external display";
     # we haven't switch to external display yet
