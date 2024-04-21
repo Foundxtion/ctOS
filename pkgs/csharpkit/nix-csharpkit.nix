@@ -17,8 +17,6 @@ with lib;
         environment.systemPackages = with pkgs; [
             cfg.dotnetPackage
             jetbrains.rider
-            mono
-            msbuild
         ];
 
         environment.variables = {
