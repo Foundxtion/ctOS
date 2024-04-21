@@ -43,6 +43,9 @@ with lib;
             xkbVariant = "";
             autorun = true;
 	    dpi = mkIf (cfg.hidpi != null) cfg.hidpi;
+            excludePackages = with pkgs; [
+                xterm
+            ];
         };
 
         environment.systemPackages = with pkgs; [
