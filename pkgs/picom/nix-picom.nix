@@ -32,6 +32,11 @@ with lib;
                     background-frame = false;
                     background-fixed = false;
                 };
+
+                blur-background-exclude = [
+                    "window_type = 'utility'"
+                ];
+
                 corner-radius = 10;
                 use-damage    = false;
 
@@ -41,6 +46,7 @@ with lib;
 
                 shadow-exclude = [
                     "class_g = 'Polybar'"
+                    "window_type = 'utility'"
                 ];
             };
         };

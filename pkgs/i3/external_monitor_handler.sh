@@ -21,8 +21,6 @@ external_display=$(echo "$displays" | sort -d | head -n1)
 echo "builtin_display = $builtin_display";
 echo "external_display = $external_display";
 
-systemctl --user restart polybar.service;
-
 if [ -z "$ext_dp_on" ]; then
     echo "Setting up external display";
     # we haven't switch to external display yet
@@ -31,6 +29,7 @@ if [ -z "$ext_dp_on" ]; then
     xrandr --auto;
     xrandr --output "$builtin_display" --off;
     xrandr --output "$external_display" --scale 2x2;
+    systemctl --user restart polybar.service;
 else
     # we've switch to external display and we now want to go back to builtin
     # display
@@ -40,6 +39,7 @@ else
     xrandr --auto;
     xrandr --auto --output "$external_display" --left-of "$builtin_display";
     xrandr --output "$external_display" --off;
+    systemctl --user restart polybar.service;
 fi
 
 "$1"/bin/feh --bg-scale --fill "$2";
