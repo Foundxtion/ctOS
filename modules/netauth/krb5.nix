@@ -37,6 +37,10 @@ with lib;
                     admin_server = strings.toLower cfg.realm;
                 };
             };
+            domain_realm = {
+                "${cfg.realm}" = "${strings.toUpper cfg.realm}";
+                ".${cfg.realm}" = "${strings.toUpper cfg.realm}";
+            };
         };
     };
 }
