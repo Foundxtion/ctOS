@@ -40,6 +40,7 @@ with lib;
         fndx.packages.picom.enable = true;
         fndx.packages.nautilus.enable = true;
         fndx.packages.gtk.enable = true;
+        fndx.packages.polybar.enable = true;
 
         environment.systemPackages = with pkgs; [
             (sddm-chili-theme.override {
