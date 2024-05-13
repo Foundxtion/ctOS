@@ -31,6 +31,7 @@ with lib;
             thunderbird
             obsidian
             cider
+            libreoffice-qt
         ];
     };
 }
