@@ -15,7 +15,7 @@ with lib;
             };
 
             font.normal.family = "DejaVuSansM Nerd Font";
-            font.normal.size = 36;
+            # font.normal.size = 36;
 
             window = {
                 opacity = 0.7;

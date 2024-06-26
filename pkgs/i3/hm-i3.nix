@@ -40,6 +40,7 @@ with lib;
 		"${mod}+Shift+E" = "exit";
                 "${mod}+l" = "exec i3lock-fancy-rapid 5 3";
                 "${mod}+Return" = "exec alacritty";
+                "${mod}+Shift+Return" = "exec alacritty -e ssh s3l4h@s3l4h.com";
                 "${mod}+a" = "exec firefox";
                 "${mod}+e" = "exec nautilus";
                 "${mod}+q" = "kill";

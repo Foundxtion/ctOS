@@ -6,11 +6,16 @@ with lib;
     };
 
     config = mkIf config.fndx.hardware.amd.enable {
-       boot.initrd.kernelModules = ["amdgpu"]; 
-       services.xserver.videoDrivers = [ "amdgpu" ];
+       boot.kernelModules = ["amdgpu"]; 
+       services.xserver.videoDrivers = [ "modesetting" ];
+
+       hardware.opengl = {
+           extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+           extraPackages = with pkgs; [ amdvlk ];
+       };
 
        environment.systemPackages = with pkgs; [
-           nvtop-amd
+           nvtopPackages.amd
        ];
     };
 }

@@ -39,8 +39,10 @@ with lib;
         services.xserver = {
             enable = true;
             desktopManager.xterm.enable = false;
-            layout = "us";
-            xkbVariant = "";
+            xkb = {
+                layout = "us";
+                variant = "";
+            };
             autorun = true;
 	    dpi = mkIf (cfg.hidpi != null) cfg.hidpi;
             excludePackages = with pkgs; [

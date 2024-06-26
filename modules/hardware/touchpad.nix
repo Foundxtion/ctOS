@@ -4,7 +4,7 @@ with lib;
     options.fndx.hardware.touchpad.enable = mkEnableOption "Touchpad for Foundxtion";
 
     config = mkIf config.fndx.hardware.touchpad.enable {
-        services.xserver.libinput = {
+        services.libinput = {
             enable = true;
             touchpad = {
                 naturalScrolling = true;
