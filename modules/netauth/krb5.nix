@@ -22,24 +22,26 @@ with lib;
             gsasl
         ];
 
-        krb5 = {
+        security.krb5 = {
             enable = true;
-            libdefaults = {
-                default_realm = strings.toUpper cfg.realm; 
-                dns_fallback = true;
-                dns_canonicalize_hostname = false;
-                rdns = false;
-                forwardable = true;
-            };
-            realms = {
-                "${toUpper cfg.realm}" = {
-                    kdc = strings.toLower cfg.realm;
-                    admin_server = strings.toLower cfg.realm;
+            settings = {
+                libdefaults = {
+                    default_realm = strings.toUpper cfg.realm; 
+                    dns_fallback = true;
+                    dns_canonicalize_hostname = false;
+                    rdns = false;
+                    forwardable = true;
                 };
-            };
-            domain_realm = {
-                "${cfg.realm}" = "${strings.toUpper cfg.realm}";
-                ".${cfg.realm}" = "${strings.toUpper cfg.realm}";
+                realms = {
+                    "${toUpper cfg.realm}" = {
+                        kdc = strings.toLower cfg.realm;
+                        admin_server = strings.toLower cfg.realm;
+                    };
+                };
+                domain_realm = {
+                    "${cfg.realm}" = "${strings.toUpper cfg.realm}";
+                    ".${cfg.realm}" = "${strings.toUpper cfg.realm}";
+                };
             };
         };
     };

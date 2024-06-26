@@ -3,12 +3,13 @@ with lib;
 {
     programs.zsh = mkIf osConfig.fndx.packages.zsh.enable {
         enable = true;
-        enableAutosuggestions = true;
+        autosuggestion.enable = true;
         enableCompletion = true;
         syntaxHighlighting.enable = true;
         autocd = true;
         shellAliases = {
             update="(cd /etc/nixos && git pull && nixos-rebuild switch)";
+            nxs="nix-shell --run zsh";
         };
         plugins = [
             {
