@@ -62,12 +62,14 @@ with lib;
             c.DockerSpawner.image_whitelist = {
                 "Tensorflow": "quay.io/jupyter/tensorflow-notebook:cuda-latest",
                 "Pytorch": "quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8",
+                "Scipy with python3.10": "jupyter/scipy-notebook:python-3.10.10",
             }
             c.DockerSpawner.image = "quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8"
             c.DockerSpawner.remove_containers = True
             c.DockerSpawner.extra_create_kwargs = {'user': 'root'}
             c.DockerSpawner.extra_host_config = {'runtime': 'nvidia'}
             c.Spawner.environment = {'GRANT_SUDO': 'yes'}
+            c.Spawner.mem_limit = "32G"
 
             # set up data persistence
             notebook_dir = os.environ.get("DOCKER_NOTEBOOK_DIR") or "/home/jovyan/work"

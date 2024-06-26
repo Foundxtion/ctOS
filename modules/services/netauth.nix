@@ -76,6 +76,7 @@ with lib;
                     "netauth-etc:/etc"
                     "netauth-lib:/var/lib"
                     "netauth-sasl:/usr/lib/sasl2"
+                    "/etc/localtime:/etc/localtime:ro"
                 ];
                 extraOptions = [
                     "--hostname=${hostName}"
