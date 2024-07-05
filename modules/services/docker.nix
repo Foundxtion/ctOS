@@ -8,6 +8,6 @@ with lib;
   config = mkIf config.fndx.services.docker.enable {
       virtualisation.docker.enable = true; 
       virtualisation.docker.package = pkgs.docker_25;
-      hardware.nvdia-container-toolkit.enable = config.fndx.hardware.nvidia.enable;
+      hardware.nvidia-container-toolkit.enable = config.fndx.hardware.nvidia.enable;
   };
 }
