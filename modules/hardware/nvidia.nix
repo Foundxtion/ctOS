@@ -18,17 +18,16 @@ with lib;
             modesetting.enable = true;
             open = false;
 
+            nvidiaPersistenced =  true;
+
             nvidiaSettings = true;
-            package = config.boot.kernelPackages.nvidiaPackages.stable;
+            package = config.boot.kernelPackages.nvidiaPackages.production;
         };
 
-        # environment.variables = {
-        #    CUDA_PATH = "${pkgs.cudatoolkit}";      
-        # };
-        boot.kernelModules = [ "nvidia_uvm" ];
+       boot.kernelModules = [ "nvidia_uvm" ];
 
         environment.systemPackages = with pkgs; [
-            nvtop-nvidia
+            nvtopPackages.nvidia
         ];
     };
 }

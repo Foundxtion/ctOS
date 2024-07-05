@@ -59,16 +59,24 @@ with lib;
             print("hub_ip =", hub_ip)
 
             c.JupyterHub.hub_ip = hub_ip
-            c.DockerSpawner.image_whitelist = {
+            c.DockerSpawner.allowed_images = {
                 "Tensorflow": "quay.io/jupyter/tensorflow-notebook:cuda-latest",
                 "Pytorch": "quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8",
                 "Scipy with python3.10": "jupyter/scipy-notebook:python-3.10.10",
             }
             c.DockerSpawner.image = "quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8"
-            c.DockerSpawner.remove_containers = True
+            c.DockerSpawner.remove = True
             c.DockerSpawner.extra_create_kwargs = {'user': 'root'}
-            c.DockerSpawner.extra_host_config = {'runtime': 'nvidia'}
-            c.Spawner.environment = {'GRANT_SUDO': 'yes'}
+            c.DockerSpawner.extra_host_config = {
+                'device_requests': [
+                    {
+                        'Driver': 'cdi',
+                        'DeviceIDs': ['nvidia.com/gpu=all']
+                    }
+                ],
+                'security_opt': ['label=disable']
+            }
+            c.Spawner.environment = {'GRANT_SUDO': 'yes', 'NVIDIA_VISIBLE_DEVICES': 'all'}
             c.Spawner.mem_limit = "32G"
 
             # set up data persistence
