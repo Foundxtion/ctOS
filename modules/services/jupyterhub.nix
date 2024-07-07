@@ -28,6 +28,7 @@ with lib;
                     Please provide a domain name linked to an LDAP server.
                 '';
             };
+            enableNvidiaSupport = mkEnableOption "Nvidia Runtime for Jupyterhub";
         };
     };
 
@@ -67,6 +68,8 @@ with lib;
             c.DockerSpawner.image = "quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8"
             c.DockerSpawner.remove = True
             c.DockerSpawner.extra_create_kwargs = {'user': 'root'}
+            '' + (if cfg.enableNvidiaSupport then
+            ''
             c.DockerSpawner.extra_host_config = {
                 'device_requests': [
                     {
@@ -77,6 +80,11 @@ with lib;
                 'security_opt': ['label=disable']
             }
             c.Spawner.environment = {'GRANT_SUDO': 'yes', 'NVIDIA_VISIBLE_DEVICES': 'all'}
+            '' else
+            ''
+            c.Spawner.environment = {'GRANT_SUDO': 'yes'}
+            '') +
+            ''
             c.Spawner.mem_limit = "32G"
 
             # set up data persistence
