@@ -5,7 +5,22 @@ in
 with lib;
 {
     options = {
-        fndx.packages.i3.enable = mkEnableOption "i3 for Foundxtion";
+        fndx.packages.i3 = {
+            enable = mkEnableOption "i3 for Foundxtion";
+            openSshTab = {
+                enable = mkEnableOption "Opening of an alacritty directly connecting to an ssh session";
+                userName = mkOption {
+                    example = "user";
+                    type = types.str;
+                    description = mdDoc "The user to connect during the ssh session";
+                };
+                domainName = mkOption {
+                    example = "example.org";
+                    type = types.str;
+                    description = mdDoc "The domain on which to connect during the ssh session";
+                };
+            };
+        };
     };
 
     config = mkIf cfg.enable {
