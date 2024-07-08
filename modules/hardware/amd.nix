@@ -7,7 +7,7 @@ with lib;
 
     config = mkIf config.fndx.hardware.amd.enable {
        boot.kernelModules = ["amdgpu"]; 
-       services.xserver.videoDrivers = [ "modesetting" ];
+       services.xserver.videoDrivers = [ "amdgpu" ];
 
        hardware.opengl = {
            extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];

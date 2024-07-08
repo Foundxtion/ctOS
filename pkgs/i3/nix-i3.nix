@@ -54,7 +54,7 @@ with lib;
 	programs.light.enable = true;
         fndx.packages.rofi.enable = true;
         fndx.packages.alacritty.enable = true;
-        # fndx.packages.picom.enable = true;
+        fndx.packages.picom.enable = true;
         fndx.packages.nautilus.enable = true;
         fndx.packages.gtk.enable = true;
         fndx.packages.polybar.enable = true;
