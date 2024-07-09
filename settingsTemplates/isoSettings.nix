@@ -14,8 +14,8 @@
     };
 
     installer = {
-        # What git remote to use as your Foundxtion configuration ?
-        git-remote = "https://github.com/foundxtion/foundxtion";
+        # What git remote to use as your ctOS configuration ?
+        git-remote = "https://github.com/foundxtion/ctOS";
 
         # Are you installing a server ?
         # If yes, you may want to enable ssh into root (default: false)

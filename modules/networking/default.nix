@@ -38,7 +38,7 @@ with lib;
             };
 
             hostName = mkOption {
-                default = "Foundxtion";
+                default = "ctOS";
                 type = types.str;
                 description = mdDoc ''
                     The hostName of your machine on the local network.

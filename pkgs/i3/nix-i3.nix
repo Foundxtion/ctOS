@@ -6,7 +6,7 @@ with lib;
 {
     options = {
         fndx.packages.i3 = {
-            enable = mkEnableOption "i3 for Foundxtion";
+            enable = mkEnableOption "i3 for ctOS";
             openSshTab = {
                 enable = mkEnableOption "Opening of an alacritty directly connecting to an ssh session";
                 userName = mkOption {

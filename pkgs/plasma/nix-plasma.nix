@@ -5,7 +5,7 @@ in
 with lib;
 {
     options = {
-        fndx.packages.plasma.enable = mkEnableOption "Plasma for Foundxtion";
+        fndx.packages.plasma.enable = mkEnableOption "Plasma for ctOS";
     };
 
     config = mkIf cfg.enable {

@@ -10,7 +10,7 @@ in
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
     fndx.user.initialHashedPassword = "";
     fndx.networking = {
-        hostName = "foundxtion";
+        hostName = "ctOS";
         useDHCP = false;
         ipv4Address = "192.168.1.192";
         prefixLength = 24;

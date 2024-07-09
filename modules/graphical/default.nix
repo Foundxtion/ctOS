@@ -5,8 +5,8 @@ in
 with lib;
 {
     options = {
-        fndx.graphical.enable = mkEnableOption "Foundxtion graphic interface";
-        fndx.graphical.enableTouchpad = mkEnableOption "touchpad on Foundxtion graphical interface";
+        fndx.graphical.enable = mkEnableOption "ctOS graphic interface";
+        fndx.graphical.enableTouchpad = mkEnableOption "touchpad on ctOS graphical interface";
         fndx.graphical.type = mkOption {
             example = "gnome";
             type = types.str;
@@ -15,12 +15,12 @@ with lib;
         fndx.graphical.background = mkOption {
             default = ../../wallpapers/macos-1.jpg;
 
-            description = mdDoc "Foundxtion background for graphical interface";
+            description = mdDoc "ctOS background for graphical interface";
         };
 	fndx.graphical.loginBackground = mkOption {
             default = ../../wallpapers/macos-1.jpg;
 
-            description = mdDoc "Foundxtion login background for graphical interface";
+            description = mdDoc "ctOS login background for graphical interface";
         };
 	fndx.graphical.hidpi = mkOption {
 	    default = 90;
@@ -33,7 +33,7 @@ with lib;
     config = mkIf cfg.enable {
         assertions = [ {
             assertion = ((cfg.type == "i3") || (cfg.type == "gnome") || (cfg.type == "plasma"));
-            message = "If Foundxtion graphic interface is enabled, please select either i3, plasma or gnome type.";
+            message = "If ctOS graphic interface is enabled, please select either i3, plasma or gnome type.";
         }];
 
         services.xserver = {

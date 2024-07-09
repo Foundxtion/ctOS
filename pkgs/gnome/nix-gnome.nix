@@ -5,7 +5,7 @@ in
 with lib;
 {
     options = {
-        fndx.packages.gnome.enable = mkEnableOption "GNOME for Foundxtion"; 
+        fndx.packages.gnome.enable = mkEnableOption "GNOME for ctOS"; 
     };
 
     config = mkIf cfg.enable {

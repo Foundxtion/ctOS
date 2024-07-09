@@ -10,7 +10,7 @@ with lib;
 	];
     options = {
         fndx.services.mailserver = {
-            enable = mkEnableOption "Mailserver for Foundxtion.";
+            enable = mkEnableOption "Mailserver for ctOS.";
             domain = mkOption {
                 default = "";
                 example = "example.org";
@@ -29,7 +29,7 @@ with lib;
                 };
 
                 description = mdDoc ''
-                    Definition of users of Foundxtion mailserver.
+                    Definition of users of ctOS mailserver.
                 '';
             };
         };

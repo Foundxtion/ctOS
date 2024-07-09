@@ -5,7 +5,7 @@ in
 with lib;
 {
     options = {
-        fndx.packages.picom.enable = mkEnableOption "Picom for Foundxtion";
+        fndx.packages.picom.enable = mkEnableOption "Picom for ctOS";
     };
 
     config = mkIf cfg.enable {

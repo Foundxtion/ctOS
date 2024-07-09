@@ -5,7 +5,7 @@ in
 with lib;
 {
     options = {
-        fndx.packages.gtk.enable = mkEnableOption "GTK Themed for Foundxtion";
+        fndx.packages.gtk.enable = mkEnableOption "GTK Themed for ctOS";
     };
 
     config = mkIf cfg.enable {

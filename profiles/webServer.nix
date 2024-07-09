@@ -7,7 +7,7 @@ with lib;
 {
     options = {
         fndx.webServer = {
-            enable = mkEnableOption "Foundxtion Webserver";
+            enable = mkEnableOption "ctOS Webserver";
             domain = mkOption {
                 example = "example.org";
                 type = types.str;

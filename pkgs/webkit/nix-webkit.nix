@@ -5,7 +5,7 @@ in
 with lib;
 {
     options = {
-        fndx.packages.webkit.enable = mkEnableOption "Web development kit for Foundxtion";
+        fndx.packages.webkit.enable = mkEnableOption "Web development kit for ctOS";
     };
 
     config = mkIf cfg.enable {

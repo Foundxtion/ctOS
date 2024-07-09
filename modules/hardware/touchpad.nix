@@ -1,7 +1,7 @@
 {config, lib, pkgs, ...}:
 with lib;
 {
-    options.fndx.hardware.touchpad.enable = mkEnableOption "Touchpad for Foundxtion";
+    options.fndx.hardware.touchpad.enable = mkEnableOption "Touchpad for ctOS";
 
     config = mkIf config.fndx.hardware.touchpad.enable {
         services.libinput = {

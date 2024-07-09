@@ -4,7 +4,7 @@ let
 in
 with lib;
 {
-    options.fndx.packages.firefox.enable = mkEnableOption "Firefox for Foundxtion";
+    options.fndx.packages.firefox.enable = mkEnableOption "Firefox for ctOS";
 
     config = mkIf cfg.enable {
         programs.firefox = {

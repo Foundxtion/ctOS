@@ -1,7 +1,7 @@
 {config, lib, pkgs, ...}:
 with lib;
 {
-    options.fndx.hardware.bluetooth.enable = mkEnableOption "Bluetooth for Foundxtion";
+    options.fndx.hardware.bluetooth.enable = mkEnableOption "Bluetooth for ctOS";
 
     config = mkIf config.fndx.hardware.bluetooth.enable {
         hardware.bluetooth = {

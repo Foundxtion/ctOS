@@ -5,12 +5,12 @@ in
 with lib;
 {
     options = {
-        fndx.dev.enable = mkEnableOption "Foundxtion Dev Profile";
-        fndx.dev.cpp.enable = mkEnableOption "Foundxtion C/C++ development profile";
-        fndx.dev.csharp.enable = mkEnableOption "Foundxtion C# development profile";
-        fndx.dev.java.enable = mkEnableOption "Foundxtion Java development profile";
-        fndx.dev.rust.enable = mkEnableOption "Foundxtion Rust development profile";
-        fndx.dev.web.enable = mkEnableOption "Foundxtion Web development profile";
+        fndx.dev.enable = mkEnableOption "ctOS Dev Profile";
+        fndx.dev.cpp.enable = mkEnableOption "ctOS C/C++ development profile";
+        fndx.dev.csharp.enable = mkEnableOption "ctOS C# development profile";
+        fndx.dev.java.enable = mkEnableOption "ctOS Java development profile";
+        fndx.dev.rust.enable = mkEnableOption "ctOS Rust development profile";
+        fndx.dev.web.enable = mkEnableOption "ctOS Web development profile";
     };
 
     config = mkIf cfg.enable {

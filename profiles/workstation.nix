@@ -5,7 +5,7 @@ in
 with lib;
 {
     options = {
-        fndx.workstation.enable = mkEnableOption "Foundxtion workstation Profile";
+        fndx.workstation.enable = mkEnableOption "ctOS workstation Profile";
     };
 
     config = mkIf cfg.enable {

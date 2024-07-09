@@ -5,7 +5,7 @@ in
 with lib;
 {
     options = {
-        fndx.packages.javakit.enable = mkEnableOption "Java development kit for Foundxtion";
+        fndx.packages.javakit.enable = mkEnableOption "Java development kit for ctOS";
     };
 
     config = mkIf cfg.enable {

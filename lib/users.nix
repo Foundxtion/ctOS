@@ -5,7 +5,7 @@ with lib;
         fndx.user.name = mkOption {
             default = "fndx";
             type = types.str;
-            description = mdDoc "Foundxtion username";
+            description = mdDoc "ctOS username";
         };
         fndx.user.initialHashedPassword = mkOption {
             example = "x";

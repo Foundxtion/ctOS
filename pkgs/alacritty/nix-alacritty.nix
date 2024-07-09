@@ -2,6 +2,6 @@
 with lib;
 {
     options = {
-        fndx.packages.alacritty.enable = mkEnableOption "Alacritty for Foundxtion";
+        fndx.packages.alacritty.enable = mkEnableOption "Alacritty for ctOS";
     };
 }

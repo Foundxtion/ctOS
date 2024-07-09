@@ -7,7 +7,7 @@
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
     fndx.user.initialHashedPassword = "";
     fndx.networking = {
-        hostName = "foundxtion";
+        hostName = "ctOS";
         useDHCP = true;
     };
     

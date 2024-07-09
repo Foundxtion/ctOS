@@ -4,7 +4,7 @@ let
 in
 with lib;
 {
-    options.fndx.packages.nautilus.enable = mkEnableOption "Nautilus for Foundxtion";
+    options.fndx.packages.nautilus.enable = mkEnableOption "Nautilus for ctOS";
 
     config = mkIf cfg.enable {
         environment.systemPackages = let

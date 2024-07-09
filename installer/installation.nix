@@ -3,10 +3,10 @@ with lib;
 {
     options = {
         installer.git-remote = mkOption {
-            default = "https://github.com/Foundxtion/Foundxtion";
+            default = "https://github.com/Foundxtion/ctOS";
             type = types.str;
             description = mdDoc ''
-                What remote to clone and use as configuration for your Foundxtion system ?
+                What remote to clone and use as configuration for your ctOS system ?
             '';
         };
     };

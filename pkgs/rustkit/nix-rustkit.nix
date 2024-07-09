@@ -5,7 +5,7 @@ in
 with lib;
 {
     options = {
-        fndx.packages.rustkit.enable = mkEnableOption "Rust development kit for Foundxtion";
+        fndx.packages.rustkit.enable = mkEnableOption "Rust development kit for ctOS";
     };
 
     config = mkIf cfg.enable {

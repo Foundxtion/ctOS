@@ -2,6 +2,6 @@
 with lib;
 {
     options = {
-        fndx.packages.vscode.enable = mkEnableOption "Code for Foundxtion";
+        fndx.packages.vscode.enable = mkEnableOption "Code for ctOS";
     };
 }

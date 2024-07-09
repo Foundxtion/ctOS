@@ -3,7 +3,7 @@ with lib;
 {
     options = {
         fndx.services.nginx = {
-            enable = mkEnableOption "Pre configured Nginx for Foundxtion";
+            enable = mkEnableOption "Pre configured Nginx for ctOS";
             acme-email = mkOption {
                 default = "";
                 example = "user@example.org";

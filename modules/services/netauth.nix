@@ -7,7 +7,7 @@ with lib;
 {
     options = {
         fndx.services.netauth = {
-            enable = mkEnableOption "NetAuth server for Foundxtion";
+            enable = mkEnableOption "NetAuth server for ctOS";
             realm = mkOption {
                 example = "EXAMPLE.ORG";
                 type = types.str;

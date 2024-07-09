@@ -5,7 +5,7 @@ in
 with lib;
 {
     options = {
-        fndx.packages.cppkit.enable = mkEnableOption "Cpp development kit for Foundxtion";
+        fndx.packages.cppkit.enable = mkEnableOption "Cpp development kit for ctOS";
     };
 
     config = mkIf cfg.enable {

@@ -7,7 +7,7 @@ with lib;
 {
     options = {
         fndx.services.jupyterhub = {
-            enable = mkEnableOption "Jupyterhub for Foundxtion";
+            enable = mkEnableOption "Jupyterhub for ctOS";
             host = mkOption {
                 default = "0.0.0.0";
                 description = mdDoc ''
@@ -23,7 +23,7 @@ with lib;
             ldapServerAddress = mkOption {
                 example = "example.org";
                 description = mdDoc ''
-                    JupyterHub for Foundxtion uses an LDAP server 
+                    JupyterHub for ctOS uses an LDAP server 
                     as Identity manager.
                     Please provide a domain name linked to an LDAP server.
                 '';
