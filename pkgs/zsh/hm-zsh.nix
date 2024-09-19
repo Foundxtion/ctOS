@@ -19,6 +19,21 @@ with lib;
             }
         ];
 
-        initExtra = (builtins.readFile ./p10k.zsh);
+        initExtra = let
+            additionalScript = ''
+            cd()
+            {
+                if [ -n "''\$1" ]; then
+                builtin cd "''$@" && ls
+                else
+                builtin cd ~ && ls
+                fi
+            }
+            '';
+        in
+        builtins.concatStringsSep "\n" [
+            additionalScript
+            (builtins.readFile ./p10k.zsh)
+        ];
     };
 }
