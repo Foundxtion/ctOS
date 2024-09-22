@@ -40,9 +40,8 @@ with lib;
 		"${mod}+Shift+E" = "exit";
                 "${mod}+l" = "exec i3lock-fancy-rapid 5 3";
                 "${mod}+Return" = "exec alacritty";
-                "${mod}+Shift+Return" = (if osConfig.fndx.packages.i3.openSshTab.enable 
-                then "exec alacritty -e ssh ${osConfig.fndx.packages.i3.openSshTab.userName}@${osConfig.fndx.packages.i3.openSshTab.domainName}" 
-                else "");
+                "${mod}+Shift+Return" = lib.mkIf osConfig.fndx.packages.i3.openSshTab.enable 
+                "exec alacritty -e ssh ${osConfig.fndx.packages.i3.openSshTab.userName}@${osConfig.fndx.packages.i3.openSshTab.domainName}";
                 "${mod}+a" = "exec firefox";
                 "${mod}+e" = "exec nautilus";
                 "${mod}+q" = "kill";

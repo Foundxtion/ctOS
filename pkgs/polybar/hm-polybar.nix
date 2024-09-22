@@ -12,16 +12,24 @@ with lib;
         config = {
             "bar/top" = {
                 width             = "100%";
-                height            = "50px";
+                height            = if (osConfig.fndx.graphical.hidpi)
+                then "50px"
+                else "25px";
                 radius            = 0;
                 modules-left      = "icon windows";
                 modules-center = "tray";
                 modules-right     = "network sound battery date";
                 background        = "#A4202020";
                 foreground        = "#e9e9e9";
-                font-0            = "Inter:size=18;4";
-                font-1            = "DejaVuSansM Nerd Font:size=25;5";
-                font-2            = "DejaVuSansM Nerd Font:size=20;5";
+                font-0            = if (osConfig.fndx.graphical.hidpi) 
+                then "Inter:size=18;4" 
+                else "Inter:size=9;4";
+                font-1            = if (osConfig.fndx.graphical.hidpi)
+                then "DejaVuSansM Nerd Font:size=25;5"
+                else "DejaVuSansM Nerd Font:size=12;5";
+                font-2            = if (osConfig.fndx.graphical.hidpi)
+                then "DejaVuSansM Nerd Font:size=12;5"
+                else "DejaVuSansM Nerd Font:size=10;5";
             };
 
             "module/tray" = {

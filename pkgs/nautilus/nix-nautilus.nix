@@ -1,6 +1,8 @@
 {config, lib, pkgs, ...}:
 let
     cfg = config.fndx.packages.nautilus;
+    gdk_scaler = "export GDK_SCALE=2;";
+    nautilus_exec = "exec ${pkgs.gnome3.nautilus}/bin/nautilus;";
 in
 with lib;
 {
@@ -8,10 +10,9 @@ with lib;
 
     config = mkIf cfg.enable {
         environment.systemPackages = let
-            wrapped = pkgs.writeShellScriptBin "nautilus" ''
-                export GDK_SCALE=2;
-                exec ${pkgs.gnome3.nautilus}/bin/nautilus
-            '';
+            wrapped = pkgs.writeShellScriptBin "nautilus" (lib.strings.concatStringsSep "\n" ( 
+            (optionals (config.fndx.graphical.hidpi) [gdk_scaler]) 
+            ++ [nautilus_exec]));
         in
         with pkgs; [
             (symlinkJoin {

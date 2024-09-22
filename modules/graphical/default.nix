@@ -23,10 +23,9 @@ with lib;
             description = mdDoc "ctOS login background for graphical interface";
         };
 	fndx.graphical.hidpi = mkOption {
-	    default = 90;
-	    example = 90;
+	    default = false;
 	    description = mdDoc "Option to set the dpi for 4K Display and Apple's Retina Display";
-	    type = types.nullOr types.int;
+	    type = types.bool;
 	};
     };
 
@@ -44,7 +43,7 @@ with lib;
                 variant = "";
             };
             autorun = true;
-	    dpi = mkIf (cfg.hidpi != null) cfg.hidpi;
+	    dpi = if (cfg.hidpi) then 200 else 90;
             excludePackages = with pkgs; [
                 xterm
             ];
