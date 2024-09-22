@@ -5,7 +5,7 @@
  *******************************************************************************/
 
 * {
-    font:   "Montserrat 25";
+    font:   "Montserrat 12";
 
     bg0:    #242424A0;
     bg1:    #7E7E7EA0;
@@ -32,7 +32,7 @@ window {
 }
 
 inputbar {
-    font:       "Montserrat 35";
+    font:       "Montserrat 18";
     padding:    12px;
     spacing:    12px;
     children:   [ icon-search, entry ];
@@ -41,7 +41,7 @@ inputbar {
 icon-search {
     expand:     false;
     filename:   "search-icon";
-    size: 70px;
+    size: 35px;
 }
 
 icon-search, entry, element-icon, element-text {
