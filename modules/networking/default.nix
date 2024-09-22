@@ -1,4 +1,7 @@
 {config, lib, pkgs, ...}:
+let
+    cfg = config.fndx.networking;
+in
 with lib;
 {
     options = {
@@ -37,6 +40,8 @@ with lib;
                 '';
             };
 
+            wakeOnLan.enable = mkEnableOption "Enable wake on lan through mac address";
+
             hostName = mkOption {
                 default = "ctOS";
                 type = types.str;
@@ -57,9 +62,9 @@ with lib;
 
     config = {
         networking = {
-            useDHCP = mkForce config.fndx.networking.useDHCP;
+            useDHCP = mkForce cfg.useDHCP;
             wireless.enable = false;
-            hostName = config.fndx.networking.hostName;
+            hostName = cfg.hostName;
 
             networkmanager.enable = true;
 
@@ -71,22 +76,23 @@ with lib;
               25 993 995 
             ] ++ optionals (config.fndx.services.netauth.enable) [
               749 464 88 389 636
-            ] ++ config.fndx.networking.extraAllowedPorts;
+            ] ++ cfg.extraAllowedPorts;
             in
             {
                 enable = true;
                 allowedTCPPorts = allowedPorts;
                 allowedUDPPorts = allowedPorts;
             };
-	    interfaces = mkIf (!config.fndx.networking.useDHCP) {
-	    	eth0.ipv4.addresses = [{
-                    address = config.fndx.networking.ipv4Address;
-                    prefixLength = config.fndx.networking.prefixLength;
+	    interfaces =  {
+	    	eth0.ipv4.addresses = mkIf (!cfg.useDHCP) [{
+                    address = cfg.ipv4Address;
+                    prefixLength = cfg.prefixLength;
 		}];
+                eth0.wakeOnLan.enable = cfg.wakeOnLan.enable;
 	    };
 
-            defaultGateway = mkIf (! config.fndx.networking.useDHCP) config.fndx.networking.defaultGateway;
-	    nameservers = [ "8.8.8.8" ];
+            defaultGateway = mkIf (! cfg.useDHCP) cfg.defaultGateway;
+	    nameservers = if cfg.useDHCP then [cfg.defaultGateway] else [ "8.8.8.8" ];
         };
     };
 }
