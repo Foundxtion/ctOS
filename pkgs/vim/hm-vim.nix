@@ -201,7 +201,7 @@ with lib;
       coc-git
       coc-go
       coc-highlight
-      coc-java
+      # coc-java
       coc-json
       coc-markdownlint
       coc-pyright
