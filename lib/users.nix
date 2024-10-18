@@ -1,4 +1,7 @@
 {config, lib, pkgs, ...}:
+let
+    cfg = config.fndx.user;
+in
 with lib;
 {
     options = {
@@ -19,13 +22,13 @@ with lib;
     config = {
         users.defaultUserShell = pkgs.zsh;
         
-        users.users."${config.fndx.user.name}" = {
-            initialHashedPassword = config.fndx.user.initialHashedPassword;
+        users.users."${cfg.name}" = {
+            initialHashedPassword = mkIf (cfg.initialHashedPassword != "") cfg.initialHashedPassword;
             isNormalUser = true;
             extraGroups = [ "wheel" "networkmanager" "video" "dialout" ] ++ optionals (config.fndx.services.docker.enable) [ "docker" ];
             openssh.authorizedKeys.keys = mkIf config.fndx.services.openssh.enable config.fndx.services.openssh.authorizedKeys;
         };
-        home-manager.users."${config.fndx.user.name}" = import ../pkgs/homeManager.nix;
+        home-manager.users."${cfg.name}" = import ../pkgs/homeManager.nix;
         home-manager.users.root = import ../pkgs/homeManager.nix;
     };
 }
