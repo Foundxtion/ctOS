@@ -16,7 +16,7 @@ with lib;
     config = mkIf cfg.enable {
         environment.systemPackages = with pkgs; [
             cfg.dotnetPackage
-            jetbrains.rider
+            # jetbrains.rider
         ];
 
         environment.variables = {

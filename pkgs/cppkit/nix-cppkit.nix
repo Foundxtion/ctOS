@@ -15,7 +15,7 @@ with lib;
             gcc
             gnumake
             cmake
-            jetbrains.clion
+            # jetbrains.clion
         ];
     };
 }
