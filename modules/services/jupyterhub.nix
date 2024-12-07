@@ -51,7 +51,8 @@ with lib;
             c.LDAPAuthenticator.bind_dn_template = [
                 "uid={username},ou=People,${dnBuilder cfg.ldapServerAddress}",
             ]
-            c.LDAPAuthenticator.use_ssl = True
+            c.LDAPAuthenticator.tls_strategy = "on_connect"
+            c.LDAPAuthenticator.allow_all = True
 
             import os
             stream = os.popen("ip addr show docker0 | grep 'inet ' | tr -s ' ' | awk '{$1=$1};1' | cut -d ' ' -f 2")
