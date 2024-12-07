@@ -6,7 +6,7 @@ with lib;
     };
 
     config = mkIf config.fndx.hardware.nvidia.enable {
-        hardware.opengl = {
+        hardware.graphics = {
             enable = true;
         };
 
