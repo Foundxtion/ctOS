@@ -64,6 +64,7 @@ with lib;
                 "Tensorflow": "quay.io/jupyter/tensorflow-notebook:cuda-latest",
                 "Pytorch": "quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8",
                 "Scipy with python3.10": "jupyter/scipy-notebook:python-3.10.10",
+                "pyspark": "quay.io/jupyter/pyspark-notebook:python-3.12",
             }
             c.DockerSpawner.image = "quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8"
             c.DockerSpawner.remove = True
