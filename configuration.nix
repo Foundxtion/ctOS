@@ -9,5 +9,5 @@
       ./hardware-configuration.nix
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }

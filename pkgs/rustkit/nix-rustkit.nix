@@ -10,7 +10,7 @@ with lib;
 
     config = mkIf cfg.enable {
         environment.systemPackages = with pkgs; [
-            jetbrains.clion
+            # jetbrains.clion
             cargo
             rustc
         ];

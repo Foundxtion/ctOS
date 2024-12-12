@@ -51,7 +51,8 @@ with lib;
             c.LDAPAuthenticator.bind_dn_template = [
                 "uid={username},ou=People,${dnBuilder cfg.ldapServerAddress}",
             ]
-            c.LDAPAuthenticator.use_ssl = True
+            c.LDAPAuthenticator.tls_strategy = "on_connect"
+            c.LDAPAuthenticator.allow_all = True
 
             import os
             stream = os.popen("ip addr show docker0 | grep 'inet ' | tr -s ' ' | awk '{$1=$1};1' | cut -d ' ' -f 2")
@@ -64,6 +65,7 @@ with lib;
                 "Tensorflow": "quay.io/jupyter/tensorflow-notebook:cuda-latest",
                 "Pytorch": "quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8",
                 "Scipy with python3.10": "jupyter/scipy-notebook:python-3.10.10",
+                "pyspark": "quay.io/jupyter/pyspark-notebook:python-3.12",
             }
             c.DockerSpawner.image = "quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8"
             c.DockerSpawner.remove = True

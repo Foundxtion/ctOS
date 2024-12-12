@@ -2,7 +2,7 @@
 let
     cfg = config.fndx.packages.nautilus;
     gdk_scaler = "export GDK_SCALE=2;";
-    nautilus_exec = "exec ${pkgs.gnome3.nautilus}/bin/nautilus;";
+    nautilus_exec = "exec ${pkgs.nautilus}/bin/nautilus;";
 in
 with lib;
 {
@@ -19,7 +19,7 @@ with lib;
                 name = "nautilus";
                 paths = [
                     wrapped
-                    gnome3.nautilus
+                    nautilus
                 ];
             })
         ];
