@@ -1,2 +1,4 @@
 pandas
 cysystemd
+sqlalchemy
+psycopg2-binary

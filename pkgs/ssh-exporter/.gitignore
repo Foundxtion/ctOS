@@ -1,0 +1,13 @@
+*.ipynb_checkpoints/
+test.*
+__pycache__/
+*.log
+.env
+venv/
+.venv/
+.idea/
+
+# Documentation
+autoapi
+_build
+output.rdf
