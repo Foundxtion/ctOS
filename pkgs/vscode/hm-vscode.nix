@@ -19,8 +19,8 @@ with lib;
             }
 
             {
-                name = "ms-vscode";
-                publisher = "vscode-typescript-next";
+                name = "vscode-typescript-next";
+                publisher = "ms-vscode";
                 version = "5.8.20241225";
             }
         ];
