@@ -9,7 +9,8 @@ with lib;
        boot.kernelModules = ["amdgpu"]; 
        services.xserver.videoDrivers = [ "amdgpu" ];
 
-       hardware.opengl = {
+       hardware.graphics = {
+           enable = true;
            extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
            extraPackages = with pkgs; [ amdvlk ];
        };
