@@ -24,6 +24,7 @@ with lib;
       jdk # for coc-java
       opam
       rustc # for coc-rust-analyzer
+      ripgrep # for telescope live grep
     ];
 
     extraPython3Packages = (ps: with ps; [
@@ -108,6 +109,13 @@ with lib;
       vim-one
       vim-airline-themes
       vim-devicons
+      {
+          plugin = telescope-nvim;
+          config = ''
+          nnoremap <leader>ff <cmd>Telescope find_files<cr>
+          nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+          '';
+      }
       {
         plugin = vim-airline;
         config = "let g:airline_powerline_fonts = 1";
