@@ -104,7 +104,6 @@ with lib;
           EOF
         '';
       }
-
       # Themes and visuals
       vim-one
       vim-airline-themes
@@ -204,6 +203,7 @@ with lib;
         '';
       }
 
+      coc-emmet
       coc-clangd
       coc-cmake
       coc-git
