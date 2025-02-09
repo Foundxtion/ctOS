@@ -23,6 +23,7 @@ with lib;
                 "editor.defaultFormatter" = "esbenp.prettier-vscode";
             };
             "workbench.colorTheme" = "JetBrains Rider Dark Theme";
+            "editor.formatOnSave"  = true;
         };
             extensions = with pkgs.vscode-extensions; [
             vscodevim.vim
