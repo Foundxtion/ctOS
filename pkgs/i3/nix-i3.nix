@@ -44,6 +44,7 @@ with lib;
                     spectacle
                     i3lock-fancy-rapid
 		    blugon
+                    imagemagick
                 ];
                 extraSessionCommands = ''
                   ${pkgs.feh}/bin/feh --bg-scale --fill ${config.fndx.graphical.background}
