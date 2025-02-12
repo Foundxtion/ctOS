@@ -60,7 +60,7 @@ in
             persistentIpPool = {
                 enable = mkEnableOption "Enable persistent IP pool";
                 filePath = mkOption {
-                    type = types.str;
+                    type = types.path;
                     example = "/etc/openvpn/ipp.txt";
                     description = "The path to the file that stores the persistent IP pool";
                 };
