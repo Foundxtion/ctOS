@@ -55,5 +55,9 @@ with lib;
                 updateResolvConf = true;
             };
         };
+
+        # this is a hack to make sure the openvpn-client service is not started by default
+        # You can start it manually with `systemctl start openvpn-client.service`
+        systemd.services."openvpn-client".wantedBy = lib.mkForce [];
     };
 }
