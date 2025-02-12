@@ -112,7 +112,7 @@ in
                     push "dhcp-option DNS ${cfg.dhcp-server.address}"
                     ''}
                     '' ++ concatStringsSep "\n" (map (route: ''
-                    push "route ${route.subnet} ${route.submask}"
+                    push "route ${route.subnet} ${route.netmask}"
                     '') cfg.routes);
             };
         };
