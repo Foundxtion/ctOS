@@ -2,6 +2,7 @@
 {
     imports = [
         ./ddclient.nix
+        ./vpn-client.nix
         ./docker.nix
         ./jupyterhub.nix
         ./mailserver.nix
