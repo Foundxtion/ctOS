@@ -42,7 +42,7 @@ with lib;
                     client
                     dev tun
                     proto udp
-                    remote ${cfg.serverAddress} ${cfg.port}
+                    remote ${cfg.serverAddress} ${toString cfg.port}
                     resolv-retry infinite
                     nobind
                     persist-tun
