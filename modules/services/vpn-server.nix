@@ -111,7 +111,7 @@ in
                     ${optionalString (cfg.dhcp-server.enable) ''
                     push "dhcp-option DNS ${cfg.dhcp-server.address}"
                     ''}
-                    '' ++ concatStringsSep "\n" (map (route: ''
+                    '' + concatStringsSep "\n" (map (route: ''
                     push "route ${route.subnet} ${route.netmask}"
                     '') cfg.routes);
             };
