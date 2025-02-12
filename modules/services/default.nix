@@ -8,5 +8,7 @@
         ./netauth.nix
         ./nginx.nix
         ./openssh.nix
+        ./vpn-client.nix
+        ./vpn-server.nix
     ];
 }
