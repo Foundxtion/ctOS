@@ -21,6 +21,7 @@ in
     options = {
         fndx.services.vpn-server = {
             enable = mkEnableOption "VPN Server Service";
+            enableTrafficRedirect = mkEnableOption "Enable complete traffic redirection, including internet traffic";
             port = mkOption {
                 type = types.int;
                 default = 1194;
@@ -108,6 +109,10 @@ in
                     explicit-exit-notify 1
 
                     push "tcp-nodelay 1"
+                    ${optionalString (cfg.enableTrafficRedirect) ''
+                    push "redirect-gateway def1"
+                    ''}
+
                     ${optionalString (cfg.dhcp-server.enable) ''
                     push "dhcp-option DNS ${cfg.dhcp-server.address}"
                     ''}
