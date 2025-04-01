@@ -10,6 +10,7 @@ with lib;
         shellAliases = {
             update="(cd /etc/nixos && git pull && nixos-rebuild switch)";
             nxs="nix-shell --run zsh";
+			dpsa="docker ps -a --format 'table {{.Image}}\t{{.Command}}\t{{.RunningFor}}\t{{.Status}}'";
         };
         plugins = [
             {
