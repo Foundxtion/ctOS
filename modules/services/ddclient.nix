@@ -50,7 +50,7 @@ with lib;
         services.ddclient = {
             enable = true;
             configFile = pkgs.writeText "ddclient-config-file" ''
-                use=web, web=${config.fndx.services.ddclient.getIpService}
+                use=web, web=${config.fndx.services.ddclient.getIpService}, web-skip='1.0.1.1'
                 protocol=${config.fndx.services.ddclient.protocol}
                 server=${config.fndx.services.ddclient.server}
                 login=${config.fndx.services.ddclient.domainName}

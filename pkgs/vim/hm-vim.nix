@@ -401,20 +401,14 @@ with lib;
 
       " Indentation options {{{
 
-      " The display length of a tab character
-      set tabstop=8
-
       " The number of spaces inserted when you press tab to indent with spaces
-      set softtabstop=4
+      set tabstop=4
 
       " The number of spaces inserted/removed when using < or >
       set shiftwidth=4
 
-      " Insert spaces instead of tabs
-      set expandtab
-
-      " When tabbing manually, use shiftwidth instead of tabstop and softtabstop
-      set smarttab
+      " Insert tabs instead of spaces
+      set noexpandtab
 
       " Set basic indenting (i.e. copy the indentation of the previous line)
       " When filetype detection didn't find a fancy indentation scheme

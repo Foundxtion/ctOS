@@ -13,16 +13,17 @@ with lib;
         services.xserver.videoDrivers = [ "nvidia" ];
 
         hardware.nvidia = {
+            powerManagement.enable = false;
             modesetting.enable = true;
             open = false;
 
             nvidiaPersistenced =  true;
 
             nvidiaSettings = true;
-            package = config.boot.kernelPackages.nvidiaPackages.production;
+            package = config.boot.kernelPackages.nvidiaPackages.stable;
         };
 
-       boot.kernelModules = [ "nvidia_uvm" ];
+       # boot.kernelModules = [ "nvidia_uvm" ];
 
         environment.systemPackages = with pkgs; [
             nvtopPackages.nvidia
