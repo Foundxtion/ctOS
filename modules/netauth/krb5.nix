@@ -39,8 +39,8 @@ with lib;
                     };
                 };
                 domain_realm = {
-                    "${cfg.realm}" = "${strings.toUpper cfg.realm}";
-                    ".${cfg.realm}" = "${strings.toUpper cfg.realm}";
+                    "${strings.toLower cfg.realm}" = "${strings.toUpper cfg.realm}";
+                    ".${strings.toLower cfg.realm}" = "${strings.toUpper cfg.realm}";
                 };
             };
         };

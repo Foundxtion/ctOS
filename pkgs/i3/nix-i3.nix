@@ -41,7 +41,7 @@ with lib;
                 enable = true;
                 package = pkgs.i3-gaps;
                 extraPackages = with pkgs; [
-                    spectacle
+                    kdePackages.spectacle
                     i3lock-fancy-rapid
 		    blugon
                     imagemagick
