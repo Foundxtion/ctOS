@@ -1,6 +1,13 @@
 {config, lib, pkgs, ...}:
 let
-  cfg = config.fndx.packages.csharpkit;
+	cfg = config.fndx.packages.csharpkit;
+	dotnet-sdk = (
+		with pkgs.dotnetCorePackages;
+		combinePackages [
+			sdk_9_0
+			sdk_8_0
+		]
+	);
 in
 with lib;
 {
@@ -8,7 +15,7 @@ with lib;
         fndx.packages.csharpkit.enable = mkEnableOption "C# development kit for ctOS";
         fndx.packages.csharpkit.dotnetPackage = mkOption {
             type = lib.types.package;
-            default = pkgs.dotnet-sdk_8;
+            default = dotnet-sdk;
             description = "The dotnet package version to use";
         };
     };
@@ -20,7 +27,7 @@ with lib;
         ];
 
         environment.variables = {
-            DOTNET_ROOT = "${cfg.dotnetPackage}";
+            DOTNET_ROOT = "${cfg.dotnetPackage}/share/dotnet";
         };
     };
 }

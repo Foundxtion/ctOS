@@ -20,7 +20,7 @@ with lib;
             }
         ];
 
-        initExtra = let
+		initContent = let
             additionalScript = ''
             cd()
             {
