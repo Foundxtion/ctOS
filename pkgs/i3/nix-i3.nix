@@ -52,7 +52,7 @@ with lib;
             };
         };
 
-	programs.light.enable = true;
+		programs.light.enable = true;
         fndx.packages.rofi.enable = true;
         fndx.packages.alacritty.enable = true;
         fndx.packages.picom.enable = true;

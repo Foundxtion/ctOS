@@ -12,29 +12,26 @@ with lib;
             nxs="nix-shell --run zsh";
 			dpsa="docker ps -a --format 'table {{.Image}}\t{{.Command}}\t{{.RunningFor}}\t{{.Status}}'";
         };
-        plugins = [
-            {
-                name = "powerlevel10k";
-                file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-                src = pkgs.zsh-powerlevel10k;
-            }
-        ];
 
 		initContent = let
             additionalScript = ''
             cd()
             {
                 if [ -n "''\$1" ]; then
-                builtin cd "''$@" && ls
+					z "''$@" && ls
                 else
-                builtin cd ~ && ls
+					z && ls
                 fi
             }
             '';
         in
         builtins.concatStringsSep "\n" [
             additionalScript
-            (builtins.readFile ./p10k.zsh)
         ];
     };
+	programs.starship = {
+		enable = true;
+		enableZshIntegration = true;
+		settings = builtins.fromTOML (builtins.unsafeDiscardStringContext (builtins.readFile "${./gruvbox-rainbow.toml}"));
+	};
 }
