@@ -97,6 +97,9 @@ in
 
                     dh ${toString cfg.dhPath}
 
+					sndbuf 512000
+					rcvbuf 512000
+
                     topology subnet
                     server ${cfg.networkSubnet} ${cfg.networkNetmask}
                     ${optionalString (cfg.persistentIpPool.enable) ''

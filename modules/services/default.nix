@@ -1,6 +1,8 @@
 {config, lib, pkgs, ...}:
 {
     imports = [
+		./keycloak.nix
+		./portainer.nix
         ./ddclient.nix
         ./docker.nix
         ./jupyterhub.nix
