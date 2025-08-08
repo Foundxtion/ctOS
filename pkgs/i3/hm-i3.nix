@@ -49,7 +49,7 @@ with lib;
                 "${mod}+d" = "exec --no-startup-id rofi -show drun -show-icons";
 
                 "Print" = "exec spectacle";
-                "${mod}+Shift+P" = "exec import /home/${osConfig.fndx.user.name}/main.png";
+                "${mod}+Shift+S" = "exec import /home/${osConfig.fndx.user.name}/main.png";
 
                 "${mod}+Left" = "focus left";
                 "${mod}+Down" = "focus down";
