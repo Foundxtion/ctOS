@@ -79,6 +79,7 @@ with lib;
 				http-port = cfg.port;
 				proxy-headers = "xforwarded";
 				http-enabled = true;
+				log-console-level = "debug";
 			};
 		};
 		fndx.services.nginx = {
@@ -90,13 +91,11 @@ with lib;
 					extraConfig = ''
 					proxy_set_header Host ${cfg.hostname};
 					proxy_set_header X-Real-IP $remote_addr;
-					proxy_set_header X-Forwarded-for $remote_addr;
+					proxy_set_header X-Forwarded-for $proxy_add_x_forwarded_for;
 					proxy_set_header X-Forwarded-Host   $host;
 					proxy_set_header X-Forwarded-Server $host;
 					proxy_set_header X-Forwarded-Port   $server_port;
 					proxy_set_header X-Forwarded-Proto  $scheme;
-					proxy_set_header Authorization $http_authorization;
-					proxy_pass_header WWW-Authenticate;
 					proxy_pass_header Authorization;
 					'';
 					proxyPass = "http://0.0.0.0:${toString cfg.port}/";
