@@ -23,7 +23,7 @@ with lib;
                 volumes = [
 					"/var/run/docker.sock:/var/run/docker.sock"
 					"portainer_data:/data"
-                    "/etc/localtime:/etc/localtime:ro"
+					"/etc/localtime:/etc/localtime:ro"
                 ];
             };
         };
