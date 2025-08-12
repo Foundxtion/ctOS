@@ -1,5 +1,7 @@
 {pkgs, config, ...}:
 {
+  home.stateVersion = "25.05";
+
   imports = [
     ./alacritty/hm-alacritty.nix
     ./csharpkit/hm-csharpkit.nix
