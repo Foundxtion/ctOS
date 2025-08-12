@@ -51,6 +51,7 @@ with lib;
                 '';
             };
         };
+		programs.i3lock.enable = true;
 
 		programs.light.enable = true;
         fndx.packages.rofi.enable = true;
