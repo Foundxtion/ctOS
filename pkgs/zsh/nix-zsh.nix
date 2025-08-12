@@ -7,5 +7,9 @@ with lib;
 
     config = mkIf config.fndx.packages.zsh.enable {
         programs.zsh.enable = true;
+		programs.zoxide = {
+			enable = true;
+			enableZshIntegration = true;
+		};
     };
 }

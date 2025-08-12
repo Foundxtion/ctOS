@@ -41,7 +41,7 @@ with lib;
                 enable = true;
                 package = pkgs.i3-gaps;
                 extraPackages = with pkgs; [
-                    spectacle
+                    kdePackages.spectacle
                     i3lock-fancy-rapid
 		    blugon
                     imagemagick
@@ -51,8 +51,9 @@ with lib;
                 '';
             };
         };
+		programs.i3lock.enable = true;
 
-	programs.light.enable = true;
+		programs.light.enable = true;
         fndx.packages.rofi.enable = true;
         fndx.packages.alacritty.enable = true;
         fndx.packages.picom.enable = true;

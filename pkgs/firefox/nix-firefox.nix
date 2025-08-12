@@ -10,7 +10,8 @@ with lib;
         programs.firefox = {
             enable = true;
             preferences = mkIf config.fndx.netauth.enable {
-                "network.negotiate-auth.trusted-uris" = "${strings.toLower config.fndx.netauth.realm},.${strings.toLower config.fndx.netauth.realm}";
+                "network.negotiate-auth.delegation-uris" = ".${strings.toLower config.fndx.netauth.realm}";
+                "network.negotiate-auth.trusted-uris" = ".${strings.toLower config.fndx.netauth.realm}";
                 "network.trr.excluded-domains" = "${strings.toLower config.fndx.netauth.realm}";
             };
             policies = {

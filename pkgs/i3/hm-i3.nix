@@ -37,9 +37,10 @@ with lib;
                 "XF86MonBrightnessUp" = "exec --no-startup-id light -A 4";
                 "XF86MonBrightnessDown" = "exec --no-startup-id light -U 5";
                 "XF86Display" = "exec --no-startup-id ${./external_monitor_handler.sh} \"${pkgs.feh}\" \"${osConfig.fndx.graphical.background}\"";
-		"${mod}+Shift+E" = "exit";
+				"${mod}+Shift+E" = "exit";
                 "${mod}+l" = "exec i3lock-fancy-rapid 5 3";
                 "${mod}+Return" = "exec alacritty";
+                "${mod}+Ctrl+Return" = "exec alacritty -e su";
                 "${mod}+Shift+Return" = lib.mkIf osConfig.fndx.packages.i3.openSshTab.enable 
                 "exec alacritty -e ssh ${osConfig.fndx.packages.i3.openSshTab.userName}@${osConfig.fndx.packages.i3.openSshTab.domainName}";
                 "${mod}+a" = "exec firefox";
@@ -48,7 +49,7 @@ with lib;
                 "${mod}+d" = "exec --no-startup-id rofi -show drun -show-icons";
 
                 "Print" = "exec spectacle";
-                "${mod}+Shift+P" = "exec import /home/${osConfig.fndx.user.name}/main.png";
+                "${mod}+Shift+S" = "exec import /home/${osConfig.fndx.user.name}/main.png";
 
                 "${mod}+Left" = "focus left";
                 "${mod}+Down" = "focus down";

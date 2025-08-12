@@ -5,7 +5,7 @@ with lib;
 
     config = mkIf config.fndx.hardware.pulseaudio.enable {
         services.pipewire.enable = false;
-        hardware.pulseaudio = {
+        services.pulseaudio = {
             enable = true;
             package = pkgs.pulseaudioFull;
         };

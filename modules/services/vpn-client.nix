@@ -42,6 +42,15 @@ with lib;
                     client
                     dev tun
                     proto udp
+                    fast-io
+
+					; compress
+                    cipher aes-128-cbc
+                    sndbuf 512000
+                    rcvbuf 512000
+                    mssfix 1460
+                    txqueuelen 2000
+
                     remote ${cfg.serverAddress} ${toString cfg.port}
                     resolv-retry infinite
                     nobind
