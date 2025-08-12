@@ -5,6 +5,9 @@ let
     domain = "example.com";
 in
 {
+    system.stateVersion = "25.05";
+	home.stateVersion = "25.05";
+
     fndx.user.name = "webServer";
     # please use the following command to create your password hash
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'
