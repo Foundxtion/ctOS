@@ -16,7 +16,6 @@ with lib;
     config = mkIf cfg.enable {
         fndx.graphical = {
             enable = true;
-            type = "i3";
         };
         fndx.packages.vscode.enable = true;
         fndx.packages.discord.enable = true;

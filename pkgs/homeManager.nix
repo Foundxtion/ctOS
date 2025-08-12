@@ -1,11 +1,9 @@
 {pkgs, config, ...}:
 {
-  home.stateVersion = "24.11";
   imports = [
     ./alacritty/hm-alacritty.nix
     ./csharpkit/hm-csharpkit.nix
     ./discord/hm-discord.nix
-    ./gnome/hm-gnome.nix
     ./gtk/hm-gtk.nix
     ./i3/hm-i3.nix
     ./polybar/hm-polybar.nix

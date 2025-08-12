@@ -7,11 +7,6 @@ with lib;
 	options = {
 		fndx.graphical.enable = mkEnableOption "ctOS graphic interface";
 		fndx.graphical.enableTouchpad = mkEnableOption "touchpad on ctOS graphical interface";
-		fndx.graphical.type = mkOption {
-			example = "gnome";
-			type = types.str;
-			description = mdDoc "Whether to enable GNOME or i3 interface";
-		};
 		fndx.graphical.background = mkOption {
 			default = ../../wallpapers/macos-1.jpg;
 
@@ -30,11 +25,6 @@ with lib;
 	};
 
 	config = mkIf cfg.enable {
-		assertions = [ {
-			assertion = ((cfg.type == "i3") || (cfg.type == "gnome") || (cfg.type == "plasma"));
-			message = "If ctOS graphic interface is enabled, please select either i3, plasma or gnome type.";
-		}];
-
 		services.xserver = {
 			enable = true;
 			desktopManager.xterm.enable = false;
@@ -56,9 +46,7 @@ with lib;
 
 		fndx.packages.firefox.enable = true;
 
-		fndx.packages.i3.enable = mkIf (cfg.type == "i3") true;
-		fndx.packages.gnome.enable = mkIf (cfg.type == "gnome") true;
-		fndx.packages.plasma.enable = mkIf (cfg.type == "plasma") true;
+		fndx.packages.i3.enable = true;
 		fndx.hardware.bluetooth.enable = true;
 		fndx.hardware.pulseaudio.enable = true;
 		fndx.hardware.touchpad.enable = cfg.enableTouchpad;
