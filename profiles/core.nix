@@ -17,4 +17,5 @@
 
     fndx.packages.vim.enable = true;
     fndx.packages.zsh.enable = true;
+	fndx.packages.lix.enable = true;
 }
