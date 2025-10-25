@@ -64,16 +64,15 @@ with lib;
 					version = "2.24.0";
 					sha256 = "YdzJmZ9dfu71FDCYnrseX2ago+WGPU7f8kf6uZgI8rY=";
 				}
-
-			] ++ optionals cfg.copilot.enable (with pkgs.vscode-extensions; [
-				github.copilot
-			] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
 				{
 					name = "vscode-typescript-next";
 					publisher = "ms-vscode";
 					version = "5.8.20241225";
 					sha256 = "1ojlDsWnpwvXMVEQeKN/RlNNVZh6pT3n/mKHD+hTqcI=";
 				}
+			] ++ optionals cfg.copilot.enable (with pkgs.vscode-extensions; [
+				github.copilot
+			] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
 				{
 					name = "copilot-chat";
 					publisher = "github";
