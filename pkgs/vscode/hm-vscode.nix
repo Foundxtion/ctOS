@@ -69,6 +69,12 @@ with lib;
 				github.copilot
 			] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
 				{
+					name = "vscode-typescript-next";
+					publisher = "ms-vscode";
+					version = "5.8.20241225";
+					sha256 = "1ojlDsWnpwvXMVEQeKN/RlNNVZh6pT3n/mKHD+hTqcI=";
+				}
+				{
 					name = "copilot-chat";
 					publisher = "github";
 					version = "0.31.5";
