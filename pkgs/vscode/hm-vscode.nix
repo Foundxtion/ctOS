@@ -1,7 +1,10 @@
 {osConfig, lib, pkgs, ...}:
+let
+	cfg = osConfig.fndx.packages.vscode;
+in
 with lib;
 {
-    programs.vscode = mkIf osConfig.fndx.packages.vscode.enable {
+    programs.vscode = mkIf cfg.enable {
         enable = true;
 		profiles.default = {
 			enableExtensionUpdateCheck = false;
@@ -39,6 +42,8 @@ with lib;
 						"path" = "zsh";
 					};
 				};
+			} // optionalAttrs cfg.copilot.enable {
+				"github.copilot.nextEditSuggestions.enabled" = true;
 			};
 			extensions = with pkgs.vscode-extensions; [
 				vscodevim.vim
@@ -59,14 +64,23 @@ with lib;
 					version = "2.24.0";
 					sha256 = "YdzJmZ9dfu71FDCYnrseX2ago+WGPU7f8kf6uZgI8rY=";
 				}
-
 				{
 					name = "vscode-typescript-next";
 					publisher = "ms-vscode";
 					version = "5.8.20241225";
 					sha256 = "1ojlDsWnpwvXMVEQeKN/RlNNVZh6pT3n/mKHD+hTqcI=";
 				}
-			];
+			] ++ optionals cfg.copilot.enable (with pkgs.vscode-extensions; [
+				github.copilot
+			] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+				{
+					name = "copilot-chat";
+					publisher = "github";
+					version = "0.31.5";
+					sha256 = "D7k+hA786w7IZHVI+Og6vHGAAohpfpuOmmCcDUU0WsY=";
+				}
+
+			]);
 		};
 	};
 }

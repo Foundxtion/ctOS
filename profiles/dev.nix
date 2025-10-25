@@ -29,7 +29,6 @@ with lib;
         environment.systemPackages = with pkgs; [
             thunderbird
             obsidian
-            cider
             libreoffice-qt
         ];
     };
