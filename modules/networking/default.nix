@@ -77,6 +77,8 @@ with lib;
             ] ++ optionals (config.fndx.services.netauth.enable) [
               749 464 88 389 636
             ] ++ optionals (config.fndx.services.k3s.enable) [
+				2379
+				2380
 				6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
 				8472 # k3s, flannel: required if using multi-node for inter-node networking
 			] ++ cfg.extraAllowedPorts;
