@@ -1,11 +1,14 @@
 {config, lib, pkgs, ...}:
+let
+	cfg = config.fndx.services.mailserver;
+in
 with lib;
 {
 	imports = [
         # Importing nixos mailserver
 	    (builtins.fetchTarball {
-                url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.05/nixos-mailserver-nixos-25.05.tar.gz";
-                sha256 = "1qn5fg0h62r82q7xw54ib9wcpflakix2db2mahbicx540562la1y";
+                url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
+                sha256 = "0pqc7bay9v360x2b7irqaz4ly63gp4z859cgg5c04imknv0pwjqw";
 	    })
 	];
     options = {
@@ -32,16 +35,25 @@ with lib;
                     Definition of users of ctOS mailserver.
                 '';
             };
+			stateVersion = mkOption {
+				default = 3;
+				description = mdDoc ''
+				Since 25.11, a new state has been created following a migration
+				of Dovecot: https://nixos-mailserver.readthedocs.io/en/latest/migrations.html
+				For existing setup, please follow this tutorial, otherwise you can use the default value.
+				'';
+			};
         };
     };
 
-    config = mkIf config.fndx.services.mailserver.enable {
+    config = mkIf cfg.enable {
 	    mailserver = {
 	    	enable = true;
-	    	fqdn = config.fndx.services.mailserver.domain;
-	    	domains = [ config.fndx.services.mailserver.domain ];
-	    	loginAccounts = config.fndx.services.mailserver.loginAccounts;
+	    	fqdn = cfg.domain;
+	    	domains = [ cfg.domain ];
+	    	loginAccounts = cfg.loginAccounts;
 	    	certificateScheme = "acme-nginx";
+			stateVersion = cfg.stateVersion;
 	    };
     };
 }

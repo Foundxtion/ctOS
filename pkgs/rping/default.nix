@@ -19,7 +19,7 @@ pkgs.rustPlatform.buildRustPackage {
 
 	buildInputs = with pkgs; [
 		openssl
-		krb5Full
+		krb5
 		(llvmPackages.libclang.lib)
 	];
 
