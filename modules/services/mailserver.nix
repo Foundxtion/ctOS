@@ -36,7 +36,7 @@ with lib;
                 '';
             };
 			stateVersion = mkOption {
-				default = 1;
+				default = 3;
 				description = mdDoc ''
 				Since 25.11, a new state has been created following a migration
 				of Dovecot: https://nixos-mailserver.readthedocs.io/en/latest/migrations.html
