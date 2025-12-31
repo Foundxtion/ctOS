@@ -34,7 +34,7 @@ with lib;
     config = mkIf cfg.enable {
 		assertions = [ 
 			{
-				assertion = (cfg.headNode != (cfg.headAddress == "") );
+				assertion = (cfg.headNode == (cfg.headAddress == "") );
 				message = "The headNode and headAddress attributes have been set together.";
 			}
 		];
