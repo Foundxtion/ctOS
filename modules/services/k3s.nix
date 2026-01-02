@@ -48,7 +48,6 @@ with lib;
 			extraFlags = [ 
 				"--write-kubeconfig-mode \"0644\""
 				"--disable servicelb"
-				"--disable traefik"
 				"--disable localstorage"
 			];
         };
