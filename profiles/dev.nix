@@ -30,6 +30,8 @@ with lib;
             thunderbird
             obsidian
             libreoffice-qt
+			gnome-text-editor
+			gnome-calendar
         ];
     };
 }
