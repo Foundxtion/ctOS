@@ -10,7 +10,7 @@ with lib;
 
     config = mkIf cfg.enable {
         environment.systemPackages = with pkgs; [
-            jetbrains.idea-ultimate
+            jetbrains.idea
             openjdk17
         ];
     };
