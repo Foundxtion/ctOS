@@ -6,5 +6,6 @@
       ./nvidia.nix
       ./pulseaudio.nix
       ./touchpad.nix
+      ./vm.nix
   ];
 }
