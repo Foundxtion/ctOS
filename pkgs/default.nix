@@ -9,6 +9,7 @@
     ./gtk/nix-gtk.nix
     ./i3/nix-i3.nix
     ./javakit/nix-javakit.nix
+    ./k8s/nix-k8s.nix
     ./lix/nix-lix.nix
     ./nautilus/nix-nautilus.nix
     ./picom/nix-picom.nix
