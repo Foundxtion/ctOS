@@ -1,6 +1,7 @@
 {config, pkgs, ...}:
 {
     environment.systemPackages = with pkgs; [
+		ncdu
 		git
 		htop
 		man-pages
