@@ -12,6 +12,7 @@ with lib;
 
         environment.systemPackages = with pkgs; [
             pavucontrol
+			pamixer
         ];
     };
 }
