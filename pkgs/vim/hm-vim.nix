@@ -29,6 +29,7 @@ with lib;
       ripgrep # for telescope live grep
 	  ruff
 	  ty
+	  haskell-language-server
     ];
 
     extraPython3Packages = (ps: with ps; [
@@ -671,6 +672,12 @@ with lib;
 			  "command": "${pkgs.ruff}/bin/ruff",
 			  "args": ["server"],
 			  "filetypes": ["python"]
+		  },
+		  "haskell": {
+			  "command": "${pkgs.haskell-language-server}/bin/haskell-language-server-wrapper",
+			  "args": ["--lsp"],
+			  "rootPatterns": ["hie.yaml", "cabal.project", "package.yaml", "*.cabal"],
+			  "filetypes": ["haskell", "lhaskell"]
 		  }
 	  }
   }
