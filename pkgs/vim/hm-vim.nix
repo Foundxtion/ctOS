@@ -10,6 +10,7 @@ let
     let mapleader = ","
     let maplocalleader = "\\"
   '';
+  vimBackground = ''\"#282C34\"'';
 in
 with lib;
 {
@@ -20,21 +21,62 @@ with lib;
     withNodeJs = true;
     withPython3 = true;
     extraPackages = with pkgs; [
+	  cargo-nextest
       git
       jdk # for coc-java
       opam
       rustc # for coc-rust-analyzer
       ripgrep # for telescope live grep
+	  ruff
+	  ty
     ];
 
     extraPython3Packages = (ps: with ps; [
-      black
-      flake8
       jedi
-      pylint
     ]);
 
+	extraLuaConfig = ''
+	-- Alacritty
+
+	local alacrittyAutoGroup = vim.api.nvim_create_augroup('alacritty', { clear = true })
+
+	vim.api.nvim_create_autocmd('VimEnter', {
+		group = alacrittyAutoGroup,
+		callback = function()
+		vim.fn.system(
+                "alacritty msg --socket $ALACRITTY_SOCKET config -w $ALACRITTY_WINDOW_ID options 'window.padding.x=0' 'window.padding.y=0' 'window.dynamic_padding=true' 'font.offset.x=0' 'font.offset.y=1' 'colors.primary.background=${vimBackground}' 'window.opacity=1'"
+			)
+			end,
+		})
+
+		vim.api.nvim_create_autocmd('VimLeavePre', {
+			group = alacrittyAutoGroup,
+			callback = function()
+			vim.fn.jobstart('alacritty msg --socket $ALACRITTY_SOCKET config -w $ALACRITTY_WINDOW_ID -r', { detach = true })
+			end,
+		})
+	'';
+
     plugins = with pkgs.vimPlugins; [
+		{
+			plugin = copilot-lua;
+			type = "lua";
+			config = ''
+			require('copilot').setup({
+				suggestion = {
+					enabled = true,
+					auto_trigger = true,
+					keymap = {
+						accept = "<M-l>", -- Alt+l to accept suggestion
+						next = "<M-]>",
+						prev = "<M-[>",
+						dismiss = "<C-]>",
+					},
+				},
+				panel = { enabled = true },
+			})
+			'';
+		}
       # Engines
       {
         plugin = coc-nvim;
@@ -90,7 +132,6 @@ with lib;
         plugin = nvim-treesitter.withAllGrammars;
         config = ''
           lua << EOF
-          require'nvim-treesitter.install'.compilers = {"${pkgs.clang}/bin/clang"}
           require'nvim-treesitter.configs'.setup {
             -- XXX: not sure if I need ensure_installed here or not
             highlight = {
@@ -106,8 +147,49 @@ with lib;
       }
       # Themes and visuals
       vim-one
-      vim-airline-themes
-      vim-devicons
+	  # nightfly
+	  copilot-lualine
+      {
+        plugin = lualine-nvim;
+        type = "lua";
+        config = ''
+		require('lualine').setup({
+			sections = {
+				lualine_x = { 
+					{
+						'copilot',
+						-- Default values
+						symbols = {
+							status = {
+								icons = {
+									enabled = " ",
+									sleep = " ",   -- auto-trigger disabled
+									disabled = " ",
+									warning = " ",
+									unknown = " "
+								},
+								hl = {
+									enabled = "#50FA7B",
+									sleep = "#AEB7D0",
+									disabled = "#6272A4",
+									warning = "#FFB86C",
+									unknown = "#FF5555"
+								}
+							},
+							spinners = "dots", -- has some premade spinners
+							spinner_color = "#6272A4"
+						},
+						show_colors = false,
+						show_loading = true
+					},
+					'encoding',
+					'fileformat',
+					'filetype'
+				}
+            }
+		})
+        '';
+      }
       {
           plugin = telescope-nvim;
           config = ''
@@ -116,15 +198,20 @@ with lib;
           '';
       }
       {
-        plugin = vim-airline;
-        config = "let g:airline_powerline_fonts = 1";
-      }
-      {
         plugin = indent-blankline-nvim;
+        type = "lua";
         config = ''
-          let g:indent_blankline_show_trailing_blankline_indent = v:false
-          let g:indent_blankline_char_blankline = '┆'
-          let g:indent_blankline_show_current_context = v:true
+          require("ibl").setup({
+            indent = {
+              char = "┆",
+            },
+            scope = {
+              enabled = true,
+            },
+            whitespace = {
+              remove_blankline_trail = true,
+            }
+          })
         '';
       }
 
@@ -136,8 +223,29 @@ with lib;
       vim-togglelist
 
       # Language-agnostic editing improvements
-      ctrlp-vim
-      nerdtree
+	  nvim-web-devicons
+      {
+        plugin = nvim-tree-lua;
+        type = "lua";
+        config = ''
+          -- Disable netrw to allow nvim-tree to handle directory opening
+          vim.g.loaded_netrw = 1
+          vim.g.loaded_netrwPlugin = 1
+
+          require("nvim-tree").setup({
+            renderer = {
+              icons = {
+                show = {
+                  file = true,
+                  folder = true,
+                  folder_arrow = true,
+                  git = true,
+                },
+              },
+            },
+          })
+        '';
+      }
       {
         plugin = vim-easy-align;
         config = ''
@@ -212,7 +320,6 @@ with lib;
       # coc-java
       coc-json
       coc-markdownlint
-      coc-pyright
       coc-rust-analyzer
       coc-texlab
       coc-tsserver
@@ -220,7 +327,28 @@ with lib;
       coc-yaml
 
       # Dev tools
-      vim-test
+	  neotest-rust
+      {
+        plugin = neotest;
+        type = "lua";
+        config = ''
+          require("neotest").setup({
+			discovery = {
+				enabled = false,
+			},
+            adapters = {
+              require("neotest-rust")
+            },
+            output = {
+              open_on_run = true,
+            },
+            status = {
+              virtual_text = true,
+              signs = true,
+            }
+          })
+        '';
+      }
       {
         plugin = nerdcommenter;
         config = "let g:NERDSpaceDelims=1";
@@ -228,12 +356,6 @@ with lib;
     ];
 
     extraConfig = ''
-      " General settings {{{
-      set encoding=utf-8
-
-      " Deactivate legacy vi compatibility
-      set nocompatible
-
       " Set the prefix for many plugin commands
       ${mapleadersDefinitions}
 
@@ -282,9 +404,6 @@ with lib;
       " Better vertical separator
       set fillchars=vert:│
 
-      " Always show status line
-      set laststatus=2
-
       " Show line number relative to the current one, but show absolute number for the
       " current one
       set number
@@ -297,9 +416,6 @@ with lib;
       " but disallow :autocmd in them
       set exrc
       set secure
-
-      " Do not unload abandonned buffers, useful for Coc
-      set hidden
 
       " Shorter time trigger for CursorHold (which makes coc-highlight show other uses
       " of the symbol currently under the cursor)
@@ -316,9 +432,6 @@ with lib;
 
       " Ignore case unless there is an uppercase letter in the pattern
       set smartcase
-
-      " Move cursor to the matched string
-      set incsearch
 
       " Don't highlight matched strings
       set nohlsearch
@@ -456,39 +569,111 @@ with lib;
       " More sensible yank bindings
       nnoremap Y y$
       " }}}
+
+	  " Override floating window colors
+	  hi CocFloating guifg=#abb2bf guibg=#282c34
+	  hi CocFloatBorder guifg=#61afef guibg=#282c34
+	  hi CocFloatThumb guibg=#5c6370
+	  hi CocFloatSbar guibg=#3e4452
+		
+	  " Neotest execution and UI bindings
+      nnoremap <leader>tr <cmd>lua require('neotest').run.run()<CR>
+      nnoremap <leader>tf <cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>
+      nnoremap <leader>ts <cmd>lua require('neotest').summary.toggle()<CR>
+      nnoremap <leader>to <cmd>lua require('neotest').output.open({ enter = true })<CR>
+      nnoremap <leader>tp <cmd>lua require('neotest').output_panel.toggle()<CR>
+
+	  " Stop this annoying folding
+	  set foldlevelstart=99
     '';
   };
 
   xdg.configFile."nvim/coc-settings.json".text = ''
-      {
-        "python.formatting.provider": "black",
-        "python.linting.flake8Enabled": true,
-        "python.pythonPath": "nvim-python3",
+  {
+	  "hover.floatConfig": {
+		  "border": true,
+		  "rounded": true,
+		  "borderhighlight": "CocFloatBorder"
+	  },
+	  "signature.floatConfig": {
+		  "border": true,
+		  "rounded": true,
+		  "borderhighlight": "CocFloatBorder"
+	  }
+	  "diagnostic.virtualText": true,
+	  "diagnostic.virtualTextPrefix": " ❯ ",
+	  "diagnostic.errorSign": " ",
+	  "diagnostic.warningSign": " ",
+	  "diagnostic.infoSign": " ",
+	  "diagnostic.hintSign": "󰌵 ",
+	  "diagnostic.messageTarget": "float",
 
-        "diagnostic.virtualText": true,
-        "diagnostic.virtualTextPrefix": "  ~> ",
+	  "suggest.enablePreview": true,
+	  "suggest.enablePreselect": true,
+	  "suggest.formatItems": ["kind", "abbr", "menu"],
+	  "suggest.completionItemKindLabels": {
+		  "class": "",
+		  "color": "",
+		  "constant": "",
+		  "default": "",
+		  "enum": "",
+		  "enumMember": "",
+		  "event": "",
+		  "field": "",
+		  "file": "",
+		  "folder": "",
+		  "function": "󰊕",
+		  "interface": "",
+		  "keyword": "",
+		  "method": "󰊕",
+		  "module": "",
+		  "operator": "󰆕",
+		  "property": "",
+		  "reference": "",
+		  "snippet": "",
+		  "struct": "",
+		  "text": "",
+		  "typeParameter": "",
+		  "unit": "",
+		  "value": "",
+		  "variable": "󰀫"
+	  },
 
-        "suggest.enablePreview": true,
-        "suggest.enablePreselect": true,
+	  "rust-analyzer.lens.run.enable": false
+	  "codeLens.enable": true,
+	  "codeLens.separator": "‣",
 
-        "codeLens.enable": true,
-        "codeLens.separator": "‣",
+	  "list.indicator": "›",
+	  "list.selectedSignText": "",
 
-        "highlight.colorNames.enable": false,
+	  "hover.target": "float",
+	  "signature.target": "float",
 
-        "texlab.path": "${pkgs.texlab}/bin/texlab",
+	  "highlight.colorNames.enable": false,
 
-        "rust-analyzer.inlayHints.closureReturnTypeHints.enable": true,
-        "rust-analyzer.server.path": "${pkgs.rust-analyzer}/bin/rust-analyzer",
-        "rust-analyzer.updates.checkOnStartup": false,
+	  "texlab.path": "${pkgs.texlab}/bin/texlab",
 
-        "languageserver": {
-          "nix": {
-              "command": "${pkgs.nixd}/bin/nixd",
-              "filetypes": ["nix"]
-          }
-        }
-      }
+	  "rust-analyzer.inlayHints.closureReturnTypeHints.enable": true,
+	  "rust-analyzer.server.path": "${pkgs.rust-analyzer}/bin/rust-analyzer",
+	  "rust-analyzer.updates.checkOnStartup": false,
+
+	  "languageserver": {
+		  "nix": {
+			  "command": "${pkgs.nixd}/bin/nixd",
+			  "filetypes": ["nix"]
+		  },
+		  "ty": {
+			  "command": "${pkgs.ty}/bin/ty",
+			  "args": ["server"],
+			  "filetypes": ["python"]
+		  },
+		  "ruff": {
+			  "command": "${pkgs.ruff}/bin/ruff",
+			  "args": ["server"],
+			  "filetypes": ["python"]
+		  }
+	  }
+  }
   '';
 
   # TODO: ideally find a way to dynamically change the vimtex command prefix
