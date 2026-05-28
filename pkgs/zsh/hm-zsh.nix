@@ -34,4 +34,5 @@ with lib;
 		enableZshIntegration = true;
 		settings = builtins.fromTOML (builtins.unsafeDiscardStringContext (builtins.readFile "${./gruvbox-rainbow.toml}"));
 	};
+
 }
