@@ -1,6 +1,7 @@
 {config, pkgs, ...}:
 {
     environment.systemPackages = with pkgs; [
+		ncdu
 		git
 		htop
 		man-pages
@@ -13,6 +14,7 @@
 		lsof
 		jq
 		autojump
+		glow # markdown terminal rendering
     ];
 
     fndx.packages.vim.enable = true;

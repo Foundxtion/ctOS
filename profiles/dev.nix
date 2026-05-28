@@ -29,9 +29,13 @@ with lib;
         environment.systemPackages = with pkgs; [
             thunderbird
             obsidian
+            libreoffice-qt
 			gnome-text-editor
 			gnome-calendar
-			onlyoffice-desktopeditors
+			(llm.withPlugins {
+				llm-deepseek = true;
+				llm-cmd = true;
+			})
         ];
     };
 }
