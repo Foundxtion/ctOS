@@ -14,6 +14,7 @@
 		lsof
 		jq
 		autojump
+		glow # markdown terminal rendering
     ];
 
     fndx.packages.vim.enable = true;

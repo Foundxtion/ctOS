@@ -9,6 +9,7 @@ with lib;
     then ./spotlight-dark-hidpi.rasi
     else ./spotlight-dark.rasi;
     programs.rofi = mkIf cfg.enable {
+		package = pkgs.rofi;
         enable = true;
         terminal = defaultTerminal;
         theme = "spotlight-dark";

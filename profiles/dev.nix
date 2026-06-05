@@ -32,6 +32,10 @@ with lib;
             libreoffice-qt
 			gnome-text-editor
 			gnome-calendar
+			(llm.withPlugins {
+				llm-deepseek = true;
+				llm-cmd = true;
+			})
         ];
     };
 }

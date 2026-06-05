@@ -10,6 +10,7 @@ with lib;
 			enableExtensionUpdateCheck = false;
 			enableUpdateCheck = false;
 			userSettings = {
+				"telemetry.telemetrylevel" = "off";
 				"window.titleBarStyle" = "custom";
 				"[typescriptreact]" = {
 					"editor.defaultFormatter" = "esbenp.prettier-vscode";
@@ -50,7 +51,12 @@ with lib;
 				ms-dotnettools.csharp
 				ms-dotnettools.csdevkit
 				ms-dotnettools.vscode-dotnet-runtime
-			] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+				charliermarsh.ruff
+
+              ] ++ optionals osConfig.fndx.packages.rustkit.enable (with pkgs.vscode-extensions; [
+                rust-lang.rust-analyzer
+              ])
+              ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
 				{
 					name = "jetbrains-rider-dark-theme";
 					publisher = "EdwinSulaiman";
@@ -76,8 +82,8 @@ with lib;
 				{
 					name = "copilot-chat";
 					publisher = "github";
-					version = "0.31.5";
-					sha256 = "D7k+hA786w7IZHVI+Og6vHGAAohpfpuOmmCcDUU0WsY=";
+					version = "0.36.2025121203";
+					sha256 = "MFjJxWLu4skQX/YlA7v436vJf/WE0pei/etGo4NsSeE=";
 				}
 
 			]);
