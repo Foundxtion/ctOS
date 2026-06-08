@@ -7,7 +7,7 @@ with lib;
 	imports = [
         # Importing nixos mailserver
 	    (builtins.fetchTarball {
-                url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-26.05.tar.gz";
+                url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-26.05/nixos-mailserver-nixos-26.05.tar.gz";
                 sha256 = "06di2kg36v7i2c9hhzc83v51cnpmklc9ri6phpcpay8hcaiavri6";
 	    })
 	];
