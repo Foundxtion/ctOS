@@ -37,7 +37,7 @@ with lib;
       jedi
     ]);
 
-	extraLuaConfig = ''
+    initLua = ''
 	-- Alacritty
 
 	local alacrittyAutoGroup = vim.api.nvim_create_augroup('alacritty', { clear = true })
@@ -82,6 +82,7 @@ with lib;
       # Engines
       {
         plugin = coc-nvim;
+        type = "viml";
         config = ''
           ${mapleadersDefinitions}
 
@@ -132,9 +133,9 @@ with lib;
       }
       {
         plugin = nvim-treesitter.withAllGrammars;
+        type = "lua";
         config = ''
-          lua << EOF
-          require'nvim-treesitter.configs'.setup {
+          require('nvim-treesitter.configs').setup({
             -- XXX: not sure if I need ensure_installed here or not
             highlight = {
               enable = true,
@@ -143,8 +144,7 @@ with lib;
               -- for some of its features
               disable = { "markdown", "latex" },
             },
-          }
-          EOF
+          })
         '';
       }
       # Themes and visuals
@@ -194,6 +194,7 @@ with lib;
       }
       {
           plugin = telescope-nvim;
+          type = "viml";
           config = ''
           nnoremap <leader>ff <cmd>Telescope find_files<cr>
           nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -250,6 +251,7 @@ with lib;
       }
       {
         plugin = vim-easy-align;
+        type = "viml";
         config = ''
           " Start interactive EasyAlign in visual mode (e.g. vipga)
           xmap ga <Plug>(EasyAlign)
@@ -270,10 +272,12 @@ with lib;
       vim-nix
       {
         plugin = rust-vim;
+        type = "viml";
         config = "let g:rust_cargo_use_clippy = 1";
       }
       {
         plugin = SimpylFold;
+        type = "viml";
         config = ''
           let g:SimpylFold_docstring_preview = 1
           let g:SimpylFold_fold_docstring = 0
@@ -281,6 +285,7 @@ with lib;
       }
       {
         plugin = vimtex;
+        type = "viml";
         config = ''
           let g:vimtex_fold_enabled=1
           let g:vimtex_view_automatic=0
@@ -304,6 +309,7 @@ with lib;
       }
       {
         plugin = vim-javascript;
+        type = "viml";
         config = ''
             let g:javascript_plugin_jsdoc = 1
             augroup javascript_folding
@@ -351,6 +357,7 @@ with lib;
       }
       {
         plugin = nerdcommenter;
+        type = "viml";
         config = "let g:NERDSpaceDelims=1";
       }
     ];

@@ -23,7 +23,7 @@ with lib;
                     Domain used for mailserver.
                 '';
             };
-            loginAccounts = mkOption {
+            accounts = mkOption {
                 default = {};
                 example = {
                     "user@example.com" = {
@@ -51,7 +51,7 @@ with lib;
 	    	enable = true;
 	    	fqdn = cfg.domain;
 	    	domains = [ cfg.domain ];
-	    	loginAccounts = cfg.loginAccounts;
+	    	accounts = cfg.accounts;
 			x509.useACMEHost = cfg.domain;
 			stateVersion = cfg.stateVersion;
 	    };

@@ -35,7 +35,7 @@ in
     fndx.services.mailserver = {
         enable = true;
         domain = domain;
-        loginAccounts = {};
+        accounts = {};
     };
     fndx.services.openssh = {
         enable = true;
