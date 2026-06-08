@@ -135,16 +135,28 @@ with lib;
         plugin = nvim-treesitter.withAllGrammars;
         type = "lua";
         config = ''
-          require('nvim-treesitter.configs').setup({
-            -- XXX: not sure if I need ensure_installed here or not
-            highlight = {
-              enable = true,
-              -- I prefer the default nvim highlighter for certain languages
-              -- vimtex also relies on its own syntax highlighting being used
-              -- for some of its features
-              disable = { "markdown", "latex" },
-            },
-          })
+		-- 1. Create a list of languages you want to block
+		local disabled_langs = {
+			markdown = true,
+			latex = true,
+			tex = true, -- Added 'tex' just in case, as vimtex uses both
+		}
+
+		-- 2. Intercept Neovim's filetype loading
+		vim.api.nvim_create_autocmd("FileType", {
+			group = vim.api.nvim_create_augroup("DisableTSHighlighter", { clear = true }),
+			callback = function(args)
+			local ft = vim.bo[args.buf].filetype
+
+			-- If the filetype is in our block list, stop Tree-sitter entirely
+			if disabled_langs[ft] then
+			vim.treesitter.stop(args.buf)
+			else
+			-- For all other languages, let native Tree-sitter do its job safely
+			pcall(vim.treesitter.start, args.buf)
+			end
+			end,
+		})
         '';
       }
       # Themes and visuals
