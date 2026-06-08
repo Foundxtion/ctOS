@@ -316,14 +316,12 @@ with lib;
       coc-clangd
       coc-cmake
       coc-git
-      coc-go
       coc-highlight
       # coc-java
       coc-json
       coc-markdownlint
       coc-rust-analyzer
       coc-texlab
-      coc-tsserver
       coc-vimlsp
       coc-yaml
 
