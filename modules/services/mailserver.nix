@@ -52,7 +52,7 @@ with lib;
 	    	fqdn = cfg.domain;
 	    	domains = [ cfg.domain ];
 	    	loginAccounts = cfg.loginAccounts;
-			mailserver.x509.useACMEHost = cfg.domain;
+			x509.useACMEHost = cfg.domain;
 			stateVersion = cfg.stateVersion;
 	    };
     };
