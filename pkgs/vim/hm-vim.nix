@@ -20,6 +20,7 @@ with lib;
     vimAlias = true;
     withNodeJs = true;
     withPython3 = true;
+    withRuby = false;
     extraPackages = with pkgs; [
 	  cargo-nextest
       git
