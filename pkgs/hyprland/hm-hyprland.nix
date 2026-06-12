@@ -9,7 +9,7 @@ with lib;
 {
   config = mkIf osConfig.fndx.packages.hyprland.enable {
     home.file.".wayland-session" = {
-      source = "${package}/bin/Hyprland";
+      source = "${package}/bin/start-hyprland";
       executable = true;
     };
     home.pointerCursor = {
@@ -37,10 +37,11 @@ with lib;
       settings = {
         ipc = "on";
         splash = false;
-        preload = [ "${osConfig.fndx.graphical.background}" ];
-        wallpaper = [
-          ",${osConfig.fndx.graphical.background}"
-        ];
+        wallpaper = {
+          monitor = "";
+          path = "${osConfig.fndx.graphical.background}";
+          fit_mode = "cover";
+        };
       };
     };
 
@@ -61,48 +62,52 @@ with lib;
         };
 
         layer_rule = [
-          { match = { namespace = "waybar"; }; blur = true; ignorezero = true; }
+          { match = { namespace = "waybar"; }; blur = true; }
           { match = { namespace = "rofi"; }; blur = true; }
-          { match = { namespace = "swaync-control-center"; }; blur = true; ignorezero = true; ignore_alpha = 0.5; }
-          { match = { namespace = "swaync-notification-window"; }; blur = true; ignorezero = true; ignore_alpha = 0.5; }
+          { match = { namespace = "swaync-control-center"; }; blur = true; ignore_alpha = 0.5; }
+          { match = { namespace = "swaync-notification-window"; }; blur = true; ignore_alpha = 0.5; }
         ];
 
-        general = {
-          gaps_in = 10;
-          gaps_out = 10;
-          layout = "dwindle";
-          col = {
-            active_border = "rgba(33ccffee)";
-            inactive_border = "rgba(595959aa)";
-          };
-          resize_on_border = false;
-          allow_tearing = false;
-        };
+		config = {
+			dwindle = {
+				preserve_split = true;
+			};
+			general = {
+				gaps_in = 10;
+				gaps_out = 10;
+				layout = "dwindle";
+				col = {
+					active_border = "rgba(33ccffee)";
+					inactive_border = "rgba(595959aa)";
+				};
+				resize_on_border = false;
+				allow_tearing = false;
+			};
 
-        decoration = {
-          rounding = 5;
-          blur = {
-            enabled = true;
-            size = 5;
-            passes = 2;
-            vibrancy = 10.0;
-          };
-          shadow = {
-            enabled = false;
-            range = 4;
-            render_power = 3;
-          };
-        };
+			decoration = {
+				rounding = 5;
+				blur = {
+					enabled = true;
+					size = 5;
+					passes = 2;
+					vibrancy = 10.0;
+				};
+				shadow = {
+					enabled = false;
+					range = 4;
+					render_power = 3;
+				};
+			};
+			misc = {
+				disable_hyprland_logo = true;
+				disable_splash_rendering = true;
+			};
 
-        misc = {
-          disable_hyprland_logo = true;
-          disable_splash_rendering = true;
-        };
-
-        input = {
-          kb_layout = "us";
-          follow_mouse = 1;
-        };
+			input = {
+				kb_layout = "us";
+				follow_mouse = 1;
+			};
+		};
 
         curve = [
           { _args = [ "easeOutQuint"  { type = "bezier"; points = [ [0.23 1] [0.32 1] ]; } ]; }
@@ -113,28 +118,24 @@ with lib;
         ];
 
         animation = [
-          { leaf = "global";          enabled = true; speed = 10;   curve = "default"; }
-          { leaf = "border";          enabled = true; speed = 5.39; curve = "easeOutQuint"; }
-          { leaf = "windows";         enabled = true; speed = 4.79; curve = "easeOutQuint"; }
-          { leaf = "windowsIn";       enabled = true; speed = 4.1;  curve = "easeOutQuint"; style = "popin 87%"; }
-          { leaf = "windowsOut";      enabled = true; speed = 1.49; curve = "linear";       style = "popin 87%"; }
-          { leaf = "fadeIn";          enabled = true; speed = 1.73; curve = "almostLinear"; }
-          { leaf = "fadeOut";         enabled = true; speed = 1.46; curve = "almostLinear"; }
-          { leaf = "fade";            enabled = true; speed = 3.03; curve = "quick"; }
-          { leaf = "layers";          enabled = true; speed = 3.81; curve = "easeOutQuint"; }
-          { leaf = "layersIn";        enabled = true; speed = 4;    curve = "easeOutQuint"; style = "fade"; }
-          { leaf = "layersOut";       enabled = true; speed = 1.5;  curve = "linear";       style = "fade"; }
-          { leaf = "fadeLayersIn";    enabled = true; speed = 1.79; curve = "almostLinear"; }
-          { leaf = "fadeLayersOut";   enabled = true; speed = 1.39; curve = "almostLinear"; }
-          { leaf = "workspaces";      enabled = true; speed = 1.94; curve = "almostLinear"; style = "fade"; }
-          { leaf = "workspacesIn";    enabled = true; speed = 1.21; curve = "almostLinear"; style = "fade"; }
-          { leaf = "workspacesOut";   enabled = true; speed = 1.94; curve = "almostLinear"; style = "fade"; }
+          { leaf = "global";          enabled = true; speed = 10;   bezier = "default"; }
+          { leaf = "border";          enabled = true; speed = 5.39; bezier = "easeOutQuint"; }
+          { leaf = "windows";         enabled = true; speed = 4.79; bezier = "easeOutQuint"; }
+          { leaf = "windowsIn";       enabled = true; speed = 4.1;  bezier = "easeOutQuint"; style = "popin 87%"; }
+          { leaf = "windowsOut";      enabled = true; speed = 1.49; bezier = "linear";       style = "popin 87%"; }
+          { leaf = "fadeIn";          enabled = true; speed = 1.73; bezier = "almostLinear"; }
+          { leaf = "fadeOut";         enabled = true; speed = 1.46; bezier = "almostLinear"; }
+          { leaf = "fade";            enabled = true; speed = 3.03; bezier = "quick"; }
+          { leaf = "layers";          enabled = true; speed = 3.81; bezier = "easeOutQuint"; }
+          { leaf = "layersIn";        enabled = true; speed = 4;    bezier = "easeOutQuint"; style = "fade"; }
+          { leaf = "layersOut";       enabled = true; speed = 1.5;  bezier = "linear";       style = "fade"; }
+          { leaf = "fadeLayersIn";    enabled = true; speed = 1.79; bezier = "almostLinear"; }
+          { leaf = "fadeLayersOut";   enabled = true; speed = 1.39; bezier = "almostLinear"; }
+          { leaf = "workspaces";      enabled = true; speed = 1.94; bezier = "almostLinear"; style = "fade"; }
+          { leaf = "workspacesIn";    enabled = true; speed = 1.21; bezier = "almostLinear"; style = "fade"; }
+          { leaf = "workspacesOut";   enabled = true; speed = 1.94; bezier = "almostLinear"; style = "fade"; }
         ];
 
-        dwindle = {
-          pseudotile = true;
-          preserve_split = true;
-        };
 
         bind = [
           { _args = [ (lua "mod .. \" + Return\"")        (lua "hl.dsp.exec_cmd(terminal)") ]; }
@@ -147,7 +148,7 @@ with lib;
           { _args = [ (lua "mod .. \" + f\"")             (lua "hl.dsp.window.fullscreen({})") ]; }
           { _args = [ (lua "mod .. \" + SHIFT + space\"") (lua "hl.dsp.window.float({})") ]; }
           { _args = [ (lua "mod .. \" + space\"")         (lua ''hl.dsp.exec_cmd("hyprctl dispatch centerwindow")'') ]; }
-          { _args = [ (lua "mod .. \" + h\"")             (lua "hl.dsp.layout.toggle_split()") ]; }
+          { _args = [ (lua "mod .. \" + h\"")             (lua ''hl.dsp.layout("togglesplit")'') ]; }
           { _args = [ (lua "mod .. \" + left\"")          (lua "hl.dsp.focus({ direction = \"l\" })") ]; }
           { _args = [ (lua "mod .. \" + right\"")         (lua "hl.dsp.focus({ direction = \"r\" })") ]; }
           { _args = [ (lua "mod .. \" + up\"")            (lua "hl.dsp.focus({ direction = \"u\" })") ]; }
