@@ -42,10 +42,11 @@ with lib;
 				SUMMARY=''$(''$GUM input --value "''$TYPE: " --placeholder "Summary of this change") || exit 1;
 
 				# Commit these changes if user confirms
-				''$GUM confirm "Commit changes?" && ''$GIT commit -m "''$SUMMARY" -m "''$DESCRIPTION"
+				''$GUM confirm "Commit changes?" && ''$GIT commit -m "''$SUMMARY"
 			'';
 			ai-commit = pkgs.writeShellScriptBin "ai-commit" ''
 				set -euo pipefail
+				GUM="${pkgs.gum}/bin/gum"
 
 				if ! git rev-parse --is-inside-work-tree &>/dev/null; then
 				echo "Error: not inside a git repository." >&2
@@ -104,9 +105,7 @@ with lib;
 				echo "└''$(printf '─%.0s' {1..78})"
 				echo ""
 
-
-				echo "''$COMMIT_MSG" | wl-copy
-				echo "✓ Commit message copied to clipboard."
+				''$GUM confirm "Commit changes?" && ''$GIT commit -m "''$COMMIT_MSG" || echo "Commit aborted."
 			'';
 		in
         with pkgs; [ 
