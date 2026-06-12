@@ -1,4 +1,4 @@
-{lib, osConfig, pkgs, ...}:
+{lib, osConfig, pkgs, config, ...}:
 let
     cfg = osConfig.fndx.packages.gtk;
     Settings = {
@@ -42,6 +42,7 @@ with lib;
         gtk3.extraConfig = mkIf cfg.enable Settings;
 
 		gtk4.extraConfig = mkIf cfg.enable Settings;
+        gtk4.theme = config.gtk.theme;
     };
 
     home.packages = mkIf cfg.enable (with pkgs; [
