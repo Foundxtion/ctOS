@@ -2,7 +2,7 @@
 let
     cfg = config.fndx.netauth;
     dnBuilder = with lib.strings; (server_name: concatMapStringsSep "," (x: "dc=" + x) (splitString "." (toLower server_name)));
-    server = "ldaps://${lib.strings.toLower cfg.realm}";
+    server = if (cfg.address == null) then "ldaps://${lib.strings.toLower cfg.realm}" else "ldaps://${lib.strings.toLower cfg.address}";
     dn = dnBuilder cfg.realm;
 in
 with lib;
@@ -20,6 +20,25 @@ with lib;
                 type = types.str;
                 description = mdDoc "NetAuth realm";
             };
+            address = mkOption {
+                example = "EXAMPLE.ORG";
+				default = null;
+                type = types.nullOr types.str;
+                description = mdDoc "NetAuth instance address";
+            };
+            additionalDomainRealms = mkOption {
+                example = [ ".example.com" ".example.net" ];
+                type = types.listOf types.str;
+                default = [];
+                description = mdDoc ''
+                Additional domains to realm mappings. This is useful if you have
+                multiple domains that should be mapped to the same realm.
+                The format is .domain -> REALM.
+                For example, if you have a realm EXAMPLE.ORG and you want to
+                map both example.com and example.net to it,
+                you would add .example.com and .example.net to this list.
+                '';
+              };
         };
     };
 
@@ -32,6 +51,8 @@ with lib;
 	fndx.authentication.krb5 = {
 	    enable = true;
 	    realm = cfg.realm;
+		address = if (cfg.address != null) then cfg.address else (lib.strings.toLower cfg.realm);
+        additionalDomainRealms = cfg.additionalDomainRealms;
 	};
         security.pam.services = {
             systemd-user.makeHomeDir = true;

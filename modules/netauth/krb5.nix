@@ -10,8 +10,26 @@ with lib;
             realm = mkOption {
                 example = "EXAMPLE.ORG";
                 type = types.str;
-                description = mdDoc "The address that acts as kdc admin_server and realm name";
+                description = mdDoc "The realm of your netauth instance";
             };
+            address = mkOption {
+                example = "example.org";
+                type = types.str;
+                description = mdDoc "The dns address towards your netauth instance";
+            };
+            additionalDomainRealms = mkOption {
+                example = [ ".example.com" ".example.net" ];
+                type = types.listOf types.str;
+                default = [];
+                description = mdDoc ''
+                Additional domains to realm mappings. This is useful if you have
+                multiple domains that should be mapped to the same realm.
+                The format is .domain -> REALM.
+                For example, if you have a realm EXAMPLE.ORG and you want to
+                map both example.com and example.net to it,
+                you would add .example.com and .example.net to this list.
+                '';
+              };
         };
     };
 
@@ -34,14 +52,17 @@ with lib;
                 };
                 realms = {
                     "${toUpper cfg.realm}" = {
-                        kdc = strings.toLower cfg.realm;
-                        admin_server = strings.toLower cfg.realm;
+                        kdc = strings.toLower cfg.address;
+                        admin_server = strings.toLower cfg.address;
                     };
                 };
                 domain_realm = {
-                    "${strings.toLower cfg.realm}" = "${strings.toUpper cfg.realm}";
+                    "${strings.toLower cfg.address}" = "${strings.toUpper cfg.realm}";
                     ".${strings.toLower cfg.realm}" = "${strings.toUpper cfg.realm}";
-                };
+                } ++ (lib.listToAttrs (map (domain: {
+                    name = "${domain}";
+                    value = "${strings.toUpper cfg.realm}";
+                }) cfg.additionalDomainRealms));
             };
         };
     };
