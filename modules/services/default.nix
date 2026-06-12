@@ -10,7 +10,7 @@
         ./nginx.nix
         ./openssh.nix
         ./portainer.nix
-        ./rping.nix
+		# ./rping.nix
         ./vpn-client.nix
         ./vpn-server.nix
     ];
