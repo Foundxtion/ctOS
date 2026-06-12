@@ -25,24 +25,12 @@ with lib;
 	};
 
 	config = mkIf cfg.enable {
-		services.xserver = {
-			enable = true;
-			desktopManager.xterm.enable = false;
-			xkb = {
-				layout = "us";
-				variant = "";
-			};
-			autorun = true;
-			dpi = if (cfg.hidpi) then 200 else 90;
-			excludePackages = with pkgs; [
-				xterm
-			];
-		};
-
 		environment.systemPackages = with pkgs; [
 			google-chrome
 			feh
 		];
+
+        services.xserver.dpi = if (cfg.hidpi) then 200 else 90;
 
 		fndx.packages.firefox.enable = true;
 

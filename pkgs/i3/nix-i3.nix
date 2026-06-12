@@ -24,7 +24,6 @@ with lib;
     };
 
     config = mkIf cfg.enable {
-        
         services.displayManager = {
             autoLogin.enable = false;
             sddm = {
@@ -35,7 +34,17 @@ with lib;
         };
 
         services.xserver = {
+			enable = true;
             upscaleDefaultCursor = true;
+			desktopManager.xterm.enable = false;
+			xkb = {
+				layout = "us";
+				variant = "";
+			};
+			autorun = true;
+			excludePackages = with pkgs; [
+				xterm
+			];
 
             windowManager.i3 = {
                 enable = true;
@@ -43,7 +52,7 @@ with lib;
                 extraPackages = with pkgs; [
                     kdePackages.spectacle
                     i3lock-fancy-rapid
-		    blugon
+                    blugon
                     imagemagick
                 ];
                 extraSessionCommands = ''
@@ -51,8 +60,8 @@ with lib;
                 '';
             };
         };
-		programs.i3lock.enable = true;
 
+		programs.i3lock.enable = true;
 		programs.light.enable = true;
         fndx.packages.rofi.enable = true;
         fndx.packages.alacritty.enable = true;
