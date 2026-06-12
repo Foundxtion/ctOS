@@ -109,7 +109,7 @@ with lib;
 				echo "✓ Commit message copied to clipboard."
 			'';
 		in
-        [ 
+        with pkgs; [ 
           commit
           ai-commit 
           thunderbird
