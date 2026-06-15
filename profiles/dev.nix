@@ -111,7 +111,7 @@ with lib;
 				echo "└''$(printf '─%.0s' {1..78})"
 				echo ""
 
-				''$GUM confirm "Commit changes?" && ''$GIT commit -m "''$COMMIT_MSG" || echo "Commit aborted."
+				''$GUM confirm "Commit changes?" && git commit -m "''$COMMIT_MSG" || echo "Commit aborted."
 			'';
 		in
         with pkgs; [ 
