@@ -29,7 +29,8 @@ in
             password = "password";
         };
         virtualHosts = {
-          # NixOS nginx configuration for now
+			# NixOS nginx configuration
+			"example.com".enableACME = true;
         };
     };
     fndx.services.mailserver = {

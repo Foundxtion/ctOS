@@ -22,31 +22,25 @@ with lib;
 			description = mdDoc "Option to set the dpi for 4K Display and Apple's Retina Display";
 			type = types.bool;
 		};
+		fndx.graphical.wm = mkOption {
+			type = types.enum [ "i3" "hyprland" ];
+			default = "i3";
+			description = mdDoc "Window manager to use (i3 or hyprland)";
+		};
 	};
 
 	config = mkIf cfg.enable {
-		services.xserver = {
-			enable = true;
-			desktopManager.xterm.enable = false;
-			xkb = {
-				layout = "us";
-				variant = "";
-			};
-			autorun = true;
-			dpi = if (cfg.hidpi) then 200 else 90;
-			excludePackages = with pkgs; [
-				xterm
-			];
-		};
-
 		environment.systemPackages = with pkgs; [
 			google-chrome
 			feh
 		];
 
+        services.xserver.dpi = if (cfg.hidpi) then 200 else 90;
+
 		fndx.packages.firefox.enable = true;
 
-		fndx.packages.i3.enable = true;
+		fndx.packages.i3.enable = cfg.wm == "i3";
+		fndx.packages.hyprland.enable = cfg.wm == "hyprland";
 		fndx.hardware.bluetooth.enable = true;
 		fndx.hardware.pulseaudio.enable = true;
 		fndx.hardware.touchpad.enable = cfg.enableTouchpad;
