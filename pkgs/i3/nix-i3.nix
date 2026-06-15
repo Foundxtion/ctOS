@@ -29,7 +29,17 @@ with lib;
             sddm = {
                 enable = true;
                 theme = "chili";
-            };
+                package = pkgs.kdePackages.sddm;
+                wayland.enable = false;
+                extraPackages = [
+                        (pkgs.sddm-chili-theme.override {
+                            themeConfig = {
+                                background = config.fndx.graphical.loginBackground;
+                            };
+                        })
+                    ];
+                settings = { Theme.Current = "chili"; };
+                };
             defaultSession = "none+i3";
         };
 
@@ -69,13 +79,5 @@ with lib;
         fndx.packages.nautilus.enable = true;
         fndx.packages.gtk.enable = true;
         fndx.packages.polybar.enable = true;
-
-        environment.systemPackages = with pkgs; [
-            (sddm-chili-theme.override {
-                themeConfig = {
-                    background = config.fndx.graphical.loginBackground;
-                };
-            })
-        ];
     };
 }
