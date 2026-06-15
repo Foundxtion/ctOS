@@ -22,6 +22,11 @@ with lib;
 			description = mdDoc "Option to set the dpi for 4K Display and Apple's Retina Display";
 			type = types.bool;
 		};
+		fndx.graphical.wm = mkOption {
+			type = types.enum [ "i3" "hyprland" ];
+			default = "i3";
+			description = mdDoc "Window manager to use (i3 or hyprland)";
+		};
 	};
 
 	config = mkIf cfg.enable {
@@ -34,7 +39,8 @@ with lib;
 
 		fndx.packages.firefox.enable = true;
 
-		fndx.packages.i3.enable = true;
+		fndx.packages.i3.enable = cfg.wm == "i3";
+		fndx.packages.hyprland.enable = cfg.wm == "hyprland";
 		fndx.hardware.bluetooth.enable = true;
 		fndx.hardware.pulseaudio.enable = true;
 		fndx.hardware.touchpad.enable = cfg.enableTouchpad;

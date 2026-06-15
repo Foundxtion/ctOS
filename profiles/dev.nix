@@ -11,11 +11,17 @@ with lib;
         fndx.dev.java.enable = mkEnableOption "ctOS Java development profile";
         fndx.dev.rust.enable = mkEnableOption "ctOS Rust development profile";
         fndx.dev.web.enable = mkEnableOption "ctOS Web development profile";
+        fndx.dev.wm = mkOption {
+            type = types.enum [ "i3" "hyprland" ];
+            default = "i3";
+            description = mdDoc "Window manager to use (i3 or hyprland)";
+        };
     };
 
     config = mkIf cfg.enable {
         fndx.graphical = {
             enable = true;
+            wm = cfg.wm;
         };
         fndx.packages.vscode.enable = true;
         fndx.packages.discord.enable = true;
