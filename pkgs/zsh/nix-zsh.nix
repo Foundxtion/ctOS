@@ -11,5 +11,7 @@ with lib;
 			enable = true;
 			enableZshIntegration = true;
 		};
+
+        environment.systemPackages = [ pkgs.eza ];
 	};
 }

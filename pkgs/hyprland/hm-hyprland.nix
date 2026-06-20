@@ -143,7 +143,7 @@ with lib;
           { _args = [ (lua "mod .. \" + a\"")             (lua ''hl.dsp.exec_cmd("firefox")'') ]; }
           { _args = [ (lua "mod .. \" + e\"")             (lua ''hl.dsp.exec_cmd("nautilus")'') ]; }
           { _args = [ (lua "mod .. \" + d\"")             (lua "hl.dsp.exec_cmd(menu)") ]; }
-          { _args = [ (lua "mod .. \" + q\"")             (lua "hl.dsp.window.kill()") ]; }
+          { _args = [ (lua "mod .. \" + q\"")             (lua "hl.dsp.window.close()") ]; }
           { _args = [ (lua "mod .. \" + SHIFT + E\"")     (lua "hl.dsp.exit()") ]; }
           { _args = [ (lua "mod .. \" + f\"")             (lua "hl.dsp.window.fullscreen({})") ]; }
           { _args = [ (lua "mod .. \" + SHIFT + space\"") (lua "hl.dsp.window.float({})") ]; }
@@ -178,7 +178,7 @@ with lib;
           { _args = [ (lua "mod .. \" + SHIFT + 9\"")     (lua "hl.dsp.window.move({ workspace = 9 })") ]; }
           { _args = [ (lua "mod .. \" + SHIFT + 0\"")     (lua "hl.dsp.window.move({ workspace = 10 })") ]; }
           { _args = [ (lua "\"Print\"")                   (lua ''hl.dsp.exec_cmd("grim - | tee /home/${osConfig.fndx.user.name}/Screenshots/$(date +'%s_grim.png') | wl-copy")'') ]; }
-          { _args = [ (lua "mod .. \" + SHIFT + s\"")     (lua ''hl.dsp.exec_cmd("grim -g \"$(slurp)\" /home/${osConfig.fndx.user.name}/main.png")'') ]; }
+          { _args = [ (lua "mod .. \" + SHIFT + s\"")     (lua ''hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | tee /home/${osConfig.fndx.user.name}/main.png | wl-copy")'') ]; }
           { _args = [ (lua "mod .. \" + l\"")             (lua ''hl.dsp.exec_cmd("hyprlock")'') ]; }
           { _args = [ (lua "mod .. \" + SHIFT + c\"")     (lua ''hl.dsp.exec_cmd("hyprctl reload")'') ]; }
         # Binde (repeating)
