@@ -7,8 +7,8 @@ with lib;
 	imports = [
         # Importing nixos mailserver
 	    (builtins.fetchTarball {
-                url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-25.11/nixos-mailserver-nixos-25.11.tar.gz";
-                sha256 = "0f1mq2gdmx9wd0k89f6w61sbfzpd1wwz857l2xvyp1x0msmd2z20";
+                url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-26.05/nixos-mailserver-nixos-26.05.tar.gz";
+                sha256 = "rq6WOopxq3U2AGEWO80o9LIJDYcYIdgw6jyl+y+19w8=";
 	    })
 	];
     options = {
@@ -23,7 +23,7 @@ with lib;
                     Domain used for mailserver.
                 '';
             };
-            loginAccounts = mkOption {
+            accounts = mkOption {
                 default = {};
                 example = {
                     "user@example.com" = {
@@ -51,8 +51,8 @@ with lib;
 	    	enable = true;
 	    	fqdn = cfg.domain;
 	    	domains = [ cfg.domain ];
-	    	loginAccounts = cfg.loginAccounts;
-	    	certificateScheme = "acme-nginx";
+	    	accounts = cfg.accounts;
+			x509.useACMEHost = cfg.domain;
 			stateVersion = cfg.stateVersion;
 	    };
     };

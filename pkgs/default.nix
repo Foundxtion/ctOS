@@ -7,6 +7,7 @@
     ./discord/nix-discord.nix
     ./firefox/nix-firefox.nix
     ./gtk/nix-gtk.nix
+    ./hyprland/nix-hyprland.nix
     ./i3/nix-i3.nix
     ./javakit/nix-javakit.nix
     ./k8s/nix-k8s.nix
@@ -18,6 +19,7 @@
     ./rustkit/nix-rustkit.nix
     ./vim/nix-vim.nix
     ./vscode/nix-vscode.nix
+    ./waybar/nix-waybar.nix
     ./webkit/nix-webkit.nix
     ./zsh/nix-zsh.nix
   ];

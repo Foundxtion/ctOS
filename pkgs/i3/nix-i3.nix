@@ -24,18 +24,37 @@ with lib;
     };
 
     config = mkIf cfg.enable {
-        
         services.displayManager = {
             autoLogin.enable = false;
             sddm = {
                 enable = true;
                 theme = "chili";
-            };
+                package = pkgs.kdePackages.sddm;
+                wayland.enable = false;
+                extraPackages = [
+                        (pkgs.sddm-chili-theme.override {
+                            themeConfig = {
+                                background = config.fndx.graphical.loginBackground;
+                            };
+                        })
+                    ];
+                settings = { Theme.Current = "chili"; };
+                };
             defaultSession = "none+i3";
         };
 
         services.xserver = {
+			enable = true;
             upscaleDefaultCursor = true;
+			desktopManager.xterm.enable = false;
+			xkb = {
+				layout = "us";
+				variant = "";
+			};
+			autorun = true;
+			excludePackages = with pkgs; [
+				xterm
+			];
 
             windowManager.i3 = {
                 enable = true;
@@ -43,30 +62,22 @@ with lib;
                 extraPackages = with pkgs; [
                     kdePackages.spectacle
                     i3lock-fancy-rapid
-		    blugon
+                    blugon
                     imagemagick
+                    brightnessctl
                 ];
                 extraSessionCommands = ''
                   ${pkgs.feh}/bin/feh --bg-scale --fill ${config.fndx.graphical.background}
                 '';
             };
         };
-		programs.i3lock.enable = true;
 
-		programs.light.enable = true;
+		programs.i3lock.enable = true;
         fndx.packages.rofi.enable = true;
         fndx.packages.alacritty.enable = true;
         fndx.packages.picom.enable = true;
         fndx.packages.nautilus.enable = true;
         fndx.packages.gtk.enable = true;
         fndx.packages.polybar.enable = true;
-
-        environment.systemPackages = with pkgs; [
-            (sddm-chili-theme.override {
-                themeConfig = {
-                    background = config.fndx.graphical.loginBackground;
-                };
-            })
-        ];
     };
 }

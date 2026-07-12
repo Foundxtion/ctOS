@@ -63,7 +63,6 @@ with lib;
     config = {
         networking = {
             useDHCP = mkForce cfg.useDHCP;
-            wireless.enable = false;
             hostName = cfg.hostName;
 
             networkmanager.enable = true;

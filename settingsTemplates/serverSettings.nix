@@ -29,13 +29,14 @@ in
             password = "password";
         };
         virtualHosts = {
-          # NixOS nginx configuration for now
+			# NixOS nginx configuration
+			"example.com".enableACME = true;
         };
     };
     fndx.services.mailserver = {
         enable = true;
         domain = domain;
-        loginAccounts = {};
+        accounts = {};
     };
     fndx.services.openssh = {
         enable = true;

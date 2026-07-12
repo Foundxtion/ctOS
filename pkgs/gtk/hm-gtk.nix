@@ -1,9 +1,10 @@
-{lib, osConfig, pkgs, ...}:
+{lib, osConfig, pkgs, config, ...}:
 let
     cfg = osConfig.fndx.packages.gtk;
-    Settings = ''
-      gtk-application-prefer-dark-theme=1
-    '';
+    Settings = {
+      "gtk-application-prefer-dark-theme" = 1;
+	  "gtk-cursor-theme-name" = "macOS";
+  };
 in
 with lib;
 { 
@@ -16,7 +17,6 @@ with lib;
 
             "org/gnome/desktop/interface" = {
                 color-scheme = "prefer-dark";
-                cursor-theme = "Adwaita";
                 icon-theme = "WhiteSur-dark";
                 gtk-theme = "WhiteSur-Dark";
             };
@@ -34,18 +34,20 @@ with lib;
             name = "WhiteSur-Dark";
             package = pkgs.whitesur-gtk-theme;
         };
+		cursorTheme = {
+			name = "macOS";
+			package = pkgs.apple-cursor;
+		};
 
-        gtk3.extraConfig = mkIf cfg.enable {
-            inherit Settings;
-        };
+        gtk3.extraConfig = mkIf cfg.enable Settings;
 
-        gtk4.extraConfig = mkIf cfg.enable {
-            inherit Settings;
-        };
+		gtk4.extraConfig = mkIf cfg.enable Settings;
+        gtk4.theme = config.gtk.theme;
     };
 
     home.packages = mkIf cfg.enable (with pkgs; [
         whitesur-gtk-theme
         whitesur-icon-theme
+		apple-cursor
     ]);
 }

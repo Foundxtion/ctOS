@@ -8,9 +8,12 @@ with lib;
         syntaxHighlighting.enable = true;
         autocd = true;
         shellAliases = {
-            update="(cd /etc/nixos && git pull && nixos-rebuild switch)";
-            nxs="nix-shell --run zsh";
+			update="(cd /etc/nixos && git pull && nixos-rebuild switch)";
+			nxs="nix-shell --run zsh";
 			dpsa="docker ps -a --format 'table {{.Image}}\t{{.Command}}\t{{.RunningFor}}\t{{.Status}}'";
+			ls="${pkgs.eza}/bin/eza";
+			l="${pkgs.eza}/bin/eza -lah";
+			ll="${pkgs.eza}/bin/eza -l";
         };
 
 		initContent = let
@@ -18,9 +21,9 @@ with lib;
             cd()
             {
                 if [ -n "''\$1" ]; then
-					z "''$@" && ls
+					z "''$@" && eza 
                 else
-					z && ls
+					z && eza
                 fi
             }
             '';
@@ -32,7 +35,6 @@ with lib;
 	programs.starship = {
 		enable = true;
 		enableZshIntegration = true;
-		settings = builtins.fromTOML (builtins.unsafeDiscardStringContext (builtins.readFile "${./gruvbox-rainbow.toml}"));
+		settings = fromTOML (builtins.unsafeDiscardStringContext (builtins.readFile "${./gruvbox-rainbow.toml}"));
 	};
-
 }
