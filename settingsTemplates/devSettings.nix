@@ -2,7 +2,7 @@
 
 { pkgs, config, ...}:
 {
-    system.stateVersion = "25.11";
+    system.stateVersion = "26.05";
     fndx.user.name = "dev";
     # please use the following command to create your password hash
     # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt'

@@ -5,7 +5,7 @@ let
     domain = "example.com";
 in
 {
-    system.stateVersion = "25.11";
+    system.stateVersion = "26.05";
 
     fndx.user.name = "webServer";
     # please use the following command to create your password hash
