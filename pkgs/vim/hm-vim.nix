@@ -333,7 +333,6 @@ with lib;
 
       coc-emmet
       coc-clangd
-      coc-cmake
       coc-git
       coc-highlight
       # coc-java
