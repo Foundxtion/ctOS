@@ -206,7 +206,14 @@ with lib;
           hl.exec_cmd("waybar")
           hl.exec_cmd("swaync")
         end)
-      '';
+        '' + lib.optionalString (osConfig.fndx.graphical.hidpi) ''
+        hl.monitor({
+          output = "",
+          mode = "preferred",
+          position = "auto",
+          scale = 1.5
+        })
+        '';
     };
 
     programs.hyprlock = {
