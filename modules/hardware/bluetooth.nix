@@ -9,7 +9,9 @@ with lib;
             package = pkgs.bluez;
             settings.General = {
                 Enable = "Source,Sink,Media,Socket";
+                Experimental = true;
             };
+            powerOnBoot = true;
         };
 
         services.blueman.enable = true;

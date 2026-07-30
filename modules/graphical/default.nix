@@ -42,8 +42,9 @@ with lib;
 		fndx.packages.i3.enable = cfg.wm == "i3";
 		fndx.packages.hyprland.enable = cfg.wm == "hyprland";
 		fndx.hardware.bluetooth.enable = true;
-		fndx.hardware.pulseaudio.enable = true;
-		fndx.hardware.touchpad.enable = cfg.enableTouchpad;
+		fndx.hardware.pulseaudio.enable = cfg.wm == "i3";
+        fndx.hardware.pipewire.enable = cfg.wm == "hyprland";
+		fndx.hardware.touchpad.enable = cfg.enableTouchpad && cfg.wm == "i3";
 		fonts = {
 			enableDefaultPackages = true;
 			enableGhostscriptFonts = true;
