@@ -30,6 +30,7 @@ with lib;
       wl-clipboard
       hyprlock
       brightnessctl
+	  pulseaudio
     ];
 
     services.hyprpaper = {
@@ -62,7 +63,7 @@ with lib;
         };
 
         layer_rule = [
-          { match = { namespace = "waybar"; }; blur = true; }
+          { match = { namespace = "quickshell:quickshell-config"; }; blur = true; }
           { match = { namespace = "rofi"; }; blur = true; }
           { match = { namespace = "swaync-control-center"; }; blur = true; ignore_alpha = 0.5; }
           { match = { namespace = "swaync-notification-window"; }; blur = true; ignore_alpha = 0.5; }
@@ -106,6 +107,7 @@ with lib;
 			input = {
 				kb_layout = "us";
 				follow_mouse = 1;
+                touchpad.natural_scroll = true;
 			};
 		};
 
@@ -203,7 +205,7 @@ with lib;
         hl.on("hyprland.start", function()
           hl.exec_cmd("hyprctl dispatch workspace 1")
           hl.exec_cmd("hyprpaper")
-          hl.exec_cmd("waybar")
+		  hl.exec_cmd("${pkgs.callPackage ../quickshell {}}/bin/fndx-quickshell")
           hl.exec_cmd("swaync")
         end)
         '' + lib.optionalString (osConfig.fndx.graphical.hidpi) ''
