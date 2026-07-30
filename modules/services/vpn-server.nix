@@ -88,7 +88,7 @@ in
             server = {
                 config = ''
                     port ${toString cfg.port}
-                    proto udp
+                    proto udp4
                     dev tun
 
                     ca ${toString cfg.caPath}
@@ -99,6 +99,7 @@ in
 
 					sndbuf 512000
 					rcvbuf 512000
+                    mssfix 1400
 
                     topology subnet
                     server ${cfg.networkSubnet} ${cfg.networkNetmask}

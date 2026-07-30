@@ -41,7 +41,7 @@ with lib;
                 config = ''
                     client
                     dev tun
-                    proto udp
+                    proto udp4
                     fast-io
 
 					; compress
