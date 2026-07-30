@@ -43,7 +43,6 @@ with lib;
 		};
 
 		fndx.packages.rofi.enable = true;
-		fndx.packages.waybar.enable = true;
         fndx.packages.alacritty.enable = true;
         fndx.packages.nautilus.enable = true;
         fndx.packages.gtk.enable = true;

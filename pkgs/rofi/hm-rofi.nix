@@ -5,7 +5,7 @@ let
 in
 with lib;
 {
-    xdg.configFile."rofi/spotlight-dark.rasi".source = if (osConfig.fndx.graphical.hidpi) 
+    xdg.configFile."rofi/spotlight-dark.rasi".source = if (osConfig.fndx.graphical.hidpi && osConfig.fndx.graphical.wm == "i3") 
     then ./spotlight-dark-hidpi.rasi
     else ./spotlight-dark.rasi;
     programs.rofi = mkIf cfg.enable {

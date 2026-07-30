@@ -19,7 +19,6 @@
     ./rustkit/nix-rustkit.nix
     ./vim/nix-vim.nix
     ./vscode/nix-vscode.nix
-    ./waybar/nix-waybar.nix
     ./webkit/nix-webkit.nix
     ./zsh/nix-zsh.nix
   ];
