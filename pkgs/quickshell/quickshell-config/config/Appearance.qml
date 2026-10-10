@@ -47,12 +47,26 @@ Singleton {
     // land, so shadowMargin is transparent padding baked into every popup
     // window (PopupCard.qml compensates its anchoring for it).
     //
-    // If popups ever land in the wrong place, set shadowEnabled to false —
-    // that collapses shadowMargin to 0 and restores flush anchoring.
+    // OFF BY DEFAULT, because it fights compositor blur.
+    //
+    // The margin has to be faintly inked for a shadow to exist at all, and
+    // Hyprland's `ignorezero` only skips blur where alpha is exactly zero —
+    // so the blur spreads across the whole padded surface and you get a
+    // frosted square hanging around every popup instead of a shadow.
+    //
+    // To turn shadows on: switch that layer rule to `ignorealpha 0.3` (both
+    // hypr/topbar.conf and hypr/topbar.lua already ship it that way), then
+    // set this to true. The threshold sits above the shadow's own alpha and
+    // below the bar's 0.55, so the card blurs and the shadow doesn't. Keep
+    // shadowOpacity under about 0.5 or it will start to leak blur again.
+    //
+    // Leaving it false also collapses shadowMargin to 0, which makes every
+    // popup surface exactly its own card — handy if popups ever land in the
+    // wrong place, since it takes the anchor compensation out of the picture.
     readonly property bool shadowEnabled: true
     readonly property int shadowMargin: 18
     readonly property real shadowBlurMax: 32
-    readonly property real shadowOpacity: 0.45
+    readonly property real shadowOpacity: 0.40
     readonly property int shadowOffset: 5
 
     // ── Colors: bar ─────────────────────────────────────────────────
@@ -94,6 +108,12 @@ Singleton {
     // a Windows/GNOME convention, macOS uses white on a dim track.
     readonly property color sliderFill: Qt.rgba(1, 1, 1, 0.92)
     readonly property color sliderTrack: Qt.rgba(1, 1, 1, 0.14)
+
+    // ── On-screen display (the volume / brightness HUD) ────────────
+    readonly property int osdRadius: 20
+    readonly property color osdBackground: Qt.rgba(0.13, 0.13, 0.14, 0.72)
+    readonly property color osdSegmentOn: Qt.rgba(1, 1, 1, 0.95)
+    readonly property color osdSegmentOff: Qt.rgba(1, 1, 1, 0.16)
 
     // ── Typography ──────────────────────────────────────────────────
     // Set this to any font you like. It only needs to look clean — it does

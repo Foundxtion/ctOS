@@ -63,8 +63,8 @@ with lib;
         };
 
         layer_rule = [
-          { match = { namespace = "quickshell:quickshell-config"; }; blur = true; }
-          { match = { namespace = "rofi"; }; blur = true; }
+          { match = { namespace = "quickshell:topbar"; }; blur = true; ignore_alpha = 0.3; blur_popups = true; }
+          { match = { namespace = "rofi"; }; blur = true; ignore_alpha = 0.3; }
           { match = { namespace = "swaync-control-center"; }; blur = true; ignore_alpha = 0.5; }
           { match = { namespace = "swaync-notification-window"; }; blur = true; ignore_alpha = 0.5; }
         ];
@@ -90,7 +90,7 @@ with lib;
 				blur = {
 					enabled = true;
 					size = 5;
-					passes = 2;
+					passes = 3;
 					vibrancy = 10.0;
 				};
 				shadow = {
@@ -184,10 +184,10 @@ with lib;
           { _args = [ (lua "mod .. \" + l\"")             (lua ''hl.dsp.exec_cmd("hyprlock")'') ]; }
           { _args = [ (lua "mod .. \" + SHIFT + c\"")     (lua ''hl.dsp.exec_cmd("hyprctl reload")'') ]; }
         # Binde (repeating)
-          { _args = [ (lua "\"XF86AudioRaiseVolume\"") (lua ''hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +10%")'')   { repeating = true; } ]; }
-          { _args = [ (lua "\"XF86AudioLowerVolume\"") (lua ''hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ -10%")'')   { repeating = true; } ]; }
-          { _args = [ (lua "\"XF86MonBrightnessUp\"")  (lua ''hl.dsp.exec_cmd("brightnessctl s 5%+")'')                         { repeating = true; } ]; }
-          { _args = [ (lua "\"XF86MonBrightnessDown\"") (lua ''hl.dsp.exec_cmd("brightnessctl s 5%-")'')                        { repeating = true; } ]; }
+          { _args = [ (lua "\"XF86AudioRaiseVolume\"") (lua ''hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +6.25%")'')   { repeating = true; } ]; }
+          { _args = [ (lua "\"XF86AudioLowerVolume\"") (lua ''hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ -6.25%")'')   { repeating = true; } ]; }
+          { _args = [ (lua "\"XF86MonBrightnessUp\"")  (lua ''hl.dsp.exec_cmd("brightnessctl s 6.25%+")'')                         { repeating = true; } ]; }
+          { _args = [ (lua "\"XF86MonBrightnessDown\"") (lua ''hl.dsp.exec_cmd("brightnessctl s 6.25%-")'')                        { repeating = true; } ]; }
         # Bindm (mouse)
           { _args = [ (lua "mod .. \" + mouse:272\"") (lua "hl.dsp.window.drag()")   { mouse = true; } ]; }
           { _args = [ (lua "mod .. \" + mouse:273\"") (lua "hl.dsp.window.resize()") { mouse = true; } ]; }

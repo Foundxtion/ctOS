@@ -60,6 +60,44 @@ Singleton {
     // Interfaces never worth showing as "your connection".
     readonly property var ignoredInterfaces: ["lo"]
 
+    // ── On-screen display ───────────────────────────────────────────
+    // The macOS-style HUD that appears when volume or brightness changes.
+    readonly property bool osdEnabled: true
+
+    // Side length of the square panel, in px.
+    readonly property int osdSize: 180
+
+    // How many blocks the level bar is divided into. macOS uses 16; set this
+    // to match your keybind's step size (10, for a 10% step) if you would
+    // rather the bar land exactly on a block every press.
+    readonly property int osdSegments: 16
+
+    // How long the panel stays up after the last change, in ms.
+    readonly property int osdTimeout: 1400
+
+    // Distance from the bottom of the screen, in px.
+    readonly property int osdBottomMargin: 140
+
+    // Grow the sun's disc and rays with the brightness level, the way
+    // SF Symbols moves between sun.min and sun.max. Apple's actual HUD
+    // keeps the glyph fixed and lets the bar carry the value, so set this
+    // to false if you want strict fidelity.
+    readonly property bool osdSunFollowsLevel: true
+
+    // Show it on every monitor rather than only the focused one.
+    readonly property bool osdOnAllScreens: false
+
+    // Expose an IPC handler so a keybind can force the HUD up even when the
+    // value didn't move (volume-up at 100%). Optional — see the README.
+    readonly property bool osdIpcEnabled: true
+
+    // How often the backlight is read from sysfs, in ms. This is a plain
+    // file read rather than a process spawn, so a short interval is cheap;
+    // it needs to be short because it's what makes the brightness HUD feel
+    // immediate. Set to 0 to stop polling entirely, which only makes sense
+    // if you drive the HUD over IPC instead.
+    readonly property int brightnessPollInterval: 150
+
     // Clock format. See Qt date format docs for tokens.
     readonly property string clockFormat: "ddd d MMM  h:mm AP"
 }

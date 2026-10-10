@@ -7,4 +7,5 @@ import "root:/modules"
 // pulled in from here via root:/ imports, so this file stays tiny.
 ShellRoot {
     Bar {}
+    OsdOverlay {}
 }

@@ -52,7 +52,12 @@ Column {
         from: 0
         to: 100
         value: Audio.volumePercent
-        onMoved: (v) => Audio.setVolumePercent(Math.round(v))
+        // Dragging a slider is its own feedback; the HUD on top of it would
+        // just be noise, and it would cover the panel you're dragging in.
+        onMoved: (v) => {
+            Osd.suppress(700);
+            Audio.setVolumePercent(Math.round(v));
+        }
 
         SpeakerIcon {
             anchors.centerIn: parent
@@ -151,7 +156,10 @@ Column {
         from: 0
         to: 100
         value: Audio.inputVolumePercent
-        onMoved: (v) => Audio.setInputVolumePercent(Math.round(v))
+        onMoved: (v) => {
+            Osd.suppress(700);
+            Audio.setInputVolumePercent(Math.round(v));
+        }
 
         MicrophoneIcon {
             anchors.centerIn: parent
