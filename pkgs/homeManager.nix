@@ -13,7 +13,6 @@
     ./rofi/hm-rofi.nix
     ./vim/hm-vim.nix
     ./vscode/hm-vscode.nix
-    ./waybar/hm-waybar.nix
     ./zsh/hm-zsh.nix
   ];
 }

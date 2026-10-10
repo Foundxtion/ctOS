@@ -30,6 +30,7 @@ with lib;
       wl-clipboard
       hyprlock
       brightnessctl
+	  pulseaudio
     ];
 
     services.hyprpaper = {
@@ -62,8 +63,8 @@ with lib;
         };
 
         layer_rule = [
-          { match = { namespace = "waybar"; }; blur = true; }
-          { match = { namespace = "rofi"; }; blur = true; }
+          { match = { namespace = "quickshell:topbar"; }; blur = true; ignore_alpha = 0.3; blur_popups = true; }
+          { match = { namespace = "rofi"; }; blur = true; ignore_alpha = 0.3; }
           { match = { namespace = "swaync-control-center"; }; blur = true; ignore_alpha = 0.5; }
           { match = { namespace = "swaync-notification-window"; }; blur = true; ignore_alpha = 0.5; }
         ];
@@ -89,7 +90,7 @@ with lib;
 				blur = {
 					enabled = true;
 					size = 5;
-					passes = 2;
+					passes = 3;
 					vibrancy = 10.0;
 				};
 				shadow = {
@@ -106,6 +107,7 @@ with lib;
 			input = {
 				kb_layout = "us";
 				follow_mouse = 1;
+                touchpad.natural_scroll = true;
 			};
 		};
 
@@ -182,10 +184,10 @@ with lib;
           { _args = [ (lua "mod .. \" + l\"")             (lua ''hl.dsp.exec_cmd("hyprlock")'') ]; }
           { _args = [ (lua "mod .. \" + SHIFT + c\"")     (lua ''hl.dsp.exec_cmd("hyprctl reload")'') ]; }
         # Binde (repeating)
-          { _args = [ (lua "\"XF86AudioRaiseVolume\"") (lua ''hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +10%")'')   { repeating = true; } ]; }
-          { _args = [ (lua "\"XF86AudioLowerVolume\"") (lua ''hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ -10%")'')   { repeating = true; } ]; }
-          { _args = [ (lua "\"XF86MonBrightnessUp\"")  (lua ''hl.dsp.exec_cmd("brightnessctl s 5%+")'')                         { repeating = true; } ]; }
-          { _args = [ (lua "\"XF86MonBrightnessDown\"") (lua ''hl.dsp.exec_cmd("brightnessctl s 5%-")'')                        { repeating = true; } ]; }
+          { _args = [ (lua "\"XF86AudioRaiseVolume\"") (lua ''hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +6.25%")'')   { repeating = true; } ]; }
+          { _args = [ (lua "\"XF86AudioLowerVolume\"") (lua ''hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ -6.25%")'')   { repeating = true; } ]; }
+          { _args = [ (lua "\"XF86MonBrightnessUp\"")  (lua ''hl.dsp.exec_cmd("brightnessctl s 6.25%+")'')                         { repeating = true; } ]; }
+          { _args = [ (lua "\"XF86MonBrightnessDown\"") (lua ''hl.dsp.exec_cmd("brightnessctl s 6.25%-")'')                        { repeating = true; } ]; }
         # Bindm (mouse)
           { _args = [ (lua "mod .. \" + mouse:272\"") (lua "hl.dsp.window.drag()")   { mouse = true; } ]; }
           { _args = [ (lua "mod .. \" + mouse:273\"") (lua "hl.dsp.window.resize()") { mouse = true; } ]; }
@@ -203,7 +205,7 @@ with lib;
         hl.on("hyprland.start", function()
           hl.exec_cmd("hyprctl dispatch workspace 1")
           hl.exec_cmd("hyprpaper")
-          hl.exec_cmd("waybar")
+		  hl.exec_cmd("${pkgs.callPackage ../quickshell {}}/bin/fndx-quickshell")
           hl.exec_cmd("swaync")
         end)
         '' + lib.optionalString (osConfig.fndx.graphical.hidpi) ''

@@ -11,7 +11,7 @@ with lib;
     config = mkIf cfg.enable {
         environment.systemPackages = let
             wrapped = pkgs.writeShellScriptBin "nautilus" (lib.strings.concatStringsSep "\n" ( 
-            (optionals (config.fndx.graphical.hidpi) [gdk_scaler]) 
+            (optionals (config.fndx.graphical.hidpi && config.fndx.graphical.wm == "i3") [gdk_scaler]) 
             ++ [nautilus_exec]));
         in
         with pkgs; [
