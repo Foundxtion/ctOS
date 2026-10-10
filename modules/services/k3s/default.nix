@@ -4,6 +4,9 @@ let
 in
 with lib;
 {
+    imports = [
+        ./maintenance.nix
+    ];
     options = {
         fndx.services.k3s = {
             enable = mkEnableOption "k3s for ctOS";
@@ -46,9 +49,9 @@ with lib;
 			clusterInit = cfg.headNode;
 			serverAddr = mkIf (!cfg.headNode) cfg.headAddress;
 			extraFlags = [ 
-				"--write-kubeconfig-mode \"0644\""
+				"--write-kubeconfig-mode 0600"
 				"--disable servicelb"
-				"--disable localstorage"
+				"--disable local-storage"
 			];
         };
 
