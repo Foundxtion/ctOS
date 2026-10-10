@@ -3,10 +3,19 @@ let
   graphical = config.fndx.graphical;
   cfg = graphical.bootSplash;
   desktopEnabled = graphical.enable || config.fndx.packages.i3.enable || config.fndx.packages.hyprland.enable;
-  theme = pkgs.callPackage ./boot-theme { };
+  theme = pkgs.callPackage ./boot-theme { waitForChime = cfg.sound.enable; };
+  # Apple's firmware boot chime, as OpenCore's binary data once shipped it.
+  # It is fetched at build time: the recording is Apple's and is not covered
+  # by this repository's license, so it is not stored in the source tree.
+  startupSound = pkgs.fetchurl {
+    name = "mac-startup-chime.wav";
+    url = "https://raw.githubusercontent.com/acidanthera/OcBinaryData/0cc5dc19384622bedbe089218e6781761a0716b9/Resources/Audio/AXEFIAudio_VoiceOver_Boot.wav";
+    hash = "sha256-RSgBAM1G2oxdiLgM/NV8x3oObcTgFcziPVrJerG0OIU=";
+    meta.license = lib.licenses.unfree;
+  };
   chime = pkgs.writeShellApplication {
     name = "ctos-startup-chime";
-    runtimeInputs = [ pkgs.alsa-utils pkgs.coreutils pkgs.gawk pkgs.systemd ];
+    runtimeInputs = [ pkgs.alsa-utils pkgs.coreutils pkgs.gawk pkgs.systemd config.boot.plymouth.package ];
     text = builtins.readFile ./boot-theme/play-chime.sh;
   };
 in
@@ -21,7 +30,7 @@ in
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
-        description = "Play an original startup chime once per boot, when the system audio device becomes available.";
+        description = "Play the Mac startup chime once per boot, when the system audio device becomes available. The boot logo stays hidden until then.";
       };
       device = lib.mkOption {
         type = lib.types.str;
@@ -31,8 +40,8 @@ in
       };
       file = lib.mkOption {
         type = lib.types.path;
-        default = "${theme}/share/sounds/ctos-startup.wav";
-        description = "WAV file for the boot chime. The default is synthesized locally during the build.";
+        default = "${startupSound}";
+        description = "WAV file for the boot chime. The default is Apple's Mac startup chime, fetched during the build.";
       };
     };
   };
