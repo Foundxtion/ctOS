@@ -24,18 +24,10 @@ with lib;
     };
 
     config = mkIf cfg.enable {
-        services = {
-		  xserver.enable = false;
-          greetd = {
-            enable = true;
-            settings = {
-              default_session = {
-                user = "lilian";
-                command = "$HOME/.wayland-session";
-              };
-            };
-          };
-        };
+        # Register Hyprland's Wayland desktop entry with display managers and
+        # enable its system integration independently of Home Manager.
+        programs.hyprland.enable = true;
+        programs.hyprlock.enable = true;
 		xdg.portal = {
 			enable = true;
 			extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];

@@ -1,6 +1,15 @@
 {config, lib, pkgs, ...}:
 let
     cfg = config.fndx.graphical;
+    # Chili imports QtQuick Controls 1 and QtGraphicalEffects, both Qt 5 APIs.
+    # nixpkgs 26.05 no longer exposes libsForQt5.sddm, so use the upstream
+    # overridable derivation with a consistent Qt 5 build and wrapper.
+    chiliSddm = pkgs.kdePackages.sddm.override {
+        sddm-unwrapped = pkgs.kdePackages.sddm.unwrapped.override {
+            inherit (pkgs.libsForQt5) qtbase qtdeclarative qttools qtquickcontrols2;
+        };
+        wrapQtAppsHook = pkgs.libsForQt5.wrapQtAppsHook;
+    };
 in
 with lib;
 {
@@ -27,9 +36,25 @@ with lib;
 			default = "i3";
 			description = mdDoc "Window manager to use (i3 or hyprland)";
 		};
+        fndx.graphical.sddm = {
+            theme = mkOption {
+                type = types.str;
+                default = "chili";
+                description = mdDoc "Theme directory name inside the SDDM theme package.";
+            };
+            themePackage = mkOption {
+                type = types.package;
+                default = pkgs.sddm-chili-theme.override {
+                    # Interpolation copies a Nix path into the store. The
+                    # theme package's toString would retain the source path.
+                    themeConfig.background = "${cfg.loginBackground}";
+                };
+                description = mdDoc "SDDM theme package. Match SDDM's Qt version to the theme's dependencies.";
+            };
+        };
 	};
 
-	config = mkIf cfg.enable {
+	config = mkMerge [ (mkIf cfg.enable {
 		environment.systemPackages = with pkgs; [
 			google-chrome
 			feh
@@ -57,5 +82,25 @@ with lib;
 				google-fonts
 			];
 		};
-	};
+	}) (mkIf (cfg.enable || config.fndx.packages.i3.enable || config.fndx.packages.hyprland.enable) {
+        # The greeter's display protocol is independent of the user's session.
+        # An X11 SDDM greeter can launch Hyprland's registered Wayland session.
+        services.xserver.enable = true;
+        services.displayManager = {
+            autoLogin.enable = mkDefault false;
+            defaultSession = mkDefault (if config.fndx.packages.hyprland.enable then "hyprland" else "none+i3");
+            sddm = {
+                enable = true;
+                package = mkDefault chiliSddm;
+                wayland.enable = mkDefault false;
+                theme = mkDefault "${cfg.sddm.themePackage}/share/sddm/themes/${cfg.sddm.theme}";
+                extraPackages = mkDefault [
+                    pkgs.libsForQt5.qtgraphicaleffects.out
+                    pkgs.libsForQt5.qtquickcontrols.out
+                    pkgs.libsForQt5.qtvirtualkeyboard.out
+                ];
+            };
+        };
+        environment.systemPackages = [ cfg.sddm.themePackage ];
+    }) ];
 }

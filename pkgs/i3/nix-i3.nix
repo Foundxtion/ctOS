@@ -24,25 +24,6 @@ with lib;
     };
 
     config = mkIf cfg.enable {
-        services.displayManager = {
-            autoLogin.enable = false;
-            sddm = {
-                enable = true;
-                theme = "chili";
-                package = pkgs.kdePackages.sddm;
-                wayland.enable = false;
-                extraPackages = [
-                        (pkgs.sddm-chili-theme.override {
-                            themeConfig = {
-                                background = config.fndx.graphical.loginBackground;
-                            };
-                        })
-                    ];
-                settings = { Theme.Current = "chili"; };
-                };
-            defaultSession = "none+i3";
-        };
-
         services.xserver = {
 			enable = true;
             upscaleDefaultCursor = true;
