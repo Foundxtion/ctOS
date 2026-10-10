@@ -8,7 +8,7 @@ let
   # It is fetched at build time: the recording is Apple's and is not covered
   # by this repository's license, so it is not stored in the source tree.
   startupSound = pkgs.fetchurl {
-    name = "mac-startup-chime.wav";
+    name = "startup-chime.wav";
     url = "https://raw.githubusercontent.com/acidanthera/OcBinaryData/0cc5dc19384622bedbe089218e6781761a0716b9/Resources/Audio/AXEFIAudio_VoiceOver_Boot.wav";
     hash = "sha256-RSgBAM1G2oxdiLgM/NV8x3oObcTgFcziPVrJerG0OIU=";
     meta.license = lib.licenses.unfree;
@@ -30,7 +30,7 @@ in
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
-        description = "Play the Mac startup chime once per boot, when the system audio device becomes available. The boot logo stays hidden until then.";
+        description = "Play the ctOS startup chime once per boot, when the system audio device becomes available. The boot logo stays hidden until then.";
       };
       device = lib.mkOption {
         type = lib.types.str;
@@ -41,7 +41,7 @@ in
       file = lib.mkOption {
         type = lib.types.path;
         default = "${startupSound}";
-        description = "WAV file for the boot chime. The default is Apple's Mac startup chime, fetched during the build.";
+        description = "WAV file for the boot chime. The default is fetched during the build.";
       };
     };
   };
@@ -49,7 +49,7 @@ in
   config = lib.mkIf (desktopEnabled && cfg.enable) (lib.mkMerge [ {
     boot.plymouth = {
       enable = true;
-      theme = lib.mkDefault "ctos-macos";
+      theme = lib.mkDefault "ctos";
       themePackages = [ theme ];
     };
     boot.kernelParams = [ "quiet" ];

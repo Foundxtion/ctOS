@@ -1,5 +1,5 @@
 { lib, runCommand, librsvg, waitForChime ? false }:
-runCommand "ctos-macos-plymouth-theme" {
+runCommand "ctos-plymouth-theme" {
   nativeBuildInputs = [ librsvg ];
   meta = {
     description = "Apple-style ctOS boot splash";
@@ -7,7 +7,7 @@ runCommand "ctos-macos-plymouth-theme" {
     platforms = lib.platforms.linux;
   };
 } ''
-  themeDir="$out/share/plymouth/themes/ctos-macos"
+  themeDir="$out/share/plymouth/themes/ctos"
   mkdir -p "$themeDir"
   # Render the vector at each supported display size. Plymouth's bilinear
   # downsampling of a large PNG drops coverage along the logo's curved edges.
@@ -16,16 +16,16 @@ runCommand "ctos-macos-plymouth-theme" {
   done
   rsvg-convert ${./progress-track.svg} > "$themeDir/progress-track.png"
   rsvg-convert ${./progress-fill.svg} > "$themeDir/progress-fill.png"
-  substitute ${./ctos-macos.script} "$themeDir/ctos-macos.script" \
+  substitute ${./ctos.script} "$themeDir/ctos.script" \
     --replace-fail @waitForChime@ ${if waitForChime then "1" else "0"}
-  cat > "$themeDir/ctos-macos.plymouth" <<EOF
+  cat > "$themeDir/ctos.plymouth" <<EOF
   [Plymouth Theme]
-  Name=ctOS macOS
-  Description=White Apple-style logo and boot progress on black
+  Name=ctOS
+  Description=White logo and boot progress on black
   ModuleName=script
 
   [script]
   ImageDir=$themeDir
-  ScriptFile=$themeDir/ctos-macos.script
+  ScriptFile=$themeDir/ctos.script
   EOF
 ''
