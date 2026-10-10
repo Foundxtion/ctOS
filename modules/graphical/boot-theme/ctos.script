@@ -1,0 +1,134 @@
+# Original ctOS Plymouth theme. Coordinates are relative to the
+# display; the bar follows Plymouth's boot estimate rather than a fixed timer.
+Window.SetBackgroundTopColor(0, 0, 0);
+Window.SetBackgroundBottomColor(0, 0, 0);
+track_source = Image("progress-track.png");
+fill_source = Image("progress-fill.png");
+logo = Sprite();
+track = Sprite();
+fill = Sprite();
+prompt_sprite = Sprite();
+entry_sprite = Sprite();
+message_sprite = Sprite();
+boot_value = 0;
+# While booting with a chime, the logo and bar stay hidden until the player
+# cues them, so that they appear as the sound starts.
+wait_for_chime = @waitForChime@;
+revealed = 0;
+bar_start = 0;
+waited = 0;
+last_duration = 0;
+prompting = 0;
+logo.SetOpacity(0);
+track.SetOpacity(0);
+fill.SetOpacity(0);
+prompt_sprite.SetOpacity(0);
+entry_sprite.SetOpacity(0);
+message_sprite.SetOpacity(0);
+
+fun draw_progress() {
+    # The bar fills from empty over whatever part of the boot is left when it
+    # appears, rather than starting part-way along.
+    progress = 0;
+    if (bar_start < 0.99) progress = (boot_value - bar_start) / (1 - bar_start);
+    width = Math.Int(bar_width * progress);
+    if (width < 1) width = 1;
+    fill.SetImage(fill_source.Scale(width, bar_height));
+    fill.SetPosition(bar_x, bar_y, 2);
+    if (revealed && progress > 0) fill.SetOpacity(1);
+    else fill.SetOpacity(0);
+}
+
+fun reveal() {
+    if (!revealed) {
+        global.revealed = 1;
+        global.bar_start = boot_value;
+        logo.SetOpacity(1);
+        track.SetOpacity(1);
+        draw_progress();
+    }
+}
+
+fun place_text(sprite, image, y) {
+    sprite.SetImage(image);
+    sprite.SetPosition(Window.GetX() + (Window.GetWidth() - image.GetWidth()) / 2, y, 10);
+}
+
+fun layout() {
+    global.screen_width = Window.GetWidth();
+    global.screen_height = Window.GetHeight();
+    global.scale = screen_height / 1080;
+    if (scale < 0.7) global.scale = 0.7;
+    if (scale > 2) global.scale = 2;
+    size = Math.Int(128 * scale / 16 + 0.5) * 16;
+    logo.SetImage(Image("logo-" + size + ".png"));
+    logo.SetPosition(Window.GetX() + (screen_width - size) / 2,
+                     Window.GetY() + screen_height * 0.44 - size / 2, 1);
+    global.bar_width = Math.Int(240 * scale);
+    global.bar_height = Math.Int(6 * scale);
+    global.bar_x = Window.GetX() + (screen_width - bar_width) / 2;
+    global.bar_y = Window.GetY() + screen_height * 0.60;
+    track.SetImage(track_source.Scale(bar_width, bar_height));
+    track.SetPosition(bar_x, bar_y, 1);
+    draw_progress();
+    if (prompt_image) place_text(prompt_sprite, prompt_image, bar_y + 24 * scale);
+    if (entry_image) place_text(entry_sprite, entry_image, bar_y + 54 * scale);
+    if (message_image) place_text(message_sprite, message_image, bar_y + 88 * scale);
+}
+
+fun refresh() {
+    if (screen_width != Window.GetWidth() || screen_height != Window.GetHeight()) layout();
+}
+fun boot_progress(duration, value) {
+    if (value < 0) value = 0;
+    if (value > 1) value = 1;
+    global.boot_value = value;
+    # Without a cue, show the logo anyway after 15 seconds of booting. Time
+    # spent at a disk-unlock prompt does not count.
+    if (!revealed && !prompting) global.waited = waited + duration - last_duration;
+    global.last_duration = duration;
+    if (waited > 15) reveal();
+    draw_progress();
+}
+fun update_status(status) {
+    if (status == "ctos:chime") reveal();
+}
+fun display_normal() {
+    global.prompting = 0;
+    prompt_sprite.SetOpacity(0);
+    entry_sprite.SetOpacity(0);
+}
+fun show_prompt(prompt, text) {
+    global.prompt_image = Image.Text(prompt, 1, 1, 1);
+    global.entry_image = Image.Text("[ " + text + " ]", 1, 1, 1);
+    place_text(prompt_sprite, prompt_image, bar_y + 24 * scale);
+    place_text(entry_sprite, entry_image, bar_y + 54 * scale);
+    prompt_sprite.SetOpacity(1);
+    entry_sprite.SetOpacity(1);
+    global.prompting = 1;
+}
+fun display_password(prompt, bullets) {
+    text = "";
+    for (i = 0; i < bullets; i++) text += "*";
+    show_prompt(prompt, text);
+}
+fun display_question(prompt, entry) { show_prompt(prompt, entry); }
+fun display_message(text) {
+    global.message_image = Image.Text(text, 0.8, 0.8, 0.8);
+    place_text(message_sprite, message_image, bar_y + 88 * scale);
+    message_sprite.SetOpacity(1);
+}
+fun hide_message(text) { message_sprite.SetOpacity(0); }
+fun quit() { global.boot_value = 1; draw_progress(); }
+
+layout();
+if (!wait_for_chime || Plymouth.GetMode() != "boot") reveal();
+Plymouth.SetRefreshFunction(refresh);
+Plymouth.SetBootProgressFunction(boot_progress);
+Plymouth.SetUpdateStatusFunction(update_status);
+Plymouth.SetDisplayNormalFunction(display_normal);
+Plymouth.SetDisplayPasswordFunction(display_password);
+Plymouth.SetDisplayQuestionFunction(display_question);
+Plymouth.SetDisplayMessageFunction(display_message);
+Plymouth.SetHideMessageFunction(hide_message);
+Plymouth.SetQuitFunction(quit);

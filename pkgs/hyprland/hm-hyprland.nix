@@ -2,23 +2,11 @@
 let
   defaultTerminal = "${pkgs.alacritty}/bin/alacritty -o font.size=13";
   sshConfig = osConfig.fndx.packages.hyprland.openSshTab;
-  package = pkgs.hyprland;
   lua = lib.generators.mkLuaInline;
 in
 with lib;
 {
   config = mkIf osConfig.fndx.packages.hyprland.enable {
-    home.file.".wayland-session" = {
-      source = "${package}/bin/start-hyprland";
-      executable = true;
-    };
-    home.pointerCursor = {
-      gtk.enable = true;
-      x11.enable = true;
-      package = pkgs.apple-cursor;
-      name = "macOS";
-      size = 16;
-    };
     home.packages = with pkgs; [
       adwaita-fonts
       swaynotificationcenter
@@ -50,6 +38,7 @@ with lib;
 
     wayland.windowManager.hyprland = {
       enable = true;
+      package = osConfig.programs.hyprland.package;
       settings = {
         mod = { _var = "SUPER"; };
         terminal = { _var = defaultTerminal; };
@@ -70,6 +59,9 @@ with lib;
         ];
 
 		config = {
+            # apple-cursor provides Xcursor assets. Keep Hyprland on that
+            # backend so it uses the same theme and size as GTK and SDDM.
+            cursor.enable_hyprcursor = false;
 			dwindle = {
 				preserve_split = true;
 			};
@@ -221,6 +213,10 @@ with lib;
     programs.hyprlock = {
       enable = true;
       settings = {
+        auth.pam = {
+          enabled = true;
+          module = "hyprlock";
+        };
         general = {
           no_fade_in = false;
           grace = 0;
