@@ -6,7 +6,7 @@ let
   theme = pkgs.callPackage ./boot-theme { };
   chime = pkgs.writeShellApplication {
     name = "ctos-startup-chime";
-    runtimeInputs = [ pkgs.alsa-utils pkgs.coreutils pkgs.gawk ];
+    runtimeInputs = [ pkgs.alsa-utils pkgs.coreutils pkgs.gawk pkgs.systemd ];
     text = builtins.readFile ./boot-theme/play-chime.sh;
   };
 in
@@ -27,7 +27,7 @@ in
         type = lib.types.str;
         default = "auto";
         example = "plughw:CARD=Generic_1,DEV=0";
-        description = "ALSA playback device. auto prefers a non-HDMI playback device; plughw bypasses user audio servers before login.";
+        description = "ALSA playback device. auto waits for a non-HDMI playback device; select HDMI explicitly if wanted. plughw bypasses user audio servers before login.";
       };
       file = lib.mkOption {
         type = lib.types.path;
@@ -56,7 +56,9 @@ in
       before = [ "display-manager.service" ];
       restartIfChanged = false;
       stopIfChanged = false;
-      unitConfig.ConditionPathExists = [ "/dev/snd" "!/run/ctos-startup-chime/played" ];
+      # sound.target can be reached before any sound card has finished probing.
+      # The player waits for its device instead of skipping the unit outright.
+      unitConfig.ConditionPathExists = [ "!/run/ctos-startup-chime/played" ];
       environment = {
         STARTUP_SOUND_DEVICE = cfg.sound.device;
         STARTUP_SOUND_FILE = toString cfg.sound.file;
@@ -66,7 +68,7 @@ in
         # does not wait for playback to finish, and audio failure is harmless.
         Type = "exec";
         ExecStart = lib.getExe chime;
-        RuntimeMaxSec = "10s";
+        RuntimeMaxSec = "15s";
         RuntimeDirectory = "ctos-startup-chime";
         RuntimeDirectoryMode = "0700";
         RuntimeDirectoryPreserve = "yes";

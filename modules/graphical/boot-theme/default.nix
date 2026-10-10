@@ -9,7 +9,11 @@ runCommand "ctos-macos-plymouth-theme" {
 } ''
   themeDir="$out/share/plymouth/themes/ctos-macos"
   mkdir -p "$themeDir" "$out/share/sounds"
-  rsvg-convert -w 512 -h 512 ${./logo.svg} > "$themeDir/logo.png"
+  # Render the vector at each supported display size. Plymouth's bilinear
+  # downsampling of a large PNG drops coverage along the logo's curved edges.
+  for size in {96..256..16}; do
+    rsvg-convert -w "$size" -h "$size" ${./logo.svg} > "$themeDir/logo-$size.png"
+  done
   rsvg-convert ${./progress-track.svg} > "$themeDir/progress-track.png"
   rsvg-convert ${./progress-fill.svg} > "$themeDir/progress-fill.png"
   cp ${./ctos-macos.script} "$themeDir/ctos-macos.script"

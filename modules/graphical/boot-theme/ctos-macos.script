@@ -2,7 +2,6 @@
 # display; the bar follows Plymouth's boot estimate rather than a fixed timer.
 Window.SetBackgroundTopColor(0, 0, 0);
 Window.SetBackgroundBottomColor(0, 0, 0);
-logo_source = Image("logo.png");
 track_source = Image("progress-track.png");
 fill_source = Image("progress-fill.png");
 logo = Sprite();
@@ -36,8 +35,8 @@ fun layout() {
     global.scale = screen_height / 1080;
     if (scale < 0.7) global.scale = 0.7;
     if (scale > 2) global.scale = 2;
-    size = Math.Int(128 * scale);
-    logo.SetImage(logo_source.Scale(size, size));
+    size = Math.Int(128 * scale / 16 + 0.5) * 16;
+    logo.SetImage(Image("logo-" + size + ".png"));
     logo.SetPosition(Window.GetX() + (screen_width - size) / 2,
                      Window.GetY() + screen_height * 0.44 - size / 2, 1);
     global.bar_width = Math.Int(240 * scale);

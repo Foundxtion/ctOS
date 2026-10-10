@@ -41,7 +41,7 @@ with lib;
         fndx.graphical.cursor = {
             size = mkOption {
                 type = types.ints.positive;
-                default = 32;
+                default = 24;
                 description = "Cursor size in logical pixels, shared by SDDM and desktop sessions.";
             };
             name = mkOption {
