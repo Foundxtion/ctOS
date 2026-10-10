@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <!-- Original vector silhouette for the Apple-style boot screen. -->
+  <g fill="#fff">
+    <path d="M131 61C129 40 145 20 170 16C172 37 153 59 131 61Z"/>
+    <path d="M128 78C143 78 151 65 174 69C186 71 196 78 202 86C179 98 172 115 180 135C185 147 195 154 207 158C201 176 187 200 174 211C159 224 150 210 130 210C110 210 100 224 86 212C66 195 48 158 48 130C48 96 69 72 93 70C108 69 119 78 128 78Z"/>
+  </g>
+</svg>

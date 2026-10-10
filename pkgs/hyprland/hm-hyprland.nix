@@ -7,13 +7,6 @@ in
 with lib;
 {
   config = mkIf osConfig.fndx.packages.hyprland.enable {
-    home.pointerCursor = {
-      gtk.enable = true;
-      x11.enable = true;
-      package = pkgs.apple-cursor;
-      name = "macOS";
-      size = 16;
-    };
     home.packages = with pkgs; [
       adwaita-fonts
       swaynotificationcenter
@@ -66,6 +59,9 @@ with lib;
         ];
 
 		config = {
+            # apple-cursor provides Xcursor assets. Keep Hyprland on that
+            # backend so it uses the same theme and size as GTK and SDDM.
+            cursor.enable_hyprcursor = false;
 			dwindle = {
 				preserve_split = true;
 			};

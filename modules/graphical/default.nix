@@ -13,6 +13,8 @@ let
 in
 with lib;
 {
+    imports = [ ./boot.nix ];
+
 	options = {
 		fndx.graphical.enable = mkEnableOption "ctOS graphic interface";
 		fndx.graphical.enableTouchpad = mkEnableOption "touchpad on ctOS graphical interface";
@@ -36,6 +38,23 @@ with lib;
 			default = "i3";
 			description = mdDoc "Window manager to use (i3 or hyprland)";
 		};
+        fndx.graphical.cursor = {
+            size = mkOption {
+                type = types.ints.positive;
+                default = 32;
+                description = "Cursor size in logical pixels, shared by SDDM and desktop sessions.";
+            };
+            name = mkOption {
+                type = types.str;
+                default = "macOS";
+                description = "Cursor theme directory name.";
+            };
+            package = mkOption {
+                type = types.package;
+                default = pkgs.apple-cursor;
+                description = "Package containing the cursor theme.";
+            };
+        };
         fndx.graphical.sddm = {
             theme = mkOption {
                 type = types.str;
@@ -44,11 +63,7 @@ with lib;
             };
             themePackage = mkOption {
                 type = types.package;
-                default = pkgs.sddm-chili-theme.override {
-                    # Interpolation copies a Nix path into the store. The
-                    # theme package's toString would retain the source path.
-                    themeConfig.background = "${cfg.loginBackground}";
-                };
+                default = import ./sddm/chili.nix { inherit pkgs; background = cfg.loginBackground; };
                 description = mdDoc "SDDM theme package. Match SDDM's Qt version to the theme's dependencies.";
             };
         };
@@ -99,8 +114,21 @@ with lib;
                     pkgs.libsForQt5.qtquickcontrols.out
                     pkgs.libsForQt5.qtvirtualkeyboard.out
                 ];
+                settings.Theme = {
+                    CursorTheme = mkDefault cfg.cursor.name;
+                    CursorSize = mkDefault cfg.cursor.size;
+                };
             };
         };
-        environment.systemPackages = [ cfg.sddm.themePackage ];
+        environment.systemPackages = [ cfg.sddm.themePackage cfg.cursor.package ];
+        home-manager.sharedModules = [ {
+            home.pointerCursor = {
+                gtk.enable = mkDefault true;
+                x11.enable = mkDefault true;
+                package = mkDefault cfg.cursor.package;
+                name = mkDefault cfg.cursor.name;
+                size = mkDefault cfg.cursor.size;
+            };
+        } ];
     }) ];
 }
