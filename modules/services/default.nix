@@ -4,7 +4,7 @@
         ./ddclient.nix
         ./docker.nix
         ./jupyterhub.nix
-        ./k3s.nix
+        ./k3s
         ./mailserver.nix
         ./netauth.nix
         ./nginx.nix

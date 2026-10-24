@@ -60,25 +60,6 @@ with lib;
 	'';
 
     plugins = with pkgs.vimPlugins; [
-		{
-			plugin = copilot-lua;
-			type = "lua";
-			config = ''
-			require('copilot').setup({
-				suggestion = {
-					enabled = true,
-					auto_trigger = true,
-					keymap = {
-						accept = "<M-l>", -- Alt+l to accept suggestion
-						next = "<M-]>",
-						prev = "<M-[>",
-						dismiss = "<C-]>",
-					},
-				},
-				panel = { enabled = true },
-			})
-			'';
-		}
       # Engines
       {
         plugin = coc-nvim;
@@ -162,7 +143,6 @@ with lib;
       # Themes and visuals
       vim-one
 	  # nightfly
-	  copilot-lualine
       {
         plugin = lualine-nvim;
         type = "lua";
@@ -170,32 +150,6 @@ with lib;
 		require('lualine').setup({
 			sections = {
 				lualine_x = { 
-					{
-						'copilot',
-						-- Default values
-						symbols = {
-							status = {
-								icons = {
-									enabled = " ",
-									sleep = " ",   -- auto-trigger disabled
-									disabled = " ",
-									warning = " ",
-									unknown = " "
-								},
-								hl = {
-									enabled = "#50FA7B",
-									sleep = "#AEB7D0",
-									disabled = "#6272A4",
-									warning = "#FFB86C",
-									unknown = "#FF5555"
-								}
-							},
-							spinners = "dots", -- has some premade spinners
-							spinner_color = "#6272A4"
-						},
-						show_colors = false,
-						show_loading = true
-					},
 					'encoding',
 					'fileformat',
 					'filetype'
